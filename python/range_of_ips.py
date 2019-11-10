@@ -12,7 +12,7 @@ import os
 import sys
 
 
-def range_of_ips(ip,file_name):
+def range_of_ips(ip, ns, file_name):
     try:
         ip_range = []
         #print(type(ipaddress.IPv4Network(ip)))
@@ -27,17 +27,7 @@ def range_of_ips(ip,file_name):
         for i in range(2,length-1,1):
             ip_range_hosts = str(ip_range_hosts) + str(ip_range[i]) + ","
             
-        #data = ['dhcp_start': ip_range[2],'dhcp_end': ip_range[length-2],'bridge_ip': ip_range[1],'net_mask': mask[1]]
-        data = {'dhcp_start':ip_range[2], 'dhcp_end':ip_range[length-2],'bridge_ip': ip_range[1],'net_mask': mask[1],'ip_range_hosts': ip_range_hosts}
-        
-        #path = "/home/ece792/LN_PROJECT/T1/C1/"
-        #try:
-        #    if not os.path.exists(path):
-        #        os.makedirs(path)
-        #    else:
-        #        print("The file path already exists: "+ str(path))
-        #except OSError:
-        #    print ("Creation of the directory %s failed" % path)
+        data = {'dhcp_start':ip_range[2], 'dhcp_end':ip_range[length-2],'bridge_ip': ip_range[1],'net_mask': mask[1],'ip_range_hosts': ip_range_hosts, 'ns_name': ns}
         
         file_name1 = file_name 
         with open(file_name1, 'w') as file:
@@ -48,27 +38,25 @@ def range_of_ips(ip,file_name):
         return False
 
 arg = sys.argv
-print(arg[1])
-Yaml_file = arg[1]
+tenant_name = arg[1].split('.')[0]
+Yaml_file = "/root/Migration-as-a-Service/Ansible/config_files/" + str(arg[1])
+ns_counter = 0
 with open(Yaml_file,'r') as stream:
     try:
         yaml_content = yaml.safe_load(stream)
-        print(yaml_content)
-
         Cloud_Number = []
         for each in yaml_content:
             i = 0
-            print(each)
             for item in yaml_content[each]:
                 if len(item) > 0:
                     i = i + 1
-            print(i)
             Cloud_Number.append(i)
 
         # For Cloud C1
         for x in range(0,Cloud_Number[0],1):
             subnet = yaml_content['C1'][x]['subnet_addr']
-            print(subnet)
+            ns_counter += 1
+            ns_name = str(tenant_name) + "ns" + str(ns_counter)
             
             # Creation of File
             path = "/root/Migration-as-a-Service/T1/C1/"
@@ -81,12 +69,14 @@ with open(Yaml_file,'r') as stream:
         
             except OSError:
                 print ("Creation of the directory %s failed" % path)
-            ip_range = range_of_ips(subnet,file_name)
+            ip_range = range_of_ips(subnet, ns_name, file_name)
 
         # For Cloud C2
         for x in range(0,Cloud_Number[1],1):
             subnet = yaml_content['C2'][x]['subnet_addr']
-            print(subnet)
+            ns_counter += 1
+            ns_name = str(tenant_name) + "ns" + str(ns_counter)
+            
             # Creation of File
             path = "/root/Migration-as-a-Service/T1/C2/"
             file_name = "/root/Migration-as-a-Service/T1/C2/t1c2s" + str(x) + ".yaml"
@@ -100,7 +90,7 @@ with open(Yaml_file,'r') as stream:
             except OSError:
                 print ("Creation of the directory %s failed" % path)
 
-            ip_range = range_of_ips(subnet,file_name)
+            ip_range = range_of_ips(subnet, ns_name, file_name)
 
     
     except yaml.YAMLError as exc:
