@@ -21,8 +21,6 @@ def range_of_ips(ip, ns, br, subnet_list, data):
 
         subnet_list.append({'dhcp_start':ip_range[2], 'dhcp_end':ip_range[length-2],'bridge_ip': ip_range[1],'net_mask': mask[1], 'ns_name': ns, 'bridge_name': br})
 
-        #data["Subnet"] = subnet_list
-
         return True
     except ValueError:
         print("Not a valid IP range: " + str(ip_range))
@@ -67,17 +65,10 @@ with open(Yaml_file,'r') as stream:
                 print ("Creation of the directory %s failed" % path)
             ip_range = range_of_ips(subnet, ns_name, bridge_name, subnet_list, data)
         data["Subnet"] = subnet_list
-        file_name = "/root/Migration-as-a-Service/t1/temp.yml"
+        file_name = "/root/Migration-as-a-Service/t1/t1c1.yml"
         with open(file_name, "w") as file:
             doc = yaml.dump(data, file, default_flow_style=False)
         
-        filename_new = "/root/Migration-as-a-Service/t1/t1c1.yml"
-        with open(file_name, "rt") as fin:
-            with open(filename_new, "wt") as fout:
-                for line in fin:
-                   fout.write(line.replace('\n', '\n\t'))
-        os.remove("/root/Migration-as-a-Service/t1/temp.yml")      
-  
         # For Cloud C2
         subnet_list = []
         data = {}
@@ -103,16 +94,9 @@ with open(Yaml_file,'r') as stream:
             ip_range = range_of_ips(subnet, ns_name, bridge_name, subnet_list, data)
 
         data["Subnet"] = subnet_list
-        file_name = "/root/Migration-as-a-Service/t1/temp.yml"
+        file_name = "/root/Migration-as-a-Service/t1/t1c2.yml"
         with open(file_name, "w") as file:
             doc = yaml.dump(data, file, default_flow_style=False)
 
-        filename_new = "/root/Migration-as-a-Service/t1/t1c2.yml"
-        with open(file_name, "rt") as fin:
-            with open(filename_new, "wt") as fout:
-                for line in fin:
-                   fout.write(line.replace('\n', '\n\t'))
-        os.remove("/root/Migration-as-a-Service/t1/temp.yml")
-         
     except yaml.YAMLError as exc:
         print(exc)

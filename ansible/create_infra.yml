@@ -3,12 +3,10 @@
   gather_facts: False
   
   vars_files:
-    - config_files/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/t1/t1c1.yml
   
   tasks:
   - name: Create bridge
-    nmcli:
-      type: bridge
-      conn_name: 'br'
-      state: present
-        
+    command: mkdir "{{ item.bridge_name }}"
+    with_items:
+      - "{{ Subnet }}"
