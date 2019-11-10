@@ -71,8 +71,8 @@ with open(Yaml_file,'r') as stream:
             print(subnet)
             
             # Creation of File
-            path = "/home/ece792/LN_PROJECT/T1/C1/"
-            file_name = "/home/ece792/LN_PROJECT/T1/C1/t1c1s" + str(x) + ".yaml"
+            path = "/root/Migration-as-a-Service/T1/C1/"
+            file_name = "/root/Migration-as-a-Service/T1/C1/t1c1s" + str(x) + ".yaml"
             try:
                 if not os.path.exists(path):
                     os.makedirs(path)
@@ -88,8 +88,8 @@ with open(Yaml_file,'r') as stream:
             subnet = yaml_content['C2'][x]['subnet_addr']
             print(subnet)
             # Creation of File
-            path = "/home/ece792/LN_PROJECT/T1/C2/"
-            file_name = "/home/ece792/LN_PROJECT/T1/C2/t1c2s" + str(x) + ".yaml"
+            path = "/root/Migration-as-a-Service/T1/C2/"
+            file_name = "/root/Migration-as-a-Service/T1/C2/t1c2s" + str(x) + ".yaml"
 
             try:
                 if not os.path.exists(path):

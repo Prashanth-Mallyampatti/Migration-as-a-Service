@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Install libvirt packages if necessary
+    apt:
+      name:
+      - qemu-kvm
+      - libvirt-bin
+      - python-libvirt
+      - python-lxml
+      - virt-manager
+      - virt-viewer
+      - virtinst
+      - apache2
+      - network-manager
+      - libguestfs-tools
+      state: present
+    when: ansible_os_family == "Debian"
+
+- hosts: worker
+  tasks:
+    - name: Test worker nodes
+      copy: src=./files/test.sh  dest=/home/ece792  mode=0777
+    - name: testing worker script
+      command: bash /home/ece792/test.sh

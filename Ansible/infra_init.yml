@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  gather_facts: False
+
+- import_playbook: install_packages.yml
