@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  gather_facts: False 
-
-  tasks:
-#  - name: Create VM disks
-#    command: virt-builder centos-7.5 -o testVM.qcow2 --format qcow2 --update --selinux-relabel --size 10G --install wireshark,iperf3 --root-password password:admin
-#    become: yes
-

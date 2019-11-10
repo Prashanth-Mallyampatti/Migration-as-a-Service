@@ -6,4 +6,9 @@
     - config_files/{{ tenant_name }}.yml
   
   tasks:
-    - name: Test
+  - name: Create bridge
+    nmcli:
+      type: bridge
+      conn_name: 'br'
+      state: present
+        
