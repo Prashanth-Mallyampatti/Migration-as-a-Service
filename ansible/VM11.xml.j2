@@ -1,5 +1,5 @@
 <domain type='kvm'>
-  <name>VM2</name>
+  <name>VM11</name>
   <memory unit='GiB'>2</memory>
   <currentMemory unit='GiB'>2</currentMemory>
   <vcpu placement='static'>4</vcpu>
@@ -34,7 +34,7 @@
     <emulator>/usr/bin/kvm-spice</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='/var/lib/libvirt/images/testVM.qcow2'/>
+      <source file='/var/lib/libvirt/images/testVM11.qcow2'/>
       <backingStore/>
       <target dev='vda' bus='virtio'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
