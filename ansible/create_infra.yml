@@ -3,10 +3,13 @@
   gather_facts: False
   
   vars_files:
-    - /root/Migration-as-a-Service/t1/t1c1.yml
+    - config_files/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c1.yml
   
   tasks:
-  - name: Create bridge
-    command: mkdir "{{ item.bridge_name }}"
+  - name: Create Namespace
+    namespace:
+      name: "{{ }}" 
+      state: present
     with_items:
-      - "{{ Subnet }}"
+      - "{{ }}"

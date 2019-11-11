@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  gather_facts: False
+
+  tasks:
+  - name: Define VMs
+    virt:
+      name: "VM1"
+      command: define
+      xml: "{{ lookup('template', 'VM1.xml.j2') }}"
+
+  - name: Create VM
+    virt:
+      name: "VM1"
+      command: create
+      state: destroyed
+
+  - name: Start VM
+    virt:
+      name: "VM1"
+      command: start
+
+- hosts: worker
+  gather_facts: False
+
+  tasks:
+  - name: Copy script
+    copy: src=/root/Migration-as-a-Service/ansible/VM2.xml.j2  dest=/home/ece792/
+
+  - name: Define VMs
+    virt:
+      name: "VM2"
+      command: define
+      xml: "{{ lookup('template', 'VM2.xml.j2') }}"
+
+  - name: Create VM
+    virt:
+      name: "VM2"
+      command: create
+      state: destroyed
+
+  - name: Start VM
+    virt:
+      name: "VM2"
+      command: start
