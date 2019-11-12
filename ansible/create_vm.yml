@@ -15,6 +15,7 @@
       - "{{ Subnet }}"
       - vms
 
+# ************************* Master tasks *********************** #
 - hosts: main
   gather_facts: False
   vars:
@@ -42,11 +43,19 @@
       - "{{ Subnet }}"
       - vms
 
+  - name: Get list of running VMs
+    command: virsh list --name
+    register: vm_list
+    changed_when: "vm_list.rc != 0"
+    become: yes
+
   - name: Define VM
     virt:
       name: "{{ item.1.name }}"
       command: define
       xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
+      state: destroyed
+    when: item.1.name not in vm_list.stdout
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -56,6 +65,7 @@
       name: "{{ item.1.name }}"
       command: create
       state: destroyed
+    when: item.1.name not in vm_list.stdout
     with_subelements: 
       - "{{ Subnet }}"
       - vms
@@ -64,16 +74,19 @@
     virt:
       name: "{{ item.1.name }}"
       command: start
+    when: item.1.name not in vm_list.stdout
     with_subelements: 
       - "{{ Subnet }}"
       - vms
 
-  - name: Attach VM interface
+  - name: Attach VM interface"
     shell: |
+      virsh domiflist "{{ item.1.name }}" | grep -w '{{ item.1.vmif }}' ; if [ $? -ne 0 ] ; then virsh attach-interface "{{ item.1.name }}" direct "{{ item.1.vmif }}" --live --persistent ; fi
     with_subelements:
       - "{{ Subnet }}"
       - vms
 
+# ********************** Worker Tasks ******************** #
 - hosts: worker
   gather_facts: False
   vars:
@@ -104,11 +117,19 @@
 #      - "{{ Subnet }}"
 #      - vms
 
+  - name: Get list of running VMs
+    command: virsh list --name
+    register: vm_list
+    changed_when: "vm_list.rc != 0"
+    become: yes
+
   - name: Define VM
     virt:
       name: "{{ item.1.name }}"
       command: define
       xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
+      state: destroyed
+    when: item.1.name not in vm_list.stdout
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -118,6 +139,7 @@
       name: "{{ item.1.name }}"
       command: create
       state: destroyed
+    when: item.1.name not in vm_list.stdout
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -126,6 +148,14 @@
     virt:
       name: "{{ item.1.name }}"
       command: start
+    when: item.1.name not in vm_list.stdout
+    with_subelements:
+      - "{{ Subnet }}"
+      - vms
+
+  - name: Attach VM interface
+    shell: |
+      virsh domiflist "{{ item.1.name }}" | grep -w '{{ item.1.vmif }}' ; if [ $? -ne 0 ] ; then virsh attach-interface "{{ item.1.name }}" direct "{{ item.1.vmif }}" --live --persistent ; fi
     with_subelements:
       - "{{ Subnet }}"
       - vms
