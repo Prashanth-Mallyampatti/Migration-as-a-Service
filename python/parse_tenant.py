@@ -32,7 +32,7 @@ class Create_YAML_FILE():
   def __init__(self, file_name):
     self.file_name = file_name
 
-  def create_tenant(self, content_req):
+  def parseSubnets(self, content_req):
     self.subnets = []
     with open(Yaml_file,'r') as stream:
       try:
@@ -56,7 +56,7 @@ class Create_YAML_FILE():
         exit()
       self.subnets.append(subnet_val)
 
-  def add_veth_pairs(self):
+  def parseVMs(self):
     all_vm_lists = []
     for br_count, subnet_addr_and_vm in enumerate(self.contents, 1):
       vms = subnet_addr_and_vm["VM"]
@@ -88,10 +88,10 @@ class Create_YAML_FILE():
 
 def main():
   obj = Create_YAML_FILE(arg[1])
-  obj.create_tenant("C1")
-  obj.add_veth_pairs()
+  obj.parseSubnets("C1")
+  obj.parseVMs()
   obj.dump_content("t1c1")
-  obj.create_tenant("C2")
-  obj.add_veth_pairs()
+  obj.parseSubnets("C2")
+  obj.parseVMs()
   obj.dump_content("t1c2")
 main()
