@@ -37,7 +37,7 @@
   - name: Attach VETH Pairs
     shell: |
       ip link show "{{ item.1.brif }}" ; if [ $? -eq 0 ] ; then ip link set "{{ item.1.brif }}" netns "{{ item.0.ns_name }}" ; fi
-      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif }}' ; if [$? -eq 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif }}" ; fi
     with_subelements:
       - "{{ Subnet }}"
       - veth_pairs
@@ -88,7 +88,7 @@
   - name: Attach VETH Pairs
     shell: |
       ip link show "{{ item.1.brif }}" ; if [ $? -eq 0 ] ; then ip link set "{{ item.1.brif }}" netns "{{ item.0.ns_name }}" ; fi
-      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif }}' ; if [$? -eq 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif }}" ; fi
     with_subelements:
       - "{{ Subnet }}"
       - veth_pairs

@@ -8,3 +8,8 @@ Subnet:
   veth_pairs:
   - brif: br1if1
     vmif: VM4if1
+  vms:
+  - disk: 10G
+    mem: 2
+    name: t1_VM4
+    vcpu: 4

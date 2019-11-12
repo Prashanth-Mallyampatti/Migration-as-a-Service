@@ -1,5 +1,5 @@
 <domain type='kvm'>
-  <name>{{ tenant_name }}_{{ item.1.name }}</name>
+  <name>{{ item.1.name }}</name>
   <memory unit='GiB'>{{ item.1.mem }}</memory>
   <currentMemory unit='GiB'>{{ item.1.mem }}</currentMemory>
   <vcpu placement='static'>{{ item.1.vcpu }}</vcpu>
@@ -34,7 +34,7 @@
     <emulator>/usr/bin/kvm-spice</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='{{ disk_dir }}/{{ tenant_name }}_{{ item.1.name }}.qcow2'/>
+      <source file='{{ disk_dir }}/{{ item.1.name }}.qcow2'/>
       <backingStore/>
       <target dev='vda' bus='virtio'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>

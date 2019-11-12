@@ -5,60 +5,68 @@
     ansible_python_interpreter: /usr/bin/python2
     disk_dir: /var/lib/libvirt/images
   vars_files:
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c2.yml
+  tasks:
+  - name: Create VM templates (C2)
+    copy:
+      src: /root/Migration-as-a-Service/ansible/templates/jinja/vm_main.xml.j2
+      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2
+    with_subelements:
+      - "{{ Subnet }}"
+      - vms
+
+- hosts: main
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python2
+    disk_dir: /var/lib/libvirt/images
+  vars_files:
     - config_files/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c1.yml
 
   tasks:
   - name: Copy VM image
     copy: 
       src: /root/mainVM.qcow2 
-      dest: /var/lib/libvirt/images/{{ tenant_name }}_{{ item.1.name }}.qcow2
+      dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
       force: no
     with_subelements:
-      - "{{ C1 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
-  - name: Create VM templates
+  - name: Create VM templates (C1)
     copy:
       src: /root/Migration-as-a-Service/ansible/templates/jinja/vm_main.xml.j2
-      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ tenant_name }}_{{ item.1.name }}.xml.j2
+      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2
     with_subelements: 
-      - "{{ C1 }}"
-      - VM
-
-  - name: Create VM templates
-    copy:
-      src: /root/Migration-as-a-Service/ansible/templates/jinja/vm_main.xml.j2
-      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ tenant_name }}_{{ item.1.name }}.xml.j2
-      remote_src: yes
-    with_subelements:
-      - "{{ C2 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
   - name: Define VM
     virt:
-      name: "{{ tenant_name }}_{{ item.1.name }}"
+      name: "{{ item.1.name }}"
       command: define
-      xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ tenant_name }}_{{ item.1.name }}.xml.j2') }}"
+      xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
     with_subelements:
-      - "{{ C1 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
   - name: Create VM
     virt:
-      name: "{{ tenant_name }}_{{ item.1.name }}"
+      name: "{{ item.1.name }}"
       command: create
       state: destroyed
     with_subelements: 
-      - "{{ C1 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
   - name: Start VM
     virt:
-      name: "{{ tenant_name }}_{{ item.1.name }}"
+      name: "{{ item.1.name }}"
       command: start
     with_subelements: 
-      - "{{ C1 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
 - hosts: worker
   gather_facts: False
@@ -67,17 +75,18 @@
     disk_dir: /var/lib/libvirt/images
   vars_files:
     - config_files/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c2.yml
 
   tasks:
   - name: Copy VM image
     copy:
       src: /root/mainVM.qcow2
-      dest: /var/lib/libvirt/images/{{ tenant_name }}_{{ item.1.name }}.qcow2
+      dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
       force: no
       remote_src: yes
     with_subelements:
-      - "{{ C2 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
 # ************* This task is being executed on Master host, as jinja lookups aren't happening locally on remote host ************ #
 #  - name: Create VM templates
@@ -86,31 +95,31 @@
 #      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2
 #      remote_src: yes
 #    with_subelements:
-#      - "{{ C2 }}"
-#      - VM
+#      - "{{ Subnet }}"
+#      - vms
 
   - name: Define VM
     virt:
-      name: "{{ tenant_name }}_{{ item.1.name }}"
+      name: "{{ item.1.name }}"
       command: define
-      xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ tenant_name }}_{{ item.1.name }}.xml.j2') }}"
+      xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
     with_subelements:
-      - "{{ C2 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
   - name: Create VM
     virt:
-      name: "{{ tenant_name }}_{{ item.1.name }}"
+      name: "{{ item.1.name }}"
       command: create
       state: destroyed
     with_subelements:
-      - "{{ C2 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
 
   - name: Start VM
     virt:
-      name: "{{ tenant_name }}_{{ item.1.name }}"
+      name: "{{ item.1.name }}"
       command: start
     with_subelements:
-      - "{{ C2 }}"
-      - VM
+      - "{{ Subnet }}"
+      - vms
