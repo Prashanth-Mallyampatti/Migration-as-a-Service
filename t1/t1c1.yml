@@ -5,31 +5,29 @@ Subnet:
   dhcp_start: 1.1.1.2
   net_mask: 255.255.255.0
   ns_name: t1ns1
-  veth_pairs:
-  - brif: br1if1
-    vmif: VM1if1
-  - brif: br1if2
-    vmif: VM2if1
   vms:
-  - disk: 10G
+  - brif: br1if1
+    disk: 10G
     mem: 2
     name: t1_VM1
     vcpu: 4
-  - disk: 10G
+    vmif: VM1if1
+  - brif: br1if2
+    disk: 10G
     mem: 4
     name: t1_VM2
     vcpu: 2
+    vmif: VM2if1
 - bridge_ip: 2.2.2.1
   bridge_name: t1br2
   dhcp_end: 2.2.2.254
   dhcp_start: 2.2.2.2
   net_mask: 255.255.255.0
   ns_name: t1ns2
-  veth_pairs:
-  - brif: br2if1
-    vmif: VM3if1
   vms:
-  - disk: 10G
+  - brif: br2if1
+    disk: 10G
     mem: 3
     name: t1_VM3
     vcpu: 2
+    vmif: VM3if1

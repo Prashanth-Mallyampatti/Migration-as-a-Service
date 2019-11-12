@@ -57,32 +57,26 @@ class Create_YAML_FILE():
       self.subnets.append(subnet_val)
 
   def add_veth_pairs(self):
-    all_veth_pairs = [] 
     all_vm_lists = []
     for br_count, subnet_addr_and_vm in enumerate(self.contents, 1):
       vms = subnet_addr_and_vm["VM"]
-      veth_pairs = []
       vm_lists = []
       for vm_count, vm in enumerate(vms, 1):
         vm_name = vm["name"]
         disk_size = vm["disk"]
         mem_size = vm["mem"]
         vcpus = vm["vcpu"]
-        veth_pair = {}
         vm_list = {}
-        veth_pair["vmif"] = vm_name + "if1"
-        veth_pair["brif"] = "br" + str(br_count) +"if" +  str(vm_count)
         vm_list["name"] = tenant_name + "_" + vm_name
         vm_list["disk"] = disk_size
         vm_list["mem"] = mem_size
         vm_list["vcpu"] = vcpus
-        veth_pairs.append(veth_pair)
+        vm_list["vmif"] = vm_name + "if1"
+        vm_list["brif"] = "br" + str(br_count) + "if" + str(vm_count)
         vm_lists.append(vm_list)
-      all_veth_pairs.append(veth_pairs)
       all_vm_lists.append(vm_lists)
 
     for subnet_no, subnet in enumerate(self.subnets):
-        subnet["veth_pairs"] = all_veth_pairs[subnet_no]
         subnet["vms"] = all_vm_lists[subnet_no]
 
   def dump_content(self, file_name):

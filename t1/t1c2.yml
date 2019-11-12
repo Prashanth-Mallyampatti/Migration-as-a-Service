@@ -5,11 +5,10 @@ Subnet:
   dhcp_start: 3.3.3.2
   net_mask: 255.255.255.0
   ns_name: t1ns1
-  veth_pairs:
-  - brif: br1if1
-    vmif: VM4if1
   vms:
-  - disk: 10G
+  - brif: br1if1
+    disk: 10G
     mem: 2
     name: t1_VM4
     vcpu: 4
+    vmif: VM4if1

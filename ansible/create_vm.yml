@@ -68,6 +68,12 @@
       - "{{ Subnet }}"
       - vms
 
+  - name: Attach VM interface
+    shell: |
+    with_subelements:
+      - "{{ Subnet }}"
+      - vms
+
 - hosts: worker
   gather_facts: False
   vars:
