@@ -1,5 +1,4 @@
 ---
-
 - hosts: main
   gather_facts: False
   vars:
@@ -15,7 +14,12 @@
       ns_file: /var/run/netns/{{ item.ns_name }}
     command: ip netns add "{{ item.ns_name }}"
     args:
-      creates: '{{ ns_file }}'
+      creates: "{{ ns_file }}"
+    with_items:
+      - "{{ Subnet }}"
+
+  - name: Create bridge inside namespace
+    shell: ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
     with_items:
       - "{{ Subnet }}"
 
@@ -34,6 +38,11 @@
       ns_file: /var/run/netns/{{ item.ns_name }}
     command: ip netns add "{{ item.ns_name }}"
     args:
-      creates: '{{ ns_file }}' 
+      creates: "{{ ns_file }}"
+    with_items:
+      - "{{ Subnet }}"
+  
+  - name: Create bridge inside namespace
+    shell: ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
     with_items:
       - "{{ Subnet }}"
