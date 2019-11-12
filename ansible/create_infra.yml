@@ -1,15 +1,39 @@
 ---
-- hosts: localhost
+
+- hosts: main
   gather_facts: False
-  
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
   vars_files:
     - config_files/{{ tenant_name }}.yml
     - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c1.yml
   
   tasks:
   - name: Create Namespace
-    namespace:
-      name: "{{ }}" 
-      state: present
+    vars: 
+      ns_file: /var/run/netns/{{ item.ns_name }}
+    command: ip netns add "{{ item.ns_name }}"
+    args:
+      creates: '{{ ns_file }}'
     with_items:
-      - "{{ }}"
+      - "{{ Subnet }}"
+
+- hosts: worker
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  vars_files:
+    - config_files/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c2.yml
+
+  tasks:
+  - name: Create Namespace
+    vars:
+      ns_file: /var/run/netns/{{ item.ns_name }}
+    command: ip netns add "{{ item.ns_name }}"
+    args:
+      creates: '{{ ns_file }}' 
+    with_items:
+      - "{{ Subnet }}"

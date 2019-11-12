@@ -7,7 +7,6 @@
     apt:
       name:
       - qemu-kvm
-      - libvirt
       - libvirt-bin
       - python-libvirt
       - python-lxml
@@ -21,9 +20,5 @@
     when: ansible_os_family == "Debian"
     become: yes
 
-#- hosts: worker
-#  tasks:
-#    - name: Test worker nodes
-#      copy: src=./files/test.sh  dest=/home/ece792  mode=0777
-#    - name: testing worker script
-#      command: bash /home/ece792/test.sh
+  - name: Make test dir
+    command: mkdir /var/run/testing

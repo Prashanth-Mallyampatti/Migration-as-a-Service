@@ -1,4 +1,4 @@
 [main]
 localhost ansible_connection=local
 [worker]
-99.99.99.2 ansible_ssh_user=ece792 ansible_ssh_private_key=./host_keys/id_rsa.pub
+99.99.99.2 ansible_ssh_user=root ansible_ssh_private_key=./host_keys/id_rsa.pub
