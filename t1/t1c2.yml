@@ -1,3 +1,4 @@
+Subnet:
 - bridge_ip: 3.3.3.1
   bridge_name: t1br1
   dhcp_end: 3.3.3.254
@@ -6,4 +7,4 @@
   ns_name: t1ns1
   veth_pairs:
   - brif: br1if1
-    vmif: testVM4if1
+    vmif: VM4if1

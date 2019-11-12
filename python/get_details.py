@@ -3,14 +3,11 @@ import yaml
 import os
 import sys
 
-
 def range_of_ips(ip, ns, br):
   try:
     ip_range = []
-    #print(type(ipaddress.IPv4Network(ip)))
     network_mask = ipaddress.IPv4Network(ip)
     mask = (str(network_mask.with_netmask)).split("/")
-    #print(mask[1])
     for addr in ipaddress.IPv4Network(ip):
       ip_range.append(str(addr))
     length = len(ip_range)
@@ -59,10 +56,6 @@ class Create_YAML_FILE():
         exit()
       self.subnets.append(subnet_val)
 
-    self.tenant = {}
-
-    self.tenant[SUBNET_KEY] = subnet_list
-
   def add_veth_pairs(self):
     all_veth_pairs = [] 
     for br_count, subnet_addr_and_vm in enumerate(self.contents, 1):
@@ -80,10 +73,11 @@ class Create_YAML_FILE():
         subnet["veth_pairs"] = all_veth_pairs[subnet_no]
 
   def dump_content(self, file_name):
+    self.tenant = {}
+    self.tenant[SUBNET_KEY] = self.subnets
     file_path = "/root/Migration-as-a-Service/" + tenant_name + "/"
     with open(file_path + file_name + ".yml", "w") as file:
-      doc = yaml.dump(self.subnets, file, default_flow_style=False)
-
+      doc = yaml.dump(self.tenant, file, default_flow_style=False)
 
 def main():
   obj = Create_YAML_FILE(arg[1])

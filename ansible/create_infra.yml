@@ -20,10 +20,35 @@
 
   - name: Create bridge inside namespace
     shell: |
-      ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
+      ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -ne 0 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
       ip netns exec "{{ item.ns_name }}" ip link set dev "{{ item.bridge_name }}" up
     with_items:
       - "{{ Subnet }}"
+  
+  - name: Create VETH Pairs
+    shell: |
+      ip link show "{{ item.1.brif }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.vmif }}" type veth peer name "{{ item.1.brif }}" ; fi
+      ip link set dev "{{ item.1.brif }}" up
+      ip link set dev "{{ item.1.vmif }}" up
+    with_subelements:
+      - "{{ Subnet }}"
+      - veth_pairs
+  
+  - name: Attach VETH Pairs
+    shell: |
+      ip link show "{{ item.1.brif }}" ; if [ $? -eq 0 ] ; then ip link set "{{ item.1.brif }}" netns "{{ item.0.ns_name }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif }}' ; if [$? -eq 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif }}" ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - veth_pairs
+
+  - name: All interfaces and bridges UP
+    shell: |
+      ip netns exec "{{ item.0.ns_name}}" ip link set "{{ item.1.brif }}" up
+      ip netns exec "{{ item.0.ns_name }}" ip link set dev "{{ item.0.bridge_name }}" up
+    with_subelements:
+      - "{{ Subnet }}"
+      - veth_pairs
 
 - hosts: worker
   gather_facts: False
@@ -50,3 +75,28 @@
       ip netns exec "{{ item.ns_name }}" ip link set dev "{{ item.bridge_name }}" up
     with_items:
       - "{{ Subnet }}"
+
+  - name: Create VETH Pairs
+    shell: |
+      ip link show "{{ item.1.brif }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.vmif }}" type veth peer name "{{ item.1.brif }}" ; fi
+      ip link set dev "{{ item.1.brif }}" up
+      ip link set dev "{{ item.1.vmif }}" up
+    with_subelements:
+      - "{{ Subnet }}"
+      - veth_pairs
+
+  - name: Attach VETH Pairs
+    shell: |
+      ip link show "{{ item.1.brif }}" ; if [ $? -eq 0 ] ; then ip link set "{{ item.1.brif }}" netns "{{ item.0.ns_name }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif }}' ; if [$? -eq 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif }}" ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - veth_pairs
+
+  - name: All interfaces and bridges UP
+    shell: |
+      ip netns exec "{{ item.0.ns_name}}" ip link set "{{ item.1.brif }}" up
+      ip netns exec "{{ item.0.ns_name }}" ip link set dev "{{ item.0.bridge_name }}" up
+    with_subelements:
+      - "{{ Subnet }}"
+      - veth_pairs
