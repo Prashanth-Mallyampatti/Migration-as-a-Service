@@ -1,13 +1,20 @@
-Subnet:
 - bridge_ip: 1.1.1.1
   bridge_name: t1br1
   dhcp_end: 1.1.1.254
   dhcp_start: 1.1.1.2
   net_mask: 255.255.255.0
   ns_name: t1ns1
+  veth_pairs:
+  - brif: br1if1
+    vmif: testVM1if1
+  - brif: br1if2
+    vmif: testVM2if1
 - bridge_ip: 2.2.2.1
   bridge_name: t1br2
   dhcp_end: 2.2.2.254
   dhcp_start: 2.2.2.2
   net_mask: 255.255.255.0
   ns_name: t1ns2
+  veth_pairs:
+  - brif: br2if1
+    vmif: testVM3if1

@@ -35,6 +35,7 @@ br_counter = 0
 with open(Yaml_file,'r') as stream:
     try:
         yaml_content = yaml.safe_load(stream)
+        print(yaml_content)
         Cloud_Number = []
         for each in yaml_content:
             i = 0

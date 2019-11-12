@@ -19,7 +19,9 @@
       - "{{ Subnet }}"
 
   - name: Create bridge inside namespace
-    shell: ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
+    shell: |
+      ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
+      ip netns exec "{{ item.ns_name }}" ip link set dev "{{ item.bridge_name }}" up
     with_items:
       - "{{ Subnet }}"
 
@@ -43,6 +45,8 @@
       - "{{ Subnet }}"
   
   - name: Create bridge inside namespace
-    shell: ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi
+    shell: |
+      ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi 
+      ip netns exec "{{ item.ns_name }}" ip link set dev "{{ item.bridge_name }}" up
     with_items:
       - "{{ Subnet }}"
