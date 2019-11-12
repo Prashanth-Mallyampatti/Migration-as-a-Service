@@ -2,46 +2,93 @@
 - hosts: main
   gather_facts: False
   vars:
-    ansible_python_interpreter: /usr/bin/python2
+    ansible_python_interpreter: /usr/bin/python3
+  vars_files:
+    - config_files/{{ tenant_name }}.yml
 
   tasks:
+  - name: Copy VM image
+    copy: 
+      src: /root/mainVM.qcow2 
+      dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
+      force: no
+    with_subelements:
+      - "{{ C1 }}"
+      - VM
 
-  - name: Define VMs
-    virt:
-      name: "VM11"
-      command: define
-      xml: "{{ lookup('template', 'VM11.xml.j2') }}"
+  - name: Create VM templates
+    copy:
+      src: /root/Migration-as-a-Service/ansible/templates/jinja/vm_main.xml.j2
+      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2
+    with_subelements: 
+      - "{{ C1 }}"
+      - VM
+    become: yes
 
-  - name: Create VM
-    virt:
-      name: "VM11"
-      command: create
-      state: destroyed
-
-  - name: Start VM
-    virt:
-      name: "VM11"
-      command: start
+  - name: 
 
 - hosts: worker
   gather_facts: False
   vars:
-    ansible_python_interpreter: /usr/bin/python2
+    ansible_python_interpreter: /usr/bin/python3
+  vars_files:
+    - config_files/{{ tenant_name }}.yml
 
   tasks:
-  - name: Define VMs
-    virt:
-      name: "VM2"
-      command: define
-      xml: "{{ lookup('template', 'VM2.xml.j2') }}"
+  - name: Copy VM image
+    copy:
+      src: /root/mainVM.qcow2
+      dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
+      force: no
+    with_subelements:
+      - "{{ C2 }}"
+      - VM
 
-  - name: Create VM
-    virt:
-      name: "VM2"
-      command: create
-      state: destroyed
+  - name: Create VM templates
+    copy:
+      src: /root/Migration-as-a-Service/ansible/templates/jinja/vm_main.xml.j2
+      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2
+    with_subelements:
+      - "{{ C2 }}"
+      - VM
+    become: yes
 
-  - name: Start VM
-    virt:
-      name: "VM2"
-      command: start
+#  - name: Define VMs
+#    virt:
+#      name: "VM11"
+#      command: define
+#      xml: "{{ lookup('template', 'VM11.xml.j2') }}"
+
+#  - name: Create VM
+#    virt:
+#      name: "VM11"
+#      command: create
+#      state: destroyed
+#
+#  - name: Start VM
+#    virt:
+#      name: "VM11"
+#      command: start
+#
+#- hosts: worker
+#  gather_facts: False
+#  vars:
+#    ansible_python_interpreter: /usr/bin/python2
+#
+#  tasks:
+#  - name: Define VMs
+#    virt:
+#      name: "VM2"
+#      command: define
+#      xml: "{{ lookup('template', 'VM2.xml.j2') }}"
+#
+#  - name: Create VM
+#    virt:
+#      name: "VM2"
+#      command: create
+#      state: destroyed
+#
+#  - name: Start VM
+#    virt:
+#      name: "VM2"
+#      command: start
