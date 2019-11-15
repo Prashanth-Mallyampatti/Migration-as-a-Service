@@ -38,7 +38,11 @@ class Create_YAML_FILE():
       except OSError:
         print ("Creation of the directory %s failed" % path)
 
-    self.contents = YAML_CONTENT[content_req]
+    if content_req in YAML_CONTENT:
+      self.contents = YAML_CONTENT[content_req]
+    else:
+      exit()
+      
 
     ns_counter = 0
     br_counter = 0
@@ -101,9 +105,11 @@ class Create_YAML_FILE():
 
 def main():
   obj = Create_YAML_FILE(arg[1])
+
   obj.parseSubnets("C1")
   obj.parseVMs()
   obj.dump_content("t1c1")
+
   obj.parseSubnets("C2")
   obj.parseVMs()
   obj.dump_content("t1c2")
