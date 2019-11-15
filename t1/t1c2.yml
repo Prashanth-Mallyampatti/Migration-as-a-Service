@@ -6,9 +6,8 @@ Subnet:
     dhcp_end: 3.3.3.254
     dhcp_start: 3.3.3.2
     dnsif: dnsif
-  namespace:
-  - name: t1ns1
-  net_mask: 255.255.255.0
+    net_mask: 255.255.255.0
+  ns_name: t1ns1
   vms:
   - brif: br1if1
     disk: 10G
