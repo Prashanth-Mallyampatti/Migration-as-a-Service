@@ -31,9 +31,7 @@ def parse_DNS(C1_contents, C2):
   for i in C2_contents:
     if C1_contents["subnet_addr"] == i["subnet_addr"]:
        return False
-    else:    
-      return True
-            
+ 
 # ******************** #
 arg = sys.argv
 tenant_name = arg[1].split('.')[0]
