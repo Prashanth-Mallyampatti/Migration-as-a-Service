@@ -3,7 +3,7 @@ import yaml
 import os
 import sys
 
-def range_of_ips(ip, ns, br):
+def range_of_ips(ip, br, ip_range):
   try:
     ip_range = []
     network_mask = ipaddress.IPv4Network(ip)
@@ -15,7 +15,7 @@ def range_of_ips(ip, ns, br):
     for i in range(2,length-1,1):
       ip_range_hosts = str(ip_range_hosts) + str(ip_range[i]) + ","
 
-    return {'dhcp_start':ip_range[2], 'dhcp_end':ip_range[length-2],'bridge_ip': ip_range[1],'net_mask': mask[1], 'ns_name': ns, 'bridge_name': br}
+    return {'bridge_ip': ip_range[1],'net_mask': mask[1], 'bridge_name': br}, ip_range
   except ValueError:
     print("Not a valid IP range: " + str(ip_range))
     return None
@@ -23,8 +23,6 @@ def range_of_ips(ip, ns, br):
 arg = sys.argv
 tenant_name = arg[1].split('.')[0]
 Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/" + str(arg[1])
-ns_counter = 0
-br_counter = 0
 SUBNET_KEY = "Subnet"
 YAML_CONTENT = None
 
@@ -44,17 +42,35 @@ class Create_YAML_FILE():
 
     ns_counter = 0
     br_counter = 0
+    ip_range = []
     subnet_list = []
+    dns = []
+    namespace = []
     for subnet_addr_and_vm in self.contents:
       subnet_addr = subnet_addr_and_vm["subnet_addr"]
+      dns_list = {}
+      ns_list = {}
       ns_counter += 1
       br_counter += 1
       ns_name = str(tenant_name) + "ns" + str(ns_counter)
       br_name = str(tenant_name) + "br" + str(br_counter)
-      subnet_val = range_of_ips(subnet_addr, ns_name, br_name)
+      subnet_val, ip_range = range_of_ips(subnet_addr, br_name, ip_range)
       if subnet_val is None:
         exit()
       self.subnets.append(subnet_val)
+
+      dns_list["brif"] = "dnsbrif"
+      dns_list["dnsif"] = "dnsif"
+      dns_list["dhcp_start"] = ip_range[2]
+      dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+      dns.append([dns_list])
+
+      ns_list["name"] = ns_name
+      namespace.append([ns_list])
+    
+    for subnet_no, subnet in enumerate(self.subnets):
+      subnet["dns"] = dns[subnet_no]
+      subnet["namespace"] = namespace[subnet_no]
 
   def parseVMs(self):
     all_vm_lists = []
