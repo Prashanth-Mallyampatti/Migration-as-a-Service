@@ -1,11 +1,12 @@
 Subnet:
-- bridge_ip: 3.3.3.1
+- bridge_ip: 1.1.1.1
   bridge_name: t1br1
   dns:
   - brif: dnsbrif
-    dhcp_end: 3.3.3.254
-    dhcp_start: 3.3.3.2
+    dhcp_end: 1.1.1.254
+    dhcp_start: 1.1.1.129
     dnsif: dnsif
+    dnsif_ip: 1.1.1.128
     net_mask: 255.255.255.0
   ns_name: t1ns1
   vms:

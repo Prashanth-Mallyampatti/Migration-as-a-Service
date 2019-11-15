@@ -20,11 +20,27 @@ def range_of_ips(ip):
     print("Not a valid IP range: " + str(ip_range))
     return None
 
+def parse_DNS(C1_contents, C2):
+  with open(Yaml_file,'r') as stream:
+    try:
+      YAML_CONTENT = yaml.safe_load(stream)
+    except OSError:
+      print ("Creation of the directory %s failed" % path)
+
+  C2_contents = YAML_CONTENT[C2]
+  for i in C2_contents:
+    if C1_contents["subnet_addr"] == i["subnet_addr"]:
+       return False
+    else:    
+      return True
+            
+# ******************** #
 arg = sys.argv
 tenant_name = arg[1].split('.')[0]
 Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/" + str(arg[1])
 SUBNET_KEY = "Subnet"
 YAML_CONTENT = None
+full_range = False
 
 class Create_YAML_FILE():
   def __init__(self, file_name):
@@ -37,12 +53,8 @@ class Create_YAML_FILE():
         YAML_CONTENT = yaml.safe_load(stream)
       except OSError:
         print ("Creation of the directory %s failed" % path)
-
-    if content_req in YAML_CONTENT:
-      self.contents = YAML_CONTENT[content_req]
-    else:
-      exit()
-      
+    
+    self.contents = YAML_CONTENT[content_req]
 
     ns_counter = 0
     br_counter = 0
@@ -65,8 +77,29 @@ class Create_YAML_FILE():
 
       dns_list["brif"] = "dnsbrif"
       dns_list["dnsif"] = "dnsif"
-      dns_list["dhcp_start"] = ip_range[2]
-      dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+      
+      if content_req == "C1":
+        full_range = parse_DNS(subnet_addr_and_vm, "C2")
+        if full_range is False:
+          dns_list["dnsif_ip"] = ip_range[1]
+          dns_list["dhcp_start"] = ip_range[2]
+          dns_list["dhcp_end"] = ip_range[len(ip_range)//2 - 2]
+        else:
+          dns_list["dnsif_ip"] = ip_range[1]
+          dns_list["dhcp_start"] = ip_range[2]
+          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+
+      elif content_req == "C2":
+        full_range = parse_DNS(subnet_addr_and_vm, "C1")
+        if full_range is False:
+          dns_list["dnsif_ip"] = ip_range[len(ip_range)//2]
+          dns_list["dhcp_start"] = ip_range[len(ip_range)//2 + 1]
+          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+        else:
+          dns_list["dnsif_ip"] = ip_range[1]
+          dns_list["dhcp_start"] = ip_range[2]
+          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+
       dns_list["net_mask"] = mask
       dns.append([dns_list])
 
@@ -106,11 +139,28 @@ class Create_YAML_FILE():
 def main():
   obj = Create_YAML_FILE(arg[1])
 
-  obj.parseSubnets("C1")
-  obj.parseVMs()
-  obj.dump_content("t1c1")
+  with open(Yaml_file,'r') as stream:
+      try:
+        YAML_CONTENT = yaml.safe_load(stream)
+      except OSError:
+        print ("Creation of the directory %s failed" % path)
 
-  obj.parseSubnets("C2")
-  obj.parseVMs()
-  obj.dump_content("t1c2")
+  if "C1" and "C2" in YAML_CONTENT:
+    obj.parseSubnets("C1")
+    obj.parseVMs()
+    obj.dump_content("t1c1")
+
+    obj.parseSubnets("C2")
+    obj.parseVMs()
+    obj.dump_content("t1c2")
+
+  else:
+    if "C1" in YAML_CONTENT:
+      obj.parseSubnets("C1")
+      obj.parseVMs()
+      obj.dump_content("t1c1")
+    elif "C2" in YAML_CONTENT:
+      obj.parseSubnets("C2")
+      obj.parseVMs()
+      obj.dump_content("t1c2")
 main()

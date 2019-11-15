@@ -18,7 +18,7 @@
           vcpu: 2
 
   C2:
-    - subnet_addr: 3.3.3.0/24
+    - subnet_addr: 1.1.1.0/24
       VM:
         - name: VM4
           disk: 10G
