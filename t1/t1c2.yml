@@ -4,9 +4,9 @@ Subnet:
   dns:
   - brif: dnsbrif
     dhcp_end: 1.1.1.254
-    dhcp_start: 1.1.1.129
+    dhcp_start: 1.1.1.133
     dnsif: dnsif
-    dnsif_ip: 1.1.1.128
+    dnsif_ip: 1.1.1.128/24
     net_mask: 255.255.255.0
   ns_name: t1ns1
   vms:

@@ -65,3 +65,17 @@
     with_subelements:
       - "{{ Subnet }}"
       - vms
+
+  - name: Add IP to DNS Interface
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" ip addr show "{{ item.1.dnsif }}" | awk 'FNR==3{ print $2}'| grep -w '^{{ item.1.dnsif_ip }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" ip addr add "{{ item.1.dnsif_ip }}" dev "{{ item.1.dnsif }}" ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - dns
+
+  - name: Install DHCP Server
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" ps aux | grep -w '[d]nsmasq --interface {{ item.1.dnsif }} --dhcp-range={{ item.1.dhcp_start }},{{ item.1.dhcp_end }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" dnsmasq --interface "{{ item.1.dnsif }}" --dhcp-range={{ item.1.dhcp_start }},'{{ item.1.dhcp_end }}' ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - dns
