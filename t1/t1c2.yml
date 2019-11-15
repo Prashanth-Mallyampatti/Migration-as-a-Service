@@ -9,6 +9,12 @@ Subnet:
     dnsif_ip: 1.1.1.128/24
     net_mask: 255.255.255.0
   ns_name: t1ns1
+  tenant_ns:
+  - tenant_ns: t1
+    tenant_ns_if: t1s1if
+    tenant_ns_ip: 10.2.1.1
+    tenant_sub_if: s1if
+    tenant_sub_ip: 10.2.1.2
   vms:
   - brif: br1if1
     disk: 10G
@@ -16,3 +22,9 @@ Subnet:
     name: t1_VM4
     vcpu: 4
     vmif: VM4if1
+t1:
+- name: t1
+  pns_if: t1pns_if
+  pns_ip: 192.168.129.1
+  tenant_if: t1if
+  tenant_ip: 192.168.129.2

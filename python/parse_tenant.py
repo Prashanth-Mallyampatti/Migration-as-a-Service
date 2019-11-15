@@ -37,6 +37,7 @@ arg = sys.argv
 tenant_name = arg[1].split('.')[0]
 Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/" + str(arg[1])
 SUBNET_KEY = "Subnet"
+TENANT_KEY = tenant_name
 YAML_CONTENT = None
 full_range = False
 
@@ -45,6 +46,7 @@ class Create_YAML_FILE():
     self.file_name = file_name
 
   def parseSubnets(self, content_req):
+    IP_COUNTER = 0
     self.subnets = []
     with open(Yaml_file,'r') as stream:
       try:
@@ -58,9 +60,11 @@ class Create_YAML_FILE():
     br_counter = 0
     subnet_list = []
     dns = []
+    tenant_ns = []
     for subnet_addr_and_vm in self.contents:
       subnet_addr = subnet_addr_and_vm["subnet_addr"]
       dns_list = {}
+      tenant_ns_list = {}
       ns_counter += 1
       br_counter += 1
       ns_name = str(tenant_name) + "ns" + str(ns_counter)
@@ -102,8 +106,28 @@ class Create_YAML_FILE():
       dns_list["net_mask"] = mask
       dns.append([dns_list])
 
+      IP_COUNTER += 1
+      ip = ((int(tenant_name[-1:]) - 1) * 10) + IP_COUNTER
+      
+      if content_req == "C1":
+        tenant_ns_ip = "10.1." + str(ip) + ".1"
+        tenant_sub_ip = "10.1." + str(ip) + ".2"
+      
+      if content_req == "C2":
+        tenant_ns_ip = "10.2." + str(ip) + ".1"
+        tenant_sub_ip = "10.2." + str(ip) + ".2"
+
+      tenant_ns_list["tenant_ns"] = tenant_name
+      tenant_ns_list["tenant_ns_if"] = tenant_name + "s" + str(br_counter) + "if"
+      tenant_ns_list["tenant_sub_if"] = "s" + str(br_counter) + "if"
+      tenant_ns_list["tenant_ns_ip"] = tenant_ns_ip
+      tenant_ns_list["tenant_sub_ip"] = tenant_sub_ip
+
+      tenant_ns.append([tenant_ns_list])
+
     for subnet_no, subnet in enumerate(self.subnets):
       subnet["dns"] = dns[subnet_no]
+      subnet["tenant_ns"] = tenant_ns[subnet_no]
 
   def parseVMs(self):
     all_vm_lists = []
@@ -127,10 +151,30 @@ class Create_YAML_FILE():
 
     for subnet_no, subnet in enumerate(self.subnets):
         subnet["vms"] = all_vm_lists[subnet_no]
+  
+  def parseTENANT(self, content_req):
+    self.tenant_ns = []
+    tenant_list = {}
+
+    if content_req == "C1": 
+      pns_ip = "192.168." + tenant_name[-1:] + ".1"
+      tenant_ip = "192.168." + tenant_name[-1:] + ".2"
+    if content_req == "C2":
+      temp = 128 + int(tenant_name[-1:])
+      pns_ip = "192.168." + str(temp) + ".1"
+      tenant_ip = "192.168." + str(temp) + ".2"
+
+    tenant_list["name"] = tenant_name
+    tenant_list["tenant_if"] = tenant_name + "if"
+    tenant_list["pns_if"] = tenant_name + "pns_if"
+    tenant_list["pns_ip"] = pns_ip
+    tenant_list["tenant_ip"] = tenant_ip
+    self.tenant_ns = [tenant_list]
 
   def dump_content(self, file_name):
     self.tenant = {}
     self.tenant[SUBNET_KEY] = self.subnets
+    self.tenant[TENANT_KEY] = self.tenant_ns
     file_path = "/root/Migration-as-a-Service/" + tenant_name + "/"
     with open(file_path + file_name + ".yml", "w") as file:
       doc = yaml.dump(self.tenant, file, default_flow_style=False)
@@ -144,22 +188,16 @@ def main():
       except OSError:
         print ("Creation of the directory %s failed" % path)
 
-  if "C1" and "C2" in YAML_CONTENT:
+  if "C1" in YAML_CONTENT:
     obj.parseSubnets("C1")
     obj.parseVMs()
-    obj.dump_content("t1c1")
-
+    obj.parseTENANT("C1")
+    file_name = tenant_name + "c1"
+    obj.dump_content(file_name)
+  if "C2" in YAML_CONTENT:
     obj.parseSubnets("C2")
     obj.parseVMs()
-    obj.dump_content("t1c2")
-
-  else:
-    if "C1" in YAML_CONTENT:
-      obj.parseSubnets("C1")
-      obj.parseVMs()
-      obj.dump_content("t1c1")
-    elif "C2" in YAML_CONTENT:
-      obj.parseSubnets("C2")
-      obj.parseVMs()
-      obj.dump_content("t1c2")
+    obj.parseTENANT("C2")
+    file_name = tenant_name + "c2"
+    obj.dump_content(file_name)
 main()
