@@ -24,6 +24,22 @@
       ip netns exec "{{ item.ns_name }}" ip link set dev "{{ item.bridge_name }}" up
     with_items:
       - "{{ Subnet }}"
+
+  - name: Create DNS VETH Pair
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" ip link show "{{ item.1.brif }}" ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" ip link add "{{ item.1.brif }}" type veth peer name "{{ item.1.dnsif }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" ip link set dev "{{ item.1.brif }}" up
+      ip netns exec "{{ item.0.ns_name }}" ip link set dev "{{ item.1.dnsif }}" up
+    with_subelements:
+      - "{{ Subnet }}"
+      - dns
+
+  - name: Attach DNS VETH Pair
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.1.brif }}" ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" ip link set "{{  }}"
+    with_subelements:
+      - "{{ Subnet }}"
+      - dns
   
   - name: Create VETH Pairs
     shell: |
@@ -71,7 +87,7 @@
   
   - name: Create bridge inside namespace
     shell: |
-      ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -eq 1 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi 
+      ip netns exec "{{ item.ns_name }}" brctl show | grep -w '^{{ item.bridge_name }}'; if [ $? -ne 0 ] ; then ip netns exec "{{ item.ns_name }}" brctl addbr "{{ item.bridge_name }}" ; fi 
       ip netns exec "{{ item.ns_name }}" ip link set dev "{{ item.bridge_name }}" up
     with_items:
       - "{{ Subnet }}"

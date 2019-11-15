@@ -19,6 +19,3 @@
       state: present
     when: ansible_os_family == "Debian"
     become: yes
-
-  - name: Make test dir
-    command: mkdir /var/run/testing
