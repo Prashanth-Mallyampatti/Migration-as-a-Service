@@ -27,6 +27,28 @@
     with_items:
       - "{{ Subnet }}"
 
+  - name: Create Tenant VETH pairs
+    shell: |
+      ip link show "{{ item.tenant_if }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.tenant_if }}" type veth peer name "{{ item.pns_if }}" ; fi
+    with_items:
+      - "{{ Namespace }}"
+
+  - name: Attach Tenant VETH Pairs
+    shell: |
+      ip netns exec pns ip link show "{{ item.pns_if }}" ; if [ $? -ne 0 ] ; then ip link set "{{ item.pns_if }}" netns pns ; fi
+      ip netns exec "{{ item.name }}" ip link show "{{ item.tenant_if }}" ; if [ $? -ne 0 ] ; then ip link set "{{ item.tenant_if }}" netns "{{ item.name }}" ; fi
+      ip netns exec pns ip link set dev "{{ item.pns_if }}" up
+      ip netns exec "{{ item.name }}" ip link set dev "{{ item.tenant_if }}" up
+    with_items: 
+      - "{{ Namespace }}"
+
+  - name: Add IP addresses to Tenant VETH Pairs
+    shell: |
+      ip netns exec pns ip addr show "{{ item.pns_if }}" | awk 'FNR==3{ print $2 }' | grep -w '^{{ item.pns_ip }}' ; if [ $? -ne 0 ] ; then ip netns exec pns ip addr add "{{ item.pns_ip }}" dev "{{ item.pns_if }}" ; fi
+      ip netns exec "{{ item.name }}" ip addr show "{{ item.tenant_if }}" | awk 'FNR==3{ print $2 }' | grep -w '^{{ item.tenant_ip }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.name }}" ip addr add "{{ item.tenant_ip }}" dev "{{ item.tenant_if }}" ; fi
+    with_items:
+      - "{{ Namespace}}"
+
   - name: Create Namespace VETH Pairs
     shell: |
       ip link show "{{ item.1.tenant_ns_if }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.tenant_ns_if }}" type veth peer name "{{ item.1.tenant_sub_if }}" ; fi
@@ -109,7 +131,7 @@
 
   - name: Add IP to DNS Interface
     shell: |
-      ip netns exec "{{ item.0.ns_name }}" ip addr show "{{ item.1.dnsif }}" | awk 'FNR==3{ print $2}'| grep -w '^{{ item.1.dnsif_ip }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" ip addr add "{{ item.1.dnsif_ip }}" dev "{{ item.1.dnsif }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" ip addr show "{{ item.1.dnsif }}" | awk 'FNR==3{ print $2i }' | grep -w '^{{ item.1.dnsif_ip }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" ip addr add "{{ item.1.dnsif_ip }}" dev "{{ item.1.dnsif }}" ; fi
     with_subelements:
       - "{{ Subnet }}"
       - dns

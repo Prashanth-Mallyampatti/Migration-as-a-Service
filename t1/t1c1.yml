@@ -1,9 +1,9 @@
 Namespace:
 - name: t1
   pns_if: t1pns_if
-  pns_ip: 192.168.1.1
+  pns_ip: 192.168.1.1/24
   tenant_if: t1if
-  tenant_ip: 192.168.1.2
+  tenant_ip: 192.168.1.2/24
 Subnet:
 - bridge_ip: 1.1.1.1
   bridge_name: t1br1

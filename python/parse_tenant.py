@@ -211,8 +211,8 @@ class Create_YAML_FILE():
     tenant_list["name"] = tenant_name
     tenant_list["tenant_if"] = tenant_name + "if"
     tenant_list["pns_if"] = tenant_name + "pns_if"
-    tenant_list["pns_ip"] = pns_ip
-    tenant_list["tenant_ip"] = tenant_ip
+    tenant_list["pns_ip"] = pns_ip + "/24"
+    tenant_list["tenant_ip"] = tenant_ip + "/24"
     self.tenant_ns = [tenant_list]
 
   def dump_content(self, file_name):
