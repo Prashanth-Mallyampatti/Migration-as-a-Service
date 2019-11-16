@@ -120,3 +120,29 @@
     with_subelements:
       - "{{ Subnet }}"
       - dns
+
+  - name: Create VXLAN devices
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" ip link show "{{ item.1.v_name }}" ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" ip link add "{{ item.1.v_name }}" type vxlan id "{{ item.1.id }}" local "{{ item.1.local_ip }}" remote "{{ item.1.remote_ip }}" dstport "{{ item.1.dsport }}" ; ip netns exec "{{ item.0.ns_name }}" ip link set dev "{{ item.1.v_name }}" up ; fi
+    when:
+      - item.1.dsport != []
+      - item.1.id != []
+      - item.1.local_ip != []
+      - item.1.remote_ip != []
+      - item.1.v_name != []
+    with_subelements:
+      - "{{ Subnet }}"
+      - vxlan
+
+  - name: Attach VXLANs to bridge
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.v_name }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.v_name }}" ; fi
+    when:
+      - item.1.dsport != []
+      - item.1.id != []
+      - item.1.local_ip != []
+      - item.1.remote_ip != []
+      - item.1.v_name != []
+    with_subelements:
+      - "{{ Subnet }}"
+      - vxlan

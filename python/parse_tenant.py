@@ -61,10 +61,13 @@ class Create_YAML_FILE():
     subnet_list = []
     dns = []
     tenant_ns = []
+    vxlan = []
     for subnet_addr_and_vm in self.contents:
       subnet_addr = subnet_addr_and_vm["subnet_addr"]
       dns_list = {}
       tenant_ns_list = {}
+      vxlan_list = {}
+
       ns_counter += 1
       br_counter += 1
       ns_name = str(tenant_name) + "ns" + str(ns_counter)
@@ -125,9 +128,50 @@ class Create_YAML_FILE():
 
       tenant_ns.append([tenant_ns_list])
 
+      if content_req == "C1":
+        C2_contents = YAML_CONTENT["C2"]
+        for subnet_C2 in C2_contents:
+          subnet_addr_C2 = subnet_C2["subnet_addr"]
+          if subnet_addr_C2 == subnet_addr:
+            vxlan_list["v_name"] = "vxlan_" + tenant_name + "s" + str(br_counter)
+            vxlan_list["local_ip"] = tenant_ns_list["tenant_sub_ip"].split("/")[0]
+            vxlan_list["remote_ip"] = "10.2." + str(ip) + ".2"
+            vxlan_list["id"] = 42
+            vxlan_list["dsport"] = 4789
+            vxlan.append([vxlan_list])
+            break
+          else: 
+            vxlan_list["v_name"] = []
+            vxlan_list["local_ip"] = []
+            vxlan_list["remote_ip"] = []
+            vxlan_list["id"] = []
+            vxlan_list["dsport"] = []
+            vxlan.append([vxlan_list])
+
+      if content_req == "C2":
+        C1_contents = YAML_CONTENT["C1"]
+        for subnet_C1 in C1_contents:
+          subnet_addr_C1 = subnet_C1["subnet_addr"]
+          if subnet_addr_C1 == subnet_addr:
+            vxlan_list["v_name"] = "vxlan_" + tenant_name + "s" + str(br_counter)
+            vxlan_list["local_ip"] = tenant_ns_list["tenant_sub_ip"].split("/")[0]
+            vxlan_list["remote_ip"] = "10.1." + str(ip) + ".2"
+            vxlan_list["id"] = 42
+            vxlan_list["dsport"] = 4789
+            vxlan.append([vxlan_list])
+            break
+          else:
+            vxlan_list["v_name"] = []
+            vxlan_list["local_ip"] = []
+            vxlan_list["remote_ip"] = []
+            vxlan_list["id"] = []
+            vxlan_list["dsport"] = []
+            vxlan.append([vxlan_list])
+
     for subnet_no, subnet in enumerate(self.subnets):
       subnet["dns"] = dns[subnet_no]
       subnet["tenant_ns"] = tenant_ns[subnet_no]
+      subnet["vxlan"] = vxlan[subnet_no]
 
   def parseVMs(self):
     all_vm_lists = []

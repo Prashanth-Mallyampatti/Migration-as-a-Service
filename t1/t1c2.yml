@@ -28,3 +28,9 @@ Subnet:
     name: t1_VM4
     vcpu: 4
     vmif: VM4if1
+  vxlan:
+  - dsport: 4789
+    id: 42
+    local_ip: 10.2.1.2
+    remote_ip: 10.1.1.2
+    v_name: vxlan_t1s1
