@@ -1,0 +1,6 @@
+INFO:root: 18:56:59.219548file 't4.yaml' created in '/root/Migration-as-a-Service/ansible/config_files'
+INFO:root: 19:01:00.862030file 't4.yaml' deleted in '/root/Migration-as-a-Service/ansible/config_files'
+INFO:root: 19:02:15.707568 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files'
+INFO:root: 19:02:22.652754 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files'
+INFO:root: 19:02:22.653003 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files'
+INFO:root: 19:02:27.029340 file 't4.yml' deleted in '/root/Migration-as-a-Service/ansible/config_files'
