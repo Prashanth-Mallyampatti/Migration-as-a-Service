@@ -62,11 +62,13 @@ class Create_YAML_FILE():
     dns = []
     tenant_ns = []
     vxlan = []
+    route = []
     for subnet_addr_and_vm in self.contents:
       subnet_addr = subnet_addr_and_vm["subnet_addr"]
       dns_list = {}
       tenant_ns_list = {}
       vxlan_list = {}
+      route_list = {}
 
       ns_counter += 1
       br_counter += 1
@@ -127,7 +129,8 @@ class Create_YAML_FILE():
       tenant_ns_list["tenant_sub_ip"] = tenant_sub_ip + "/" + mask_num[1]
 
       tenant_ns.append([tenant_ns_list])
-
+      
+      subnet_val["default_route_ip"] = tenant_ns_ip
       if content_req == "C1":
         C2_contents = YAML_CONTENT["C2"]
         for subnet_C2 in C2_contents:
@@ -138,6 +141,7 @@ class Create_YAML_FILE():
             vxlan_list["remote_ip"] = "10.2." + str(ip) + ".2"
             vxlan_list["id"] = 42
             vxlan_list["dsport"] = 4789
+            vxlan_list["dev"] = tenant_ns_list["tenant_sub_if"]
             vxlan.append([vxlan_list])
             break
           else: 
@@ -146,6 +150,7 @@ class Create_YAML_FILE():
             vxlan_list["remote_ip"] = []
             vxlan_list["id"] = []
             vxlan_list["dsport"] = []
+            vxlan_list["dev"] = []
             vxlan.append([vxlan_list])
 
       if content_req == "C2":
@@ -158,6 +163,7 @@ class Create_YAML_FILE():
             vxlan_list["remote_ip"] = "10.1." + str(ip) + ".2"
             vxlan_list["id"] = 42
             vxlan_list["dsport"] = 4789
+            vxlan_list["dev"] = tenant_ns_list["tenant_sub_if"]
             vxlan.append([vxlan_list])
             break
           else:
@@ -166,12 +172,21 @@ class Create_YAML_FILE():
             vxlan_list["remote_ip"] = []
             vxlan_list["id"] = []
             vxlan_list["dsport"] = []
+            vxlan_list["dev"] = []
             vxlan.append([vxlan_list])
+      
+      route_list["ip"] = tenant_ns_ip + "/" + mask_num[1]
+      route_list["if"] = "p1"
+      route_list["ns_name"] = tenant_name
+      route_list["ns_if"] = tenant_name + "if"
+      route.append([route_list])
+
 
     for subnet_no, subnet in enumerate(self.subnets):
       subnet["dns"] = dns[subnet_no]
       subnet["tenant_ns"] = tenant_ns[subnet_no]
       subnet["vxlan"] = vxlan[subnet_no]
+      subnet["route"] = route[subnet_no]
 
   def parseVMs(self):
     all_vm_lists = []
@@ -213,6 +228,7 @@ class Create_YAML_FILE():
     tenant_list["pns_if"] = tenant_name + "pns_if"
     tenant_list["pns_ip"] = pns_ip + "/24"
     tenant_list["tenant_ip"] = tenant_ip + "/24"
+    tenant_list["default_route_ip"] = pns_ip
     self.tenant_ns = [tenant_list]
 
   def dump_content(self, file_name):
@@ -233,15 +249,15 @@ def main():
         print ("Creation of the directory %s failed" % path)
 
   if "C1" in YAML_CONTENT:
+    obj.parseTENANT("C1")
     obj.parseSubnets("C1")
     obj.parseVMs()
-    obj.parseTENANT("C1")
     file_name = tenant_name + "c1"
     obj.dump_content(file_name)
   if "C2" in YAML_CONTENT:
+    obj.parseTENANT("C2")
     obj.parseSubnets("C2")
     obj.parseVMs()
-    obj.parseTENANT("C2")
     file_name = tenant_name + "c2"
     obj.dump_content(file_name)
 main()

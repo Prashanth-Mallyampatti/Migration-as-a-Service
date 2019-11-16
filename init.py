@@ -24,7 +24,7 @@ for event in notifier.event_gen():
         if 'IN_CREATE' in event[1]:
              logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' created in '{1}'".format(event[3], event[2]))
              print "file '{0}' created".format(event[3], event[2])
-             #os.system("your_python_script_here.py")
+             os.system("validate.py")
         if 'IN_MODIFY' in event[1]:
              logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' modified in '{1}'".format(event[3], event[2]))
              print "file '{0}' modified".format(event[3], event[2])

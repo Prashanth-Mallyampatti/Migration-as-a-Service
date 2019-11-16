@@ -1,5 +1,6 @@
 Namespace:
-- name: t1
+- default_route_ip: 192.168.129.1
+  name: t1
   pns_if: t1pns_if
   pns_ip: 192.168.129.1/24
   tenant_if: t1if
@@ -7,6 +8,7 @@ Namespace:
 Subnet:
 - bridge_ip: 1.1.1.1
   bridge_name: t1br1
+  default_route_ip: 10.2.1.1
   dns:
   - brif: dnsbrif
     dhcp_end: 1.1.1.254
@@ -15,6 +17,11 @@ Subnet:
     dnsif_ip: 1.1.1.128/24
     net_mask: 255.255.255.0
   ns_name: t1ns1
+  route:
+  - if: p1
+    ip: 10.2.1.1/24
+    ns_if: t1if
+    ns_name: t1
   tenant_ns:
   - tenant_ns_if: t1s1if
     tenant_ns_ip: 10.2.1.1/24
@@ -29,7 +36,8 @@ Subnet:
     vcpu: 4
     vmif: VM4if1
   vxlan:
-  - dsport: 4789
+  - dev: s1if
+    dsport: 4789
     id: 42
     local_ip: 10.2.1.2
     remote_ip: 10.1.1.2

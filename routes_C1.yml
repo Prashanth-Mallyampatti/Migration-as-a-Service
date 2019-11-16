@@ -1,0 +1,11 @@
+---
+- hosts: main
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  vars_files:
+    - config_files/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c1.yml
+
+  tasks:

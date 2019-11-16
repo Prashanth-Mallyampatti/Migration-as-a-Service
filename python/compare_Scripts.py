@@ -1,10 +1,29 @@
+############################################################################
+# This script is used to compare the subnets in the multicloud environment.
+# The script reads the tenant config file and compares subnets in one cloud
+# with subnets in another cloud to determine the spread of tenant subnets 
+# across the multicloud environment. 
+#
+# If the same subnet is spread across multiple clouds, we need to ensure
+# L2 connectivity between the subnets in different clouds.
+############################################################################
+
 import sys
 import os
 import yaml
+import logging
+import datetime
 
+# Create log file
+logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log")
+
+# Receive the yaml file of the tenant
 arg = sys.argv
-print(arg[1])
+#print(arg[1])
+logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Invoking compare_script for' + str(arg[1]))
 Yaml_file = arg[1]
+
+# Read the yaml config file
 with open(Yaml_file,'r') as stream:
     try:
         yaml_content = yaml.safe_load(stream)
@@ -20,40 +39,49 @@ with open(Yaml_file,'r') as stream:
             print(i)
             Cloud_Number.append(i)
 
-        # Listing all number of subnets in the C1 and C2
-        print("List of subnets in the C1:")
-        print("--------------------------")
+        # Listing all subnets in the Cloud 1 and Cloud 2
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Listing all subnets in cloud 1')
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + '--------------------------')
 
         C1S = []
         for x in range(0,Cloud_Number[0],1):
             subnet = str(yaml_content['C1'][x]['subnet_addr'])
             C1S.append(subnet)
-            print(subnet)
+            logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(subnet))
 
-        print("\n")
-        print("List of subnets in the C2:")
-        print("--------------------------")
+        #print("\n")
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Listing all subnets in cloud 2')
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + '--------------------------')
 
         C2S = []
         for x in range(0,Cloud_Number[1],1):
             subnet = str(yaml_content['C2'][x]['subnet_addr'])
             C2S.append(subnet)
-            print(subnet)
+            #print(subnet)
+            logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(subnet))
 
         print(C1S)
         print(C2S)
 
+        # Identify if subnets are spread across clouds and create L2 tunnel
+        # If tenant chooses to have routed gateway as a requirement,
+        # ensure that all the subnets are reachable from each other
         compare_subnet_list_vxlan = []
         compare_subnet_list_gre = []
          
         for i in range(0,Cloud_Number[0],1):
             for j in range(0,Cloud_Number[1],1):
                 if (C1S[i] == C2S[j]):
-                    print("Entered in to the if loop")
+                    #print("Entered in to the if loop")
+                    logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Identified same subnet across multiple clouds, create L2 tunnel')
                     test = str(C1S[i]) + ' - ' + str(C2S[j]) + ' - ' + 'VxLan'
-                    print(test)
+                    #print(test)
                     compare_subnet_list_vxlan.append(test)
                 else:
+                    #TODO: Check if the tenant needs a routed gateway.
+                    #      If yes, create L3 tunnel
+                    #      If no, don not create anything
+                    logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Identified multiple subnets across multiple clouds, create L3 tunnel')
                     test = str(C1S[i]) + ' - ' + str(C2S[j]) + ' - ' + 'GRE'
                     compare_subnet_list_gre.append(test)
     
@@ -65,22 +93,28 @@ with open(Yaml_file,'r') as stream:
         
         if len1 > 0:
             for i in range(0,len1,1):
-                print(compare_subnet_list_vxlan[i])
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + compare_subnet_list_vxlan[i])
         if len2 > 0:
             for i in range(0,len2,1):
-                print(compare_subnet_list_gre[i])
+                #print(compare_subnet_list_gre[i])
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + compare_subnet_list_gre[i])
     
         # Writing the list in to the file
-        path = '/home/ece792/LN_PROJECT/'
-        file_path = '/home/ece792/LN_PROJECT/Compare_Subnets_Across_Clouds.yaml'
+        #path = '/home/ece792/LN_PROJECT/'
+        path = '/root/Migration-as-a-Service/'
+        #file_path = '/home/ece792/LN_PROJECT/Compare_Subnets_Across_Clouds.yaml'
+        file_path = '/root/Migration-as-a-Service/Compare_Subnets_Across_Clouds.yaml'
         try:
             if not os.path.exists(path):
                 os.makedirs(path)
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Creating Compare_Subnets_Across_Clouds.yaml')
             else:
-                print("The file path already exists: "+ str(path))
+                #print("The file path already exists: "+ str(path))
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Compare_Subnets_Across_Clouds.yaml file exists')
 
         except OSError:
-            print ("Creation of the directory %s failed" % path)
+            #print ("Creation of the directory %s failed" % path)
+            logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Failed to create Compare_Subnets_Across_Clouds.yaml')
         
         with open(file_path, 'w') as file:
             documents = yaml.dump(compare_subnet_list_vxlan, file, default_flow_style=False)
@@ -92,6 +126,7 @@ with open(Yaml_file,'r') as stream:
 #                filehandle.write('%s\n' % items)
 #            for items in C2S :
 #                filehandle.write('%s\n' $ items)
-    except yaml.YAMLError as exc:
-        print(exc)
+    except yaml.YAMLError as exception:
+        #print(exc)
+        logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + exception)
 
