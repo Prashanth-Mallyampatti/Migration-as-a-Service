@@ -37,7 +37,7 @@ arg = sys.argv
 tenant_name = arg[1].split('.')[0]
 Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/" + str(arg[1])
 SUBNET_KEY = "Subnet"
-TENANT_KEY = tenant_name
+TENANT_KEY = "Namespace"
 YAML_CONTENT = None
 full_range = False
 
@@ -117,11 +117,11 @@ class Create_YAML_FILE():
         tenant_ns_ip = "10.2." + str(ip) + ".1"
         tenant_sub_ip = "10.2." + str(ip) + ".2"
 
-      tenant_ns_list["tenant_ns"] = tenant_name
+      tenant_ns_list["tenant_ns_name"] = tenant_name
       tenant_ns_list["tenant_ns_if"] = tenant_name + "s" + str(br_counter) + "if"
       tenant_ns_list["tenant_sub_if"] = "s" + str(br_counter) + "if"
-      tenant_ns_list["tenant_ns_ip"] = tenant_ns_ip
-      tenant_ns_list["tenant_sub_ip"] = tenant_sub_ip
+      tenant_ns_list["tenant_ns_ip"] = tenant_ns_ip + "/" + mask_num[1]
+      tenant_ns_list["tenant_sub_ip"] = tenant_sub_ip + "/" + mask_num[1]
 
       tenant_ns.append([tenant_ns_list])
 
