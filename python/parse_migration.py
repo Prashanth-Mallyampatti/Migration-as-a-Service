@@ -2,7 +2,8 @@ import ipaddress
 import yaml
 import os
 import sys
-
+import re
+import subprocess
 
 # ******************** #
 arg = sys.argv
@@ -51,9 +52,11 @@ class Create_YAML_FILE():
           subnet_ip = infra["subnet_ip"]
           ns_name = infra["ns_name"]
           infra_vms = infra["vms"]
+          bridge_name = infra["bridge_name"]
 
           if subnet_ip == source_subnet:
             migrate_list["ns_name"] = ns_name
+            migrate_list["bridge_name"] = bridge_name
             VM = migrate["VM"]
             vm = []
             for vms in VM:
@@ -62,6 +65,50 @@ class Create_YAML_FILE():
               for infra_vm in infra_vms:
                 if vm_list["name"] == infra_vm["name"]:
                   vm_list["vmif"] = infra_vm["vmif"]
+                  vm_list["vmif_m"] = infra_vm["vmif"] + "_m"
+                  vm_list["brif_m"] = infra_vm["brif"] + "_m"
+                  cmd = "virsh domiflist " + vm_list["name"] + " |  awk 'FNR==3{ print $5 }'"
+                  stream = os.popen(cmd)
+                  out = stream.read()
+                  vm_list["vm_mac"] = out.rstrip()
+              #vm_list["hello"] = "hi"
+              vm.append(vm_list)
+            migrate_list["VM"] = vm
+
+      if source_cloud == "C2":
+        with open(C2_infra_file,'r') as stream:
+          try:
+            INFRA_CONTENT = yaml.safe_load(stream)
+          except OSError:
+            print ("Creation of the directory %s failed" % path)
+      
+        self.infra_contents = INFRA_CONTENT["Subnet"]
+      
+        migrate_list = {}
+
+        for infra in self.infra_contents:
+          subnet_ip = infra["subnet_ip"]
+          ns_name = infra["ns_name"]
+          infra_vms = infra["vms"]
+          bridge_name = infra["bridge_name"]
+
+          if subnet_ip == source_subnet:
+            migrate_list["ns_name"] = ns_name
+            migrate_list["bridge_name"] = bridge_name
+            VM = migrate["VM"]
+            vm = []
+            for vms in VM:
+              vm_list = {}
+              vm_list["name"] = tenant_name + "_" + vms["name"]
+              for infra_vm in infra_vms:
+                if vm_list["name"] == infra_vm["name"]:
+                  vm_list["vmif"] = infra_vm["vmif"]
+                  vm_list["vmif_m"] = infra_vm["vmif"] + "_m"
+                  vm_list["brif_m"] = infra_vm["brif"] + "_m"
+                  cmd = "virsh domiflist " + vm_list["name"] + " |  awk 'FNR==3{ print $5 }'"
+                  stream = os.popen(cmd)
+                  out = stream.read()
+                  vm_list["vm_mac"] = out.rstrip()
               #vm_list["hello"] = "hi"
               vm.append(vm_list)
             migrate_list["VM"] = vm

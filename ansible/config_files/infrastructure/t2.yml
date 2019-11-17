@@ -6,14 +6,16 @@
           disk: 10G
           mem: 2
           vcpu: 4
-          internet access: true
+        - name: VM2
+          disk: 10G
+          mem: 2
+          vcpu: 4
     - subnet_addr: 2.2.2.0/24
       VM:
         - name: VM3
           disk: 10G
           mem: 3
           vcpu: 2
-          internet access: false
 
   C2:
     - subnet_addr: 1.1.1.0/24
@@ -22,4 +24,3 @@
           disk: 10G
           mem: 2
           vcpu: 4
-          internet access: true

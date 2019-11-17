@@ -1,12 +1,12 @@
 ---
-- hosts: main
+- hosts: worker
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
   vars_files:
     - config_files/migration/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C2.yml
   
   tasks:
   - name: Detach Interface
@@ -23,7 +23,7 @@
       - "{{ Migrate }}"
       - VM
 
-- hosts: worker
+- hosts: main
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python2
@@ -31,7 +31,7 @@
     template_dir: /etc/libvirt/qemu
   vars_files:
     - config_files/migration/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C2.yml
 
   tasks:  
   - name: Migrate VM images
