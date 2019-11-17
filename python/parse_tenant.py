@@ -114,7 +114,6 @@ class Create_YAML_FILE():
 
       IP_COUNTER += 1
       ip = ((int(tenant_name[-1:]) - 1) * 10) + IP_COUNTER
-      
       if content_req == "C1":
         tenant_ns_subnet = "10.1." + str(ip) + ".0"
         tenant_ns_ip = "10.1." + str(ip) + ".1"
@@ -124,6 +123,7 @@ class Create_YAML_FILE():
         tenant_ns_subnet = "10.2." + str(ip) + ".0"
         tenant_ns_ip = "10.2." + str(ip) + ".1"
         tenant_sub_ip = "10.2." + str(ip) + ".2"
+        
 
       tenant_ns_list["tenant_ns_name"] = tenant_name
       tenant_ns_list["tenant_ns_if"] = tenant_name + "s" + str(br_counter) + "if"
@@ -147,6 +147,7 @@ class Create_YAML_FILE():
             vxlan_list["dev"] = tenant_ns_list["tenant_sub_if"]
             vxlan_list["subnet_route"] = tenant_ns_subnet + "/" + mask_num[1]
             vxlan_list["tenant_route_ip"] = tenant_route_ip
+            vxlan_list["remote_route"] = "10.2." + str(ip) + ".0" + "/" + mask_num[1]
             vxlan.append([vxlan_list])
             break
           else: 
@@ -158,6 +159,7 @@ class Create_YAML_FILE():
             vxlan_list["dev"] = []
             vxlan_list["subnet_route"] = [] 
             vxlan_list["tenant_route_ip"] = [] 
+            vxlan_list["remote_route"] = []
             vxlan.append([vxlan_list])
 
       if content_req == "C2":
@@ -173,6 +175,7 @@ class Create_YAML_FILE():
             vxlan_list["dev"] = tenant_ns_list["tenant_sub_if"]
             vxlan_list["subnet_route"] = tenant_ns_subnet + "/" + mask_num[1]
             vxlan_list["tenant_route_ip"] = tenant_route_ip
+            vxlan_list["remote_route"] = "10.1." + str(ip) + ".0" + "/" + mask_num[1]
             vxlan.append([vxlan_list])
             break
           else:
@@ -184,6 +187,7 @@ class Create_YAML_FILE():
             vxlan_list["dev"] = []
             vxlan_list["subnet_route"] = [] 
             vxlan_list["tenant_route_ip"] = []
+            vxlan_list["remote_route"] = []
             vxlan.append([vxlan_list])
       
       route_list["ip"] = tenant_ns_ip + "/" + mask_num[1]
