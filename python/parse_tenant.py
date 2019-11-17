@@ -94,7 +94,7 @@ class Create_YAML_FILE():
       subnet_val, ip_range, mask = range_of_ips(subnet_addr)
       subnet_val["ns_name"] = ns_name
       subnet_val["bridge_name"] = br_name
-      subnet_val["bridge_ip"] = ip_range[1]
+      subnet_val["subnet_ip"] = subnet_addr
       if subnet_val is None:
         exit()
       self.subnets.append(subnet_val)

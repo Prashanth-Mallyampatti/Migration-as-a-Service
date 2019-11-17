@@ -6,8 +6,7 @@ Namespace:
   tenant_if: t1if
   tenant_ip: 192.168.129.2/24
 Subnet:
-- bridge_ip: 1.1.1.1
-  bridge_name: t1br1
+- bridge_name: t1br1
   default_route_ip: 10.2.1.1
   dns:
   - brif: t1s1_dnsbrif
@@ -22,6 +21,7 @@ Subnet:
     ip: 10.2.1.1/24
     ns_if: t1if
     ns_name: t1
+  subnet_ip: 1.1.1.0/24
   tenant_ns:
   - tenant_ns_if: t1ns1if
     tenant_ns_ip: 10.2.1.1/24

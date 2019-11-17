@@ -25,15 +25,16 @@ try:
         yaml_content = yaml.safe_load(stream)
         logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Printing the yaml input file')
         logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(yaml_content))
-        
+      
+        #print(yaml_content) 
         Cloud_Number = []
         for each in yaml_content:
           i = 0
           for item in yaml_content[each]:
             if len(item) > 0:
               i = i + 1
-        Cloud_Number.append(i)
-
+          Cloud_Number.append(i)
+  #      print(Cloud_Number)
 
         # list of subnet address in the first cloud
         C1S = []
@@ -44,13 +45,15 @@ try:
             ip_addr = ipaddress.ip_network(subnet)
             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C1: ' + subnet + ' is valid')
           except ValueError:
-            logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C1: ' + subnet + ' is not valid')
-            exit()
+            logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C1: ' + subnet + ' is not valid')         
+            sys.exit()
           
-          C1S.append(subnet)
-          if subnet in C1S:
+          #C1S.append(subnet)
+          if subnet not in C1S:
+            C1S.append(subnet)
+          else:  
             logging.error(' ' + str(datetime.datetime.now().time()) + 'Multiple subnet in the C1 are same')
-            exit()
+            sys.exit()
 
 
 
@@ -63,24 +66,27 @@ try:
             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C2: ' + subnet + ' is valid')
           except ValueError:
             logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C2: ' + subnet + ' is not valid')
-            exit()
+            sys.exit()
           
-          C2S.append(subnet)
-          if subnet in C2S:
+          #C2S.append(subnet)
+          if subnet not in C2S:
+            C2S.append(subnet)
+          else:
             logging.error(' ' + str(datetime.datetime.now()) + 'Duplicate subnets in the C2')
-            exit()
+            sys.exit()
 
-        print(C1S)
-        print("\n")
-        print(C2S)
+        #print(C1S)
+        #print("\n")
+        #print(C2S)
      
       except yaml.YAMLError as exc:
         #print(exc)
         logging.error(' ' + str(datetime.datetime.time().now()) + ' ' + str(exc))
- 
+        sys.exit()
+
 except ValueError:
   logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Unable to open user input yaml file')
-  
+  sys.exit()
 
 
 

@@ -6,8 +6,7 @@ Namespace:
   tenant_if: t1if
   tenant_ip: 192.168.1.2/24
 Subnet:
-- bridge_ip: 1.1.1.1
-  bridge_name: t1br1
+- bridge_name: t1br1
   default_route_ip: 10.1.1.1
   dns:
   - brif: t1s1_dnsbrif
@@ -22,6 +21,7 @@ Subnet:
     ip: 10.1.1.1/24
     ns_if: t1if
     ns_name: t1
+  subnet_ip: 1.1.1.0/24
   tenant_ns:
   - tenant_ns_if: t1ns1if
     tenant_ns_ip: 10.1.1.1/24
@@ -35,12 +35,6 @@ Subnet:
     name: t1_VM1
     vcpu: 4
     vmif: t1VM1if1
-  - brif: t1br1if2
-    disk: 10G
-    mem: 4
-    name: t1_VM2
-    vcpu: 2
-    vmif: t1VM2if1
   vxlan:
   - dev: t1s1if
     dsport: 4789
@@ -51,8 +45,7 @@ Subnet:
     subnet_route: 10.1.1.0/24
     tenant_route_ip: 192.168.1.2
     v_name: vxlan_t1s1
-- bridge_ip: 2.2.2.1
-  bridge_name: t1br2
+- bridge_name: t1br2
   default_route_ip: 10.1.2.1
   dns:
   - brif: t1s2_dnsbrif
@@ -67,6 +60,7 @@ Subnet:
     ip: 10.1.2.1/24
     ns_if: t1if
     ns_name: t1
+  subnet_ip: 2.2.2.0/24
   tenant_ns:
   - tenant_ns_if: t1ns2if
     tenant_ns_ip: 10.1.2.1/24
