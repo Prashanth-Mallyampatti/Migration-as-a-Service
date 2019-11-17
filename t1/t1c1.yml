@@ -35,6 +35,12 @@ Subnet:
     name: t1_VM1
     vcpu: 4
     vmif: t1VM1if1
+  - brif: t1br1if2
+    disk: 10G
+    mem: 2
+    name: t1_VM2
+    vcpu: 4
+    vmif: t1VM2if1
   vxlan:
   - dev: t1s1if
     dsport: 4789

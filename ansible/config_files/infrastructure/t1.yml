@@ -6,7 +6,11 @@
           disk: 10G
           mem: 2
           vcpu: 4
-    - subnet_addr: 1.1.1.0/24
+        - name: VM2
+          disk: 10G
+          mem: 2
+          vcpu: 4
+    - subnet_addr: 2.2.2.0/24
       VM:
         - name: VM3
           disk: 10G

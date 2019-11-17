@@ -1,0 +1,24 @@
+---
+- hosts: main
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  vars_files:
+    - config_files/migration/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
+  
+  tasks:
+  - name: Detach Interface
+    shell: |
+      virsh domiflist "{{ item.1.name }}" | grep -w "{{ item.1.vmif }}" ; if [ $? -eq 0 ] ; then virsh detach-interface --domain "{{ item.1.name }}" --type direct --config ; fi
+    with_subelements:
+      - "{{ Migrate }}"
+      - VM
+
+  - name: Shutdown VMs
+    shell: |
+      virsh list --state-shutoff | grep -w "{{ item.1.name }}" ; if [ $? -ne 0 ] ; then virsh shutdown "{{ item.1.name }}" ; fi
+    with_subelements:
+      - "{{ Migrate }}"
+      - VM

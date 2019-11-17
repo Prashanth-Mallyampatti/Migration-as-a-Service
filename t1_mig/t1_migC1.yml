@@ -1,8 +1,11 @@
 Migrate:
 - VM:
   - name: t1_VM1
+    vmif: t1VM1if1
   - name: t1_VM2
+    vmif: t1VM2if1
   ns_name: t1ns1
 - VM:
-  - name: t1_VM2
+  - name: t1_VM3
+    vmif: t1VM3if1
   ns_name: t1ns2
