@@ -5,6 +5,10 @@
 
 #!/bin/bash
 
+#virsh net-undefine testBR
+#virsh net-destroy testBR
+#ip netns del pns
+
 # Create mainBR network and bridge
 sudo cp /root/networks/testBR.xml /etc/libvirt/qemu/networks/
 cd /etc/libvirt/qemu/networks
@@ -25,7 +29,7 @@ ip link set p1 netns pns
 ip netns exec pns ip link set dev p1 up
 ip netns exec pns dhclient p1
 
-ip link set dev mainBR up
+ip link set dev testBR up
 
 # Rules to take care
 rule_num_1=`sudo iptables -t filter -L FORWARD -nv --line-numbers | grep testBR | grep REJECT | awk -c '{print $1}' | awk 'NR==1'`

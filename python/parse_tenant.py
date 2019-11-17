@@ -1,8 +1,19 @@
+#################################################
+# Script that parses tenant's input config file
+# and creates the required files for Ansible
+#################################################
+
 import ipaddress
 import yaml
 import os
 import sys
+import datetime
+import logging
 
+# Log file
+logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
+
+# Retrieve range of IPs for a given subnet
 def range_of_ips(ip):
   try:
     ip_range = []
@@ -17,15 +28,18 @@ def range_of_ips(ip):
 
     return {}, ip_range, mask[1]
   except ValueError:
-    print("Not a valid IP range: " + str(ip_range))
+    #print("Not a valid IP range: " + str(ip_range))
+    logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Not a valid IP range:' + str(ip_range))
     return None
 
+# Determine the subnet for which DNS must be run
 def parse_DNS(C1_contents, C2):
   with open(Yaml_file,'r') as stream:
     try:
       YAML_CONTENT = yaml.safe_load(stream)
     except OSError:
-      print ("Creation of the directory %s failed" % path)
+      #print ("Creation of the directory %s failed" % path)
+      logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Creation of the directory ' + str(path) + ' failed')
 
   C2_contents = YAML_CONTENT[C2]
   for i in C2_contents:
@@ -42,6 +56,7 @@ YAML_CONTENT = None
 full_range = False
 tenant_route_ip = ''
 
+# Create tenant specific yaml file given as input for ansible
 class Create_YAML_FILE():
   def __init__(self, file_name):
     self.file_name = file_name
@@ -53,7 +68,8 @@ class Create_YAML_FILE():
       try:
         YAML_CONTENT = yaml.safe_load(stream)
       except OSError:
-        print ("Creation of the directory %s failed" % path)
+        #print ("Creation of the directory %s failed" % path)
+        logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Creation of the directory ' + str(path) + ' failed')
     
     self.contents = YAML_CONTENT[content_req]
 
@@ -84,8 +100,8 @@ class Create_YAML_FILE():
       self.subnets.append(subnet_val)
 
       mask_num = subnet_addr.split("/")
-      dns_list["brif"] = "dnsbrif"
-      dns_list["dnsif"] = "dnsif"
+      dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
+      dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
       
       if content_req == "C1":
         full_range = parse_DNS(subnet_addr_and_vm, "C2")
@@ -126,13 +142,14 @@ class Create_YAML_FILE():
         
 
       tenant_ns_list["tenant_ns_name"] = tenant_name
-      tenant_ns_list["tenant_ns_if"] = tenant_name + "s" + str(br_counter) + "if"
-      tenant_ns_list["tenant_sub_if"] = "s" + str(br_counter) + "if"
+      tenant_ns_list["tenant_ns_if"] = tenant_name + "ns" + str(br_counter) + "if"
+      tenant_ns_list["tenant_sub_if"] = tenant_name + "s" + str(br_counter) + "if"
       tenant_ns_list["tenant_ns_ip"] = tenant_ns_ip + "/" + mask_num[1]
       tenant_ns_list["tenant_sub_ip"] = tenant_sub_ip + "/" + mask_num[1]
 
       tenant_ns.append([tenant_ns_list])
-      
+     
+      # Create L2 tunnel if same subnet is spread across the clouds 
       subnet_val["default_route_ip"] = tenant_ns_ip
       if content_req == "C1":
         C2_contents = YAML_CONTENT["C2"]
@@ -218,8 +235,8 @@ class Create_YAML_FILE():
         vm_list["disk"] = disk_size
         vm_list["mem"] = mem_size
         vm_list["vcpu"] = vcpus
-        vm_list["vmif"] = vm_name + "if1"
-        vm_list["brif"] = "br" + str(br_count) + "if" + str(vm_count)
+        vm_list["vmif"] = tenant_name + vm_name + "if1"
+        vm_list["brif"] = tenant_name + "br" + str(br_count) + "if" + str(vm_count)
         vm_lists.append(vm_list)
       all_vm_lists.append(vm_lists)
 
@@ -264,7 +281,8 @@ def main():
       try:
         YAML_CONTENT = yaml.safe_load(stream)
       except OSError:
-        print ("Creation of the directory %s failed" % path)
+        #print ("Creation of the directory %s failed" % path)
+        logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Not a valid IP range:' + str(ip_range))
 
   if "C1" in YAML_CONTENT:
     obj.parseTENANT("C1")

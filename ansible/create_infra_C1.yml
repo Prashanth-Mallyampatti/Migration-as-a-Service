@@ -150,7 +150,7 @@
 
   - name: Install DHCP Server
     shell: |
-      ip netns exec "{{ item.0.ns_name }}" ps aux | grep -w '[d]nsmasq --interface {{ item.1.dnsif }} --dhcp-range={{ item.1.dhcp_start }},{{ item.1.dhcp_end }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" dnsmasq --interface "{{ item.1.dnsif }}" --dhcp-range={{ item.1.dhcp_start }},'{{ item.1.dhcp_end }}' ; fi
+      ip netns exec "{{ item.0.ns_name }}" ps aux | grep -w '[d]nsmasq --interface {{ item.1.dnsif }} -z --dhcp-range={{ item.1.dhcp_start }},{{ item.1.dhcp_end }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" dnsmasq --interface "{{ item.1.dnsif }}" -z --dhcp-range={{ item.1.dhcp_start }},'{{ item.1.dhcp_end }}' ; fi
     with_subelements:
       - "{{ Subnet }}"
       - dns
