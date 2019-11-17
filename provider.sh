@@ -6,11 +6,11 @@
 #!/bin/bash
 
 # Create mainBR network and bridge
-sudo cp /root/networks/mainBR.xml /etc/libvirt/qemu/networks/
+sudo cp /root/networks/testBR.xml /etc/libvirt/qemu/networks/
 cd /etc/libvirt/qemu/networks
-sudo virsh net-define mainBR.xml
-sudo virsh net-start mainBR
-sudo virsh net-autostart mainBR
+sudo virsh net-define testBR.xml
+sudo virsh net-start testBR
+sudo virsh net-autostart testBR
 
 # Create pns
 sudo ip netns add pns
@@ -18,7 +18,7 @@ sudo ip netns add pns
 # Create veth pair
 sudo ip link add p1 type veth peer name br
 ip link set dev br up
-brctl addif mainBR br
+brctl addif testBR br
 
 # Attach veth pair to pns
 ip link set p1 netns pns

@@ -11,7 +11,7 @@
   tasks:
   - name: Add VXLAN routes in PNS
     shell: |
-      ip netns exec pns ip route show "{{ item.1.subnet_route }}" via "{{ item.1.tenant_route_ip }}" ; if [ $? -ne 0 ] ; then ip route add "{{ item.1.subnet_route }}" via "{{ item.1.tenant_route_ip }}" ; fi
+      ip netns exec pns ip route show "{{ item.1.subnet_route }}" via "{{ item.1.tenant_route_ip }}" | grep -w '^{{ item.1.subnet_route }}' ; if [ $? -ne 0 ] ; then ip netns exec pns ip route add "{{ item.1.subnet_route }}" via "{{ item.1.tenant_route_ip }}" ; fi
     when:
       - item.1.dev != []
       - item.1.subnet_route != []

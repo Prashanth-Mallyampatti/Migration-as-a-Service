@@ -239,7 +239,7 @@ class Create_YAML_FILE():
       temp = 128 + int(tenant_name[-1:])
       pns_ip = "192.168." + str(temp) + ".1"
       tenant_ip = "192.168." + str(temp) + ".2"
-      tenant_route_ip = "192.168." + tenant_name[-1:] + ".2"
+      tenant_route_ip = "192.168." + str(temp) + ".2"
 
     tenant_list["name"] = tenant_name
     tenant_list["tenant_if"] = tenant_name + "if"

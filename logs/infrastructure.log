@@ -183,3 +183,13 @@ INFO:root: 00:39:39.329886 Provided subnet in C1: 1.1.1.0/24 is valid
 ERROR:root: 00:39:39.330030ERR: Multiple subnet in the C1 are same
 INFO:root: 00:40:09.407566 Provided subnet in C1: 1.1.1.0/24 is valid
 ERROR:root: 00:40:09.407748ERR: Multiple subnet in the C1 are same
+INFO:root: 04:39:00.285389 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 04:39:00.285570ERR: Multiple subnet in the C1 are same
+INFO:root: 04:40:03.061821 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 04:40:03.061994ERR: Multiple subnet in the C1 are same
+INFO:root: 05:08:39.475885 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 05:08:39.476021ERR: Multiple subnet in the C1 are same
+INFO:root: 05:22:54.105913 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 05:22:54.106086ERR: Multiple subnet in the C1 are same
+INFO:root: 05:54:30.637852 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 05:54:30.638061ERR: Multiple subnet in the C1 are same
