@@ -4,3 +4,136 @@ INFO:root: 19:02:15.707568 file 't4.yml' created in '/root/Migration-as-a-Servic
 INFO:root: 19:02:22.652754 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files'
 INFO:root: 19:02:22.653003 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files'
 INFO:root: 19:02:27.029340 file 't4.yml' deleted in '/root/Migration-as-a-Service/ansible/config_files'
+INFO:root: 06:34:45.877511 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:34:45.878125 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:34:59.875061 file 't5.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:34:59.896927 file 't5.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:35:36.087833 file 't6.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:35:36.109761 file 't6.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:36:10.619206 file 't7.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:36:10.682316 file 't7.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:42:49.665602 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:42:49.755267 file 't2.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:43:43.671138 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 06:43:43.904499 file 't3.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:08:25.768901 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:08:25.966308 file 't3.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:09:22.246232 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:09:22.249046 file 't3.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:11:17.756241 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:11:17.756654 file 't3.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:13:20.390005 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:13:20.391614 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:21:31.396875 file 't5.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:21:31.398420 file 't5.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:22:38.473043 file 't6.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:22:38.473318 file 't6.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:25:11.271759 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:25:11.272098 file 't2.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:25:32.488047 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:25:32.488334 file 't3.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:26:44.953335 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:26:45.233514 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:28:08.889309 file 't5.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:28:44.225076 file 't6.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:28:44.478874 file 't6.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:29:18.908065 file 't7.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:29:19.194607 file 't7.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:30:04.133550 file 't8.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:30:04.301701 file 't8.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:50:56.760915 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:52:30.992865 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 07:58:52.993905 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:04:09.964056 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:04:34.179464 file 't5.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:27:29.661378 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:27:29.667318 Created /VM_templates directory for tenant .t1.yml.swp
+INFO:root: 08:27:34.773031 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:27:34.777660 Created /VM_templates directory for tenant .t1.yml.swx
+INFO:root: 08:27:39.538502 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:27:39.543352 Created /VM_templates directory for tenant .t1.yml.swp
+INFO:root: 08:27:53.767559 file '4913' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:27:53.773225 Created 4913/VM_templates directory for tenant 4913
+INFO:root: 08:27:58.763993 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:27:58.769090 Created t1/VM_templates directory for tenant t1.yml
+INFO:root: 08:33:01.392543 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:33:01.397227 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:35:05.682216 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:35:05.687793 Created t3/VM_templates directory for tenant t3.yml
+INFO:root: 08:39:22.123461 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:39:22.129075 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:40:09.968991 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:40:09.974086 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:40:57.382468 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:40:57.387715 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:41:45.653885 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:41:45.659283 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:42:38.883463 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:42:38.888532 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:43:38.233072 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:43:38.239118 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 08:49:48.302522 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 08:49:48.307716 Created t3/VM_templates directory for tenant t3.yml
+INFO:root: 09:05:16.567540 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:05:16.573810 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:05:38.793425 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:05:38.798628 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:06:16.806365 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:06:16.811912 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:06:54.885541 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:06:54.890471 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:07:07.160872 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:07:07.166101 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:07:45.201161 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:07:45.207181 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:08:25.982665 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:08:25.988962 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:08:45.833025 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:08:45.837348 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:10:19.337194 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:10:19.341713 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:10:32.951458 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:10:32.957172 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 09:12:12.968110 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:12:24.881576 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:59:15.493200 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 09:59:15.498525 Created t1/VM_templates directory for tenant t1.yml
+INFO:root: 10:00:48.831762 Completed creating the required infrastructure
+INFO:root: 10:22:35.691225 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:22:35.692363 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:23:09.566650 Completed creating the required infrastructure
+INFO:root: 10:23:57.383153 Completed creating the required infrastructure
+INFO:root: 10:24:18.020070 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:24:18.020120 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:25:30.539248 Completed creating the required infrastructure
+INFO:root: 10:25:36.045280 Completed creating the required infrastructure
+INFO:root: 10:28:36.844579 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:28:41.994548 Completed creating the required infrastructure
+INFO:root: 10:28:41.995068 file '.t3.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:28:47.262744 Completed creating the required infrastructure
+INFO:root: 10:28:47.263263 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:28:52.347761 Completed creating the required infrastructure
+INFO:root: 10:28:53.516073 file '4913' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:28:53.520813 Created 4913/VM_templates directory for tenant 4913
+INFO:root: 10:28:58.582326 Completed creating the required infrastructure
+INFO:root: 10:28:58.582886 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:32:03.347521 Completed creating the required infrastructure
+INFO:root: 10:32:48.724719 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:32:53.892208 Completed creating the required infrastructure
+INFO:root: 10:32:53.892640 file '.t3.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:32:59.044441 Completed creating the required infrastructure
+INFO:root: 10:32:59.044987 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:33:04.099651 Completed creating the required infrastructure
+INFO:root: 10:34:52.852644 file '4913' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:34:57.994245 Completed creating the required infrastructure
+INFO:root: 10:34:57.994819 file 't3.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:38:48.205896 Completed creating the required infrastructure
+INFO:root: 10:39:23.898381 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:39:29.059139 Completed creating the required infrastructure
+INFO:root: 10:39:29.059746 file '.t3.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:39:34.346402 Completed creating the required infrastructure
+INFO:root: 10:39:34.347026 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:39:39.631405 Completed creating the required infrastructure
+INFO:root: 10:51:07.228917 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:52:28.208069 Completed creating the required infrastructure
+INFO:root: 10:52:51.945639 file 't2_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'

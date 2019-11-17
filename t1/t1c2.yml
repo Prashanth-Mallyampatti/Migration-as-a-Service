@@ -10,10 +10,10 @@ Subnet:
   bridge_name: t1br1
   default_route_ip: 10.2.1.1
   dns:
-  - brif: dnsbrif
+  - brif: t1s1_dnsbrif
     dhcp_end: 1.1.1.254
     dhcp_start: 1.1.1.133
-    dnsif: dnsif
+    dnsif: t1s1_dnsif
     dnsif_ip: 1.1.1.128/24
     net_mask: 255.255.255.0
   ns_name: t1ns1
@@ -23,20 +23,20 @@ Subnet:
     ns_if: t1if
     ns_name: t1
   tenant_ns:
-  - tenant_ns_if: t1s1if
+  - tenant_ns_if: t1ns1if
     tenant_ns_ip: 10.2.1.1/24
     tenant_ns_name: t1
-    tenant_sub_if: s1if
+    tenant_sub_if: t1s1if
     tenant_sub_ip: 10.2.1.2/24
   vms:
-  - brif: br1if1
+  - brif: t1br1if1
     disk: 10G
     mem: 2
     name: t1_VM4
     vcpu: 4
-    vmif: VM4if1
+    vmif: t1VM4if1
   vxlan:
-  - dev: s1if
+  - dev: t1s1if
     dsport: 4789
     id: 42
     local_ip: 10.2.1.2

@@ -23,7 +23,8 @@ try:
     with open(Yaml_file,'r') as stream:    
       try:
         yaml_content = yaml.safe_load(stream)
-        print(yaml_content)
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Printing the yaml input file')
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(yaml_content))
         
         Cloud_Number = []
         for each in yaml_content:
@@ -45,9 +46,10 @@ try:
           except ValueError:
             logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C1: ' + subnet + ' is not valid')
             exit()
+          
           C1S.append(subnet)
           if subnet in C1S:
-            logging.error(' ' + str(datetime.datetime.now().time()) + 'ERR: Multiple subnet in the C1 are same')
+            logging.error(' ' + str(datetime.datetime.now().time()) + 'Multiple subnet in the C1 are same')
             exit()
 
 
@@ -62,9 +64,10 @@ try:
           except ValueError:
             logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C2: ' + subnet + ' is not valid')
             exit()
+          
           C2S.append(subnet)
           if subnet in C2S:
-            logging.error(' ' + str(datetime.datetime.now()) + 'ERR: Duplicate subnets in the C2')
+            logging.error(' ' + str(datetime.datetime.now()) + 'Duplicate subnets in the C2')
             exit()
 
         print(C1S)
@@ -72,7 +75,8 @@ try:
         print(C2S)
      
       except yaml.YAMLError as exc:
-        print(exc)
+        #print(exc)
+        logging.error(' ' + str(datetime.datetime.time().now()) + ' ' + str(exc))
  
 except ValueError:
   logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Unable to open user input yaml file')
