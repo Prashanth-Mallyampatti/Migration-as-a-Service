@@ -47,6 +47,8 @@ Subnet:
     id: 42
     local_ip: 10.1.1.2
     remote_ip: 10.2.1.2
+    subnet_route: 10.1.1.0/24
+    tenant_route_ip: 192.168.1.2
     v_name: vxlan_t1s1
 - bridge_ip: 2.2.2.1
   bridge_name: t1br2
@@ -83,4 +85,6 @@ Subnet:
     id: []
     local_ip: []
     remote_ip: []
+    subnet_route: []
+    tenant_route_ip: []
     v_name: []

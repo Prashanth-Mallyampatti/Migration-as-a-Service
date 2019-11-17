@@ -35,11 +35,12 @@ def parse_DNS(C1_contents, C2):
 # ******************** #
 arg = sys.argv
 tenant_name = arg[1].split('.')[0]
-Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/" + str(arg[1])
+Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/infrastructure/" + str(arg[1])
 SUBNET_KEY = "Subnet"
 TENANT_KEY = "Namespace"
 YAML_CONTENT = None
 full_range = False
+tenant_route_ip = ''
 
 class Create_YAML_FILE():
   def __init__(self, file_name):
@@ -115,10 +116,12 @@ class Create_YAML_FILE():
       ip = ((int(tenant_name[-1:]) - 1) * 10) + IP_COUNTER
       
       if content_req == "C1":
+        tenant_ns_subnet = "10.1." + str(ip) + ".0"
         tenant_ns_ip = "10.1." + str(ip) + ".1"
         tenant_sub_ip = "10.1." + str(ip) + ".2"
       
       if content_req == "C2":
+        tenant_ns_subnet = "10.2." + str(ip) + ".0"
         tenant_ns_ip = "10.2." + str(ip) + ".1"
         tenant_sub_ip = "10.2." + str(ip) + ".2"
 
@@ -142,6 +145,8 @@ class Create_YAML_FILE():
             vxlan_list["id"] = 42
             vxlan_list["dsport"] = 4789
             vxlan_list["dev"] = tenant_ns_list["tenant_sub_if"]
+            vxlan_list["subnet_route"] = tenant_ns_subnet + "/" + mask_num[1]
+            vxlan_list["tenant_route_ip"] = tenant_route_ip
             vxlan.append([vxlan_list])
             break
           else: 
@@ -151,6 +156,8 @@ class Create_YAML_FILE():
             vxlan_list["id"] = []
             vxlan_list["dsport"] = []
             vxlan_list["dev"] = []
+            vxlan_list["subnet_route"] = [] 
+            vxlan_list["tenant_route_ip"] = [] 
             vxlan.append([vxlan_list])
 
       if content_req == "C2":
@@ -164,6 +171,8 @@ class Create_YAML_FILE():
             vxlan_list["id"] = 42
             vxlan_list["dsport"] = 4789
             vxlan_list["dev"] = tenant_ns_list["tenant_sub_if"]
+            vxlan_list["subnet_route"] = tenant_ns_subnet + "/" + mask_num[1]
+            vxlan_list["tenant_route_ip"] = tenant_route_ip
             vxlan.append([vxlan_list])
             break
           else:
@@ -173,6 +182,8 @@ class Create_YAML_FILE():
             vxlan_list["id"] = []
             vxlan_list["dsport"] = []
             vxlan_list["dev"] = []
+            vxlan_list["subnet_route"] = [] 
+            vxlan_list["tenant_route_ip"] = []
             vxlan.append([vxlan_list])
       
       route_list["ip"] = tenant_ns_ip + "/" + mask_num[1]
@@ -214,14 +225,17 @@ class Create_YAML_FILE():
   def parseTENANT(self, content_req):
     self.tenant_ns = []
     tenant_list = {}
-
+    global tenant_route_ip 
     if content_req == "C1": 
       pns_ip = "192.168." + tenant_name[-1:] + ".1"
       tenant_ip = "192.168." + tenant_name[-1:] + ".2"
+      tenant_route_ip = "192.168." + tenant_name[-1:] + ".2"
+
     if content_req == "C2":
       temp = 128 + int(tenant_name[-1:])
       pns_ip = "192.168." + str(temp) + ".1"
       tenant_ip = "192.168." + str(temp) + ".2"
+      tenant_route_ip = "192.168." + tenant_name[-1:] + ".2"
 
     tenant_list["name"] = tenant_name
     tenant_list["tenant_if"] = tenant_name + "if"

@@ -1,0 +1,26 @@
+---
+- hosts: worker
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  vars_files:
+    - config_files/infrastructure/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c2.yml
+
+  tasks:
+  - name: Add VXLAN routes in PNS
+    shell: |
+      ip netns exec pns ip route show "{{ item.1.subnet_route }}" via "{{ item.1.tenant_route_ip }}" ; if [ $? -ne 0 ] ; then ip route add "{{ item.1.subnet_route }}" via "{{ item.1.tenant_route_ip }}" ; fi
+    when:
+      - item.1.dev != []
+      - item.1.subnet_route != []
+      - item.1.tenant_route_ip != []
+      - item.1.dsport != []
+      - item.1.id != []
+      - item.1.local_ip != []
+      - item.1.remote_ip != []
+      - item.1.v_name != []
+    with_subelements:
+      - "{{ Subnet }}"
+      - vxlan

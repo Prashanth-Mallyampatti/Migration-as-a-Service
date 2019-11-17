@@ -1,0 +1,185 @@
+INFO:root: 23:13:00.867680 Invoking compare_script for t1.yml
+INFO:root: 23:13:00.871235 {'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM4'}]}], 'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM1'}, {'mem': 4, 'vcpu': 2, 'disk': '10G', 'name': 'VM2'}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'mem': 3, 'vcpu': 2, 'disk': '10G', 'name': 'VM3'}]}]}
+INFO:root: 23:13:00.871364 Listing all subnets in cloud 1
+INFO:root: 23:13:00.871403 --------------------------
+INFO:root: 23:13:00.871435 1.1.1.0/24
+INFO:root: 23:13:00.871462 Listing all subnets in cloud 2
+INFO:root: 23:13:00.871488 --------------------------
+INFO:root: 23:13:00.871515 1.1.1.0/24
+ERROR:root: 23:13:43.196567 Tenant provided the wrong inputs!
+ERROR:root: 23:18:38.719172 Tenant provided the wrong inputs!
+ERROR:root: 23:19:02.131952 Tenant provided the wrong inputs!
+ERROR:root: 23:19:14.957474 Tenant provided the wrong inputs!
+INFO:root: 23:21:54.577582 Invoking compare_script for t1.yaml
+INFO:root: 23:21:57.551320 Invoking compare_script for t1.yml
+INFO:root: 23:21:57.554931 {'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM4'}]}], 'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM1'}, {'mem': 4, 'vcpu': 2, 'disk': '10G', 'name': 'VM2'}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'mem': 3, 'vcpu': 2, 'disk': '10G', 'name': 'VM3'}]}]}
+INFO:root: 23:21:57.555030 Listing all subnets in cloud 1
+INFO:root: 23:21:57.555071 --------------------------
+INFO:root: 23:21:57.555107 1.1.1.0/24
+INFO:root: 23:21:57.555138 Listing all subnets in cloud 2
+INFO:root: 23:21:57.555167 --------------------------
+INFO:root: 23:21:57.555198 1.1.1.0/24
+INFO:root: 23:23:33.025952 Invoking compare_script for t1.yml
+INFO:root: 23:23:33.029450 {'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM4'}]}], 'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM1'}, {'mem': 4, 'vcpu': 2, 'disk': '10G', 'name': 'VM2'}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'mem': 3, 'vcpu': 2, 'disk': '10G', 'name': 'VM3'}]}]}
+INFO:root: 23:23:33.029547 Listing all subnets in cloud 1
+INFO:root: 23:23:33.029588 --------------------------
+INFO:root: 23:23:33.029623 1.1.1.0/24
+INFO:root: 23:23:33.029653 Listing all subnets in cloud 2
+INFO:root: 23:23:33.029681 --------------------------
+INFO:root: 23:23:33.029712 1.1.1.0/24
+INFO:root: 23:24:30.867261 Invoking compare_script for t1.yml
+INFO:root: 23:24:30.870749 {'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM4'}]}], 'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'mem': 2, 'vcpu': 4, 'disk': '10G', 'name': 'VM1'}, {'mem': 4, 'vcpu': 2, 'disk': '10G', 'name': 'VM2'}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'mem': 3, 'vcpu': 2, 'disk': '10G', 'name': 'VM3'}]}]}
+INFO:root: 23:24:30.870847 Listing all subnets in cloud 1
+INFO:root: 23:24:30.870889 --------------------------
+INFO:root: 23:24:30.870924 1.1.1.0/24
+INFO:root: 23:24:30.870954 Listing all subnets in cloud 2
+INFO:root: 23:24:30.870983 --------------------------
+INFO:root: 23:24:30.871014 1.1.1.0/24
+INFO:root: 23:25:44.891498 Invoking compare_script for t1.yml
+INFO:root: 23:25:44.894997 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 23:25:44.895126 Listing all subnets in cloud 1
+INFO:root: 23:25:44.895163 --------------------------
+INFO:root: 23:25:44.895196 1.1.1.0/24
+INFO:root: 23:25:44.895223 2.2.2.0/24
+INFO:root: 23:25:44.895249 Listing all subnets in cloud 2
+INFO:root: 23:25:44.895273 --------------------------
+INFO:root: 23:25:44.895299 1.1.1.0/24
+INFO:root: 23:25:44.895324 Identified same subnet across multiple clouds, create L2 tunnel
+INFO:root: 23:25:44.895365 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:25:44.895392 1.1.1.0/24 - 1.1.1.0/24 - VxLan
+INFO:root: 23:25:44.895416 2.2.2.0/24 - 1.1.1.0/24 - GRE
+INFO:root: 23:25:44.895450 Compare_Subnets_Across_Clouds.yaml file exists
+INFO:root: 23:27:39.365465 Invoking compare_script for t1.yml
+INFO:root: 23:27:39.369162 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 23:27:39.369304 Listing all subnets in cloud 1
+INFO:root: 23:27:39.369341 --------------------------
+INFO:root: 23:27:39.369372 1.1.1.0/24
+INFO:root: 23:27:39.369399 2.2.2.0/24
+INFO:root: 23:27:39.369423 Listing all subnets in cloud 2
+INFO:root: 23:27:39.369446 --------------------------
+INFO:root: 23:27:39.369471 1.1.1.0/24
+INFO:root: 23:27:39.369496 Identified same subnet across multiple clouds, create L2 tunnel
+INFO:root: 23:27:39.369522 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:27:39.369548 1.1.1.0/24 - 1.1.1.0/24 - VxLan
+INFO:root: 23:27:39.369572 2.2.2.0/24 - 1.1.1.0/24 - GRE
+INFO:root: 23:27:39.369608 Compare_Subnets_Across_Clouds.yaml file exists
+INFO:root: 23:29:40.190307 Invoking compare_script for t1.yml
+INFO:root: 23:29:40.193330 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 23:29:40.193413 Listing all subnets in cloud 1
+INFO:root: 23:29:40.193447 --------------------------
+INFO:root: 23:29:40.193477 1.1.1.0/24
+INFO:root: 23:29:40.193504 2.2.2.0/24
+INFO:root: 23:29:40.193528 Listing all subnets in cloud 2
+INFO:root: 23:29:40.193551 --------------------------
+INFO:root: 23:29:40.193575 1.1.1.0/24
+INFO:root: 23:29:40.193599 Identified same subnet across multiple clouds, create L2 tunnel
+INFO:root: 23:29:40.193624 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:29:40.193649 1.1.1.0/24 - 1.1.1.0/24 - VxLan
+INFO:root: 23:29:40.193684 2.2.2.0/24 - 1.1.1.0/24 - GRE
+INFO:root: 23:29:40.193713 Compare_Subnets_Across_Clouds.yaml file exists
+INFO:root: 23:31:59.011324 Invoking compare_script for t1.yml
+INFO:root: 23:31:59.016303 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:31:59.016407 Listing all subnets in cloud 1
+INFO:root: 23:31:59.016448 --------------------------
+INFO:root: 23:31:59.016482 192.168.0.0/24
+INFO:root: 23:31:59.016524 192.168.321.0/24
+INFO:root: 23:31:59.016553 Listing all subnets in cloud 2
+INFO:root: 23:31:59.016581 --------------------------
+INFO:root: 23:31:59.016612 192.16.0.0/16
+INFO:root: 23:31:59.016641 192.168.23.0/24
+INFO:root: 23:32:46.731865 Invoking compare_script for t1.yml
+INFO:root: 23:32:46.736651 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:32:46.736759 Listing all subnets in cloud 1
+INFO:root: 23:32:46.736798 --------------------------
+INFO:root: 23:32:46.736830 192.168.0.0/24
+INFO:root: 23:32:46.736858 192.168.321.0/24
+INFO:root: 23:32:46.736885 Listing all subnets in cloud 2
+INFO:root: 23:32:46.736910 --------------------------
+INFO:root: 23:32:46.736937 192.16.0.0/16
+INFO:root: 23:32:46.736963 192.168.23.0/24
+INFO:root: 23:33:41.275433 Invoking compare_script for t1.yml
+INFO:root: 23:33:41.280325 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:33:41.280440 Listing all subnets in cloud 1
+INFO:root: 23:33:41.280490 --------------------------
+INFO:root: 23:33:41.280543 192.168.0.0/24
+INFO:root: 23:33:41.280575 192.168.321.0/24
+INFO:root: 23:33:41.280605 Listing all subnets in cloud 2
+INFO:root: 23:33:41.280633 --------------------------
+INFO:root: 23:33:41.280664 192.16.0.0/16
+INFO:root: 23:33:41.280693 192.168.23.0/24
+INFO:root: 23:34:31.254630 Invoking compare_script for t1.yml
+INFO:root: 23:34:31.260264 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:34:31.260865 Listing all subnets in cloud 1
+INFO:root: 23:34:31.260946 --------------------------
+INFO:root: 23:34:31.260988 192.168.0.0/24
+INFO:root: 23:34:31.261022 192.168.321.0/24
+INFO:root: 23:34:31.261052 Listing all subnets in cloud 2
+INFO:root: 23:34:31.261082 --------------------------
+INFO:root: 23:34:31.261116 192.16.0.0/16
+INFO:root: 23:34:31.261146 192.168.23.0/24
+INFO:root: 23:35:13.822925 Invoking compare_script for t1.yml
+INFO:root: 23:35:13.828279 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:35:13.828468 Listing all subnets in cloud 1
+INFO:root: 23:35:13.828535 --------------------------
+INFO:root: 23:35:13.828575 192.168.0.0/24
+INFO:root: 23:35:13.828607 192.168.321.0/24
+INFO:root: 23:35:13.828638 Listing all subnets in cloud 2
+INFO:root: 23:35:13.828667 --------------------------
+INFO:root: 23:35:13.828699 192.16.0.0/16
+INFO:root: 23:35:13.828728 192.168.23.0/24
+INFO:root: 23:37:49.881111 Invoking compare_script for t1.yml
+INFO:root: 23:37:49.886245 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:37:49.886425 Listing all subnets in cloud 1
+INFO:root: 23:37:49.886468 --------------------------
+INFO:root: 23:37:49.886513 192.168.0.0/24
+INFO:root: 23:37:49.886552 192.168.321.0/24
+INFO:root: 23:37:49.886581 Listing all subnets in cloud 2
+INFO:root: 23:37:49.886609 --------------------------
+INFO:root: 23:37:49.886639 192.16.0.0/16
+INFO:root: 23:37:49.886668 192.168.23.0/24
+INFO:root: 23:38:33.491054 Invoking compare_script for t1.yml
+INFO:root: 23:38:33.496001 {'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Anand'}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Vinniotis'}]}], 'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Sharath'}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Ramya'}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Prashanth'}]}, {'VM4': [{'mem': 12, 'vcpu': 4, 'disk': 4, 'name': 'Amogh'}], 'subnet_addr': '192.168.23.0/24'}]}
+INFO:root: 23:38:33.496285 Listing all subnets in cloud 1
+INFO:root: 23:38:33.496393 --------------------------
+INFO:root: 23:38:33.496470 192.168.0.0/24
+INFO:root: 23:38:33.496579 192.168.321.0/24
+INFO:root: 23:38:33.496669 Listing all subnets in cloud 2
+INFO:root: 23:38:33.496701 --------------------------
+INFO:root: 23:38:33.496743 192.16.0.0/16
+INFO:root: 23:38:33.496840 192.168.23.0/24
+INFO:root: 23:43:29.365466 Invoking compare_script for t1.yml
+INFO:root: 23:43:29.370602 {'C1': [{'subnet_addr': '192.168.0.0/24', 'VM1': [{'name': 'Sharath', 'disk': 4, 'mem': 12, 'vcpu': 4}]}, {'subnet_addr': '192.168.321.0/24', 'VM2': [{'name': 'Ramya', 'disk': 4, 'mem': 12, 'vcpu': 4}]}, {'subnet_addr': '192.168.192.0/24', 'VM3': [{'name': 'Prashanth', 'disk': 4, 'mem': 12, 'vcpu': 4}]}, {'subnet_addr': '192.168.23.0/24', 'VM4': [{'name': 'Amogh', 'disk': 4, 'mem': 12, 'vcpu': 4}]}], 'C2': [{'subnet_addr': '192.16.0.0/16', 'VM1': [{'name': 'Anand', 'disk': 4, 'mem': 12, 'vcpu': 4}]}, {'subnet_addr': '192.168.23.0/24', 'VM2': [{'name': 'Vinniotis', 'disk': 4, 'mem': 12, 'vcpu': 4}]}]}
+INFO:root: 23:43:29.370803 Listing all subnets in cloud 1
+INFO:root: 23:43:29.370847 --------------------------
+INFO:root: 23:43:29.370896 192.168.0.0/24
+INFO:root: 23:43:29.370925 192.168.321.0/24
+INFO:root: 23:43:29.370951 192.168.192.0/24
+INFO:root: 23:43:29.370976 192.168.23.0/24
+INFO:root: 23:43:29.371000 Listing all subnets in cloud 2
+INFO:root: 23:43:29.371024 --------------------------
+INFO:root: 23:43:29.371048 192.16.0.0/16
+INFO:root: 23:43:29.371072 192.168.23.0/24
+INFO:root: 23:43:29.371097 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371123 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371148 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371172 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371197 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371221 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371246 Identified multiple subnets across multiple clouds, create L3 tunnel
+INFO:root: 23:43:29.371270 Identified same subnet across multiple clouds, create L2 tunnel
+INFO:root: 23:43:29.371297 192.168.23.0/24 - 192.168.23.0/24 - VxLan
+INFO:root: 23:43:29.371321 192.168.0.0/24 - 192.16.0.0/16 - GRE
+INFO:root: 23:43:29.371357 192.168.0.0/24 - 192.168.23.0/24 - GRE
+INFO:root: 23:43:29.371381 192.168.321.0/24 - 192.16.0.0/16 - GRE
+INFO:root: 23:43:29.371403 192.168.321.0/24 - 192.168.23.0/24 - GRE
+INFO:root: 23:43:29.371426 192.168.192.0/24 - 192.16.0.0/16 - GRE
+INFO:root: 23:43:29.371449 192.168.192.0/24 - 192.168.23.0/24 - GRE
+INFO:root: 23:43:29.371472 192.168.23.0/24 - 192.16.0.0/16 - GRE
+INFO:root: 23:43:29.371509 Compare_Subnets_Across_Clouds.yaml file exists
+ERROR:root: 23:44:12.925467 Tenant provided the wrong inputs!
+INFO:root: 00:38:23.939782 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 00:38:23.940378ERR: Multiple subnet in the C1 are same
+INFO:root: 00:39:39.329886 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 00:39:39.330030ERR: Multiple subnet in the C1 are same
+INFO:root: 00:40:09.407566 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 00:40:09.407748ERR: Multiple subnet in the C1 are same

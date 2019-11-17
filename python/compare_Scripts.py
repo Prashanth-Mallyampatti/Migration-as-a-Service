@@ -14,20 +14,20 @@ import yaml
 import logging
 import datetime
 
-# Create log file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log")
+# Log file
+logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
 
 # Receive the yaml file of the tenant
 arg = sys.argv
-#print(arg[1])
-logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Invoking compare_script for' + str(arg[1]))
-Yaml_file = arg[1]
-
+logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Invoking compare_script for ' + arg[1])
+Yaml_file = os.path.join('/root/Migration-as-a-Service/ansible/config_files/infrastructure', arg[1])
+print(Yaml_file)
 # Read the yaml config file
 with open(Yaml_file,'r') as stream:
     try:
         yaml_content = yaml.safe_load(stream)
         print(yaml_content)
+        logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(yaml_content))
         
         Cloud_Number = []
         for each in yaml_content:
@@ -39,12 +39,14 @@ with open(Yaml_file,'r') as stream:
             print(i)
             Cloud_Number.append(i)
 
+        print(Cloud_Number)
         # Listing all subnets in the Cloud 1 and Cloud 2
         logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Listing all subnets in cloud 1')
         logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + '--------------------------')
 
         C1S = []
         for x in range(0,Cloud_Number[0],1):
+            #print x
             subnet = str(yaml_content['C1'][x]['subnet_addr'])
             C1S.append(subnet)
             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(subnet))
@@ -55,13 +57,14 @@ with open(Yaml_file,'r') as stream:
 
         C2S = []
         for x in range(0,Cloud_Number[1],1):
+            #print x
             subnet = str(yaml_content['C2'][x]['subnet_addr'])
             C2S.append(subnet)
             #print(subnet)
             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(subnet))
 
-        print(C1S)
-        print(C2S)
+        #print(C1S)
+        #print(C2S)
 
         # Identify if subnets are spread across clouds and create L2 tunnel
         # If tenant chooses to have routed gateway as a requirement,
@@ -120,12 +123,6 @@ with open(Yaml_file,'r') as stream:
             documents = yaml.dump(compare_subnet_list_vxlan, file, default_flow_style=False)
             documents = yaml.dump(compare_subnet_list_gre, file, default_flow_style=False)
 
-
-#        with open('listfile.txt', 'w') as filehandle:
-#            for items in C1S :
-#                filehandle.write('%s\n' % items)
-#            for items in C2S :
-#                filehandle.write('%s\n' $ items)
     except yaml.YAMLError as exception:
         #print(exc)
         logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + exception)
