@@ -1,3 +1,8 @@
+############################################################################
+# Script that validates the migration config yaml file provided
+# by tenant in /root/Migration-as-a-Service/ansible/config_files/migration
+############################################################################
+
 import ipaddress
 import yaml
 import sys
@@ -6,9 +11,7 @@ import logging
 import os
 import subprocess
 
-#Vm_Name = "t1_VM4"
 subnet = ""
-#cmd = "virsh list | grep -o " + Vm_Name
 
 # Reading the subnets and the VMS
 arg = sys.argv
@@ -80,6 +83,7 @@ with open(Migration_File,'r') as stream:
     try:
         yaml_content = yaml.safe_load(stream)
         #print(yaml_content)
+        #logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + str(yaml_content)))
         source_cloud = []
         for each in yaml_content:
             i = 0

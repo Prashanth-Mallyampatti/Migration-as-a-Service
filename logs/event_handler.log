@@ -291,3 +291,45 @@ INFO:root: 08:30:17.076063 file 't3_mig.yml' created in '/root/Migration-as-a-Se
 INFO:root: 08:30:17.078781 Created t3_migdirectory for tenant t3_mig.yml
 ERROR:root: 08:40:26.922256 FAILED to migrate for tenant t3_mig
 INFO:root: 08:40:26.924016 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 10:33:05.935864 file 't4.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:33:05.960138 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 10:44:22.374668 SUCCESSFULLY completed creating the required infrastructure for tenant t4
+INFO:root: 10:44:22.376617 file 't4.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 10:45:32.369451 file 't4_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 10:45:32.372820 Created t4_migdirectory for tenant t4_mig.yml
+INFO:root: 11:02:30.333135 file 't4_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:21:23.751563 file 't5.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 11:21:23.756598 Created t5/VM_templates directory for tenant t5.yml
+ERROR:root: 11:24:49.863631 FAILED to create infrastructure for tenant t5
+INFO:root: 11:24:49.864736 SUCCESSFULLY completed creating the required infrastructure for tenant t5
+INFO:root: 11:24:49.865113 file 't5.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 11:37:22.510610 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 11:44:33.280394 SUCCESSFULLY completed creating the required infrastructure for tenant t1
+INFO:root: 11:44:33.289597 file 't1.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 11:47:56.120973 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:47:56.489462 FAILED to migrate for tenant t1_mig
+INFO:root: 11:47:56.489935 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:49:25.965369 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:49:26.099398 FAILED to migrate for tenant t1_mig
+INFO:root: 11:49:26.099993 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:50:19.531754 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:50:19.651917 FAILED to migrate for tenant t1_mig
+INFO:root: 11:50:19.652368 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:51:15.068527 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:51:15.176838 FAILED to migrate for tenant t1_mig
+INFO:root: 11:51:15.177303 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:51:59.017289 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:51:59.139478 FAILED to migrate for tenant t1_mig
+INFO:root: 11:51:59.139989 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:52:52.795322 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:52:52.908773 FAILED to migrate for tenant t1_mig
+INFO:root: 11:52:52.909331 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:53:52.474659 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:53:52.623658 FAILED to migrate for tenant t1_mig
+INFO:root: 11:53:52.624331 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:54:39.035926 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 11:54:39.165603 FAILED to migrate for tenant t1_mig
+INFO:root: 11:54:39.166089 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 11:55:21.909424 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 12:10:31.035087 FAILED to migrate for tenant t1_mig
+INFO:root: 12:10:31.036884 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'

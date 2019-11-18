@@ -1,3 +1,9 @@
+###################################################
+# This script parses the migration config file
+# provided by the tenant and generates yaml files
+# required for ansible.
+###################################################
+
 import ipaddress
 import yaml
 import os
@@ -5,11 +11,19 @@ import sys
 import re
 import subprocess
 import paramiko
+import datetime
+import logging
 
+# Log file
+logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
+
+# worker node ssh details
 ip='99.99.99.2'
 port=22
 username='root'
 password=''
+
+# Takes <tenant>_mig.yml file as input
 arg = sys.argv
 tenant_name1 = arg[1].split('.')[0]
 Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/migration/" + str(arg[1])
@@ -17,6 +31,7 @@ YAML_CONTENT = None
 INFRA_CONTENT = None
 MIGRATION_KEY = "Migrate"
 
+# Create yaml files needed for ansible
 tenant_name = arg[1].split("_")[0]
 C1_infra_file = "/root/Migration-as-a-Service/" + tenant_name + "/" + tenant_name + "c1.yml"
 C2_infra_file = "/root/Migration-as-a-Service/" + tenant_name + "/" + tenant_name + "c2.yml"
@@ -33,7 +48,8 @@ class Create_YAML_FILE():
       try:
         YAML_CONTENT = yaml.safe_load(stream)
       except OSError:
-        print ("Creation of the directory %s failed" % path)
+        #print ("Creation of the directory %s failed" % path)
+         logging.error(' ' + str(datetime.datetime.now().time() + ' ' + 'Creation of the directory ' + str(path) + 'failed'))
     
     self.contents = YAML_CONTENT[content_req]
     
@@ -46,7 +62,8 @@ class Create_YAML_FILE():
           try:
             INFRA_CONTENT = yaml.safe_load(stream)
           except OSError:
-            print ("Creation of the directory %s failed" % path)
+            #print ("Creation of the directory %s failed" % path)
+            logging.error(' ' + str(datetime.datetime.now().time() + ' ' + 'Creation of the directory ' + str(path) + 'failed'))
       
         self.infra_contents = INFRA_CONTENT["Subnet"]
       
@@ -79,13 +96,15 @@ class Create_YAML_FILE():
             migrate_list["VM"] = vm
         self.subnets_C1.append(migrate_list)
         file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + "C1.yml"
-      print(source_cloud) 
+      #print(source_cloud) 
+      logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'source cloud is ' + str(source_cloud))
       if source_cloud == "C2":
         with open(C2_infra_file,'r') as stream:
           try:
             INFRA_CONTENT = yaml.safe_load(stream)
           except OSError:
-            print ("Creation of the directory %s failed" % path)
+            #print ("Creation of the directory %s failed" % path)
+            logging.error(' ' + str(datetime.datetime.now().time() + ' ' + 'Creation of the directory ' + str(path) + 'failed'))
     
         self.infra_contents = INFRA_CONTENT["Subnet"]
     
@@ -143,7 +162,8 @@ def main():
       try:
         YAML_CONTENT = yaml.safe_load(stream)
       except OSError:
-        print ("Creation of the directory %s failed" % path)
+        #print ("Creation of the directory %s failed" % path)
+        logging.error(' ' + str(datetime.datetime.now().time() + ' ' + 'Creation of the directory ' + str(path) + 'failed'))
 
   if "VM_Migration" in YAML_CONTENT:
     obj.parse_Migration("VM_Migration")
