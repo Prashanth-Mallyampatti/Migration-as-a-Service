@@ -25,6 +25,11 @@
     with_subelements:
       - "{{ Migrate }}"
       - VM
+  
+  - name: Remove TEMP files
+    file:
+      path: /root/.ansible/tmp/
+      state: absent
 
 # ***************** Worker Tasks *************** #
 - hosts: worker
@@ -40,7 +45,12 @@
     - config_files/migration/{{ tenant_name }}.yml
     - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
 
-  tasks:  
+  tasks:
+  - name: Remove TEMP files
+    file:
+      path: /root/.ansible/tmp/
+      state: absent
+  
   - name: Migrate VM images
     copy:
       src: '{{ disk_dir }}/{{ item.1.name }}.qcow2'
