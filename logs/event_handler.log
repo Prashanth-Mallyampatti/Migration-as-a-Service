@@ -333,3 +333,10 @@ INFO:root: 11:54:39.166089 file 't1_mig.yml' modified in '/root/Migration-as-a-S
 INFO:root: 11:55:21.909424 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
 ERROR:root: 12:10:31.035087 FAILED to migrate for tenant t1_mig
 INFO:root: 12:10:31.036884 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 12:38:36.816829 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 12:38:36.821789 Created t1/VM_templates directory for tenant t1.yml
+INFO:root: 12:45:58.995979 SUCCESSFULLY completed creating the required infrastructure for tenant t1
+INFO:root: 12:45:58.998765 file 't1.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 12:46:43.199150 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 12:46:43.201314 Created t1_migdirectory for tenant t1_mig.yml
+INFO:root: 13:03:06.163529 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
