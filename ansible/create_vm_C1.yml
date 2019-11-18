@@ -68,10 +68,10 @@
       - "{{ Subnet }}"
       - vms
 
-  - name: Attach VM interent interface
-    shell: |
-      virsh domiflist '{{ tenant_name }}_{{ item.1.name }}' | grep -w 'default' ; if [ $? -ne 0 ] ; then virsh attach-interface --domain '{{ tenant_name }}_{{ item.1.name }}' --type network --source default --live --config ; fi
-    when: "{{ item.1.internet_access }}" 
-    with_subelements:
-      - "{{ C1 }}"
-      - VM
+#  - name: Attach VM interent interface
+#    shell: |
+#      virsh domiflist '{{ tenant_name }}_{{ item.1.name }}' | grep -w 'default' ; if [ $? -ne 0 ] ; then virsh attach-interface --domain '{{ tenant_name }}_{{ item.1.name }}' --type network --source default --live --config ; fi
+#    when: "{{ item.1.internet_access }}" 
+#    with_subelements:
+#      - "{{ C1 }}"
+#      - VM

@@ -4,8 +4,12 @@ import os
 import sys
 import re
 import subprocess
+import paramiko
 
-# ******************** #
+ip='99.99.99.2'
+port=22
+username='root'
+password=''
 arg = sys.argv
 tenant_name1 = arg[1].split('.')[0]
 Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/migration/" + str(arg[1])
@@ -67,7 +71,7 @@ class Create_YAML_FILE():
                   vm_list["vmif"] = infra_vm["vmif"]
                   vm_list["vmif_m"] = infra_vm["vmif"] + "_m"
                   vm_list["brif_m"] = infra_vm["brif"] + "_m"
-                  cmd = "virsh domiflist " + vm_list["name"] + " |  awk 'FNR==3{ print $5 }'"
+                  cmd = "virsh domiflist " + vm_list["name"] + " | grep -w 'direct' |  awk '{ print $5 }'"
                   stream = os.popen(cmd)
                   out = stream.read()
                   vm_list["vm_mac"] = out.rstrip()
@@ -106,16 +110,19 @@ class Create_YAML_FILE():
                   vm_list["vmif"] = infra_vm["vmif"]
                   vm_list["vmif_m"] = infra_vm["vmif"] + "_m"
                   vm_list["brif_m"] = infra_vm["brif"] + "_m"
-                  cmd = "virsh domiflist " + vm_list["name"] + " |  awk 'FNR==3{ print $5 }'"
-                  stream = os.popen(cmd)
-                  out = stream.read()
-                  vm_list["vm_mac"] = out.rstrip()
+                  cmd="virsh domiflist " + vm_list["name"]  + " | grep -w 'direct' | awk '{ print $5 }'"
+                  ssh=paramiko.SSHClient()
+                  ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                  ssh.connect(ip,port,username,password)
+                  stdin,stdout,stderr=ssh.exec_command(cmd)
+                  outlines=stdout.readlines()
+                  resp=''.join(outlines).rstrip()
+                  vm_list["vm_mac"] = resp
               vm.append(vm_list)
             migrate_list["VM"] = vm
         
         file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + "C2.yml"
         self.subnets_C2.append(migrate_list)
-        print(self.subnets_C2)
     
       self.dump_content(file_name, source_cloud)
     

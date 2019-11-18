@@ -126,20 +126,18 @@
 - hosts: main
   gather_facts: False
   vars:
-    ansible_python_interpreter: /usr/bin/python2
-    disk_dir: /var/lib/libvirt/images
-    template_dir: /etc/libvirt/qemu
+    ansible_python_interpreter: /usr/bin/python3
     ansible_ssh_pipelining: no
     sftp_batch_mode: yes
 
   vars_files:
     - config_files/migration/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C2.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
   tasks:
   - pause:
       minutes: 1
 
-  - name: Undefine Migrated VM at C2
+  - name: Undefine Migrated VM at C1
     shell: |
       virsh undefine "{{ item.1.name }}"
     with_subelements:
