@@ -9,7 +9,6 @@ import inotify.adapters
 import os
 import datetime
 import logging
-import sys
 
 # Migration directories
 MIG_ANSIBLE = "/root/Migration-as-a-Service/ansible/"
@@ -21,11 +20,14 @@ logging.basicConfig(filename="/root/Migration-as-a-Service/logs/event_handler.lo
 
 # Create event handlers for infrastructure and migration
 notifier_infra = inotify.adapters.Inotify()
-notifier_mig = inotify.adapters.Inotify()
+#notifier_mig = inotify.adapters.Inotify()
 
 # Initialize directory to watch for events
 notifier_infra.add_watch('/root/Migration-as-a-Service/ansible/config_files/infrastructure')
-notifier_mig.add_watch('/root/Migration-as-a-Service/ansible/config_files/migration')
+#notifier_mig.add_watch('/root/Migration-as-a-Service/ansible/config_files/migration')
+
+# Error checking flag
+continue_flag = True
 
 # Event handling
 for event in notifier_infra.event_gen():
@@ -33,13 +35,9 @@ for event in notifier_infra.event_gen():
         # If a new tenant is created
         if 'IN_CREATE' in event[1]:
              logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' created in '{1}'".format(event[3], event[2]))
-             #print "file '{0}' created".format(event[3], event[2])
              tenant = '{0}'.format(event[3], event[2])
-             #print tenant
              dir_name = tenant.split(".")
-             #print dir_name[0]
              dir_exists=os.path.exists("/root/Migration-as-a-Service/" + str(dir_name[0]))
-             #print create_dir
              if not dir_exists:
                 os.system("mkdir /root/Migration-as-a-Service/" + str(dir_name[0]))
                 os.system("mkdir /root/Migration-as-a-Service/" + str(dir_name[0]) + "/VM_templates")
@@ -47,45 +45,78 @@ for event in notifier_infra.event_gen():
                          
              # Validate tenant input
              exit_status = os.system("python3 " + str(MIG_PYTHON) + "validate_subnet.py " + str(tenant))
-             print exit_status
+             #print exit_status
              if exit_status!= 0:
-                sys.exit
+                continue_flag = False
+                logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
 
              # Create the required files for building infrastructure
-             exit_status = os.system("python3 " + str(MIG_PYTHON) + "parse_tenant.py " + str(tenant))
-             print exit_status
-             if exit_status!= 0:
-                sys.exit
+             if continue_flag:
+                exit_status = os.system("python3 " + str(MIG_PYTHON) + "parse_tenant.py " + str(tenant))
+                #print exit_status
+                if exit_status!= 0:
+                   continue_flag = False
+                   logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
 
-#             # Create infrastructure on cloud 1
-             exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-             print exit_status
-             if exit_status!= 0:
-                sys.exit
+#            # Create infrastructure on cloud 1
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                #print exit_status
+                if exit_status!= 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
              
-#
-#             # Create infrastructure on cloud 2
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#
-#             # Add routes in cloud 1
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#
-#             # Add routes in cloud 2
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#
-#             # Create VM templates on cloud 1
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#
-#             # Create VM templates on cloud 2
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#
-#             # Create VMs in cloud 1
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#
-#             # Create VMs in cloud 2
-#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2.yml -i " +  str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-#        
-#             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Completed creating the required infrastructure')
+
+             # Create infrastructure on cloud 2
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status!= 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
+
+             # Add routes in cloud 1
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status!= 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
+
+             # Add routes in cloud 2
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status != 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
+
+             # Create VM templates on cloud 1
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status != 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
+
+             # Create VM templates on cloud 2
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status != 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time() + ' ' + 'FAILED to create infrastructure')
+
+             # Create VMs in cloud 1
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status != 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
+
+             # Create VMs in cloud 2
+             if continue_flag:
+                exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2.yml -i " +  str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+                if exit_status != 0:
+                  continue_flag = False
+                  logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure')
+        
+             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'SUCCESSFULLY completed creating the required infrastructure')
   
              # Watch migration requests once the infrastructure is created
              # Event handling

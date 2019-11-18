@@ -46,14 +46,14 @@ try:
             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C1: ' + subnet + ' is valid')
           except ValueError:
             logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C1: ' + subnet + ' is not valid')         
-            sys.exit()
+            exit(1)
           
           #C1S.append(subnet)
           if subnet not in C1S:
             C1S.append(subnet)
           else:  
             logging.error(' ' + str(datetime.datetime.now().time()) + 'Multiple subnet in the C1 are same')
-            sys.exit()
+            exit(1)
 
 
 
@@ -66,14 +66,14 @@ try:
             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C2: ' + subnet + ' is valid')
           except ValueError:
             logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Provided subnet in C2: ' + subnet + ' is not valid')
-            sys.exit()
+            exit(1)
           
           #C2S.append(subnet)
           if subnet not in C2S:
             C2S.append(subnet)
           else:
             logging.error(' ' + str(datetime.datetime.now()) + 'Duplicate subnets in the C2')
-            sys.exit()
+            exit(1)
 
         #print(C1S)
         #print("\n")
@@ -82,11 +82,11 @@ try:
       except yaml.YAMLError as exc:
         #print(exc)
         logging.error(' ' + str(datetime.datetime.time().now()) + ' ' + str(exc))
-        sys.exit()
+        exit(1)
 
 except ValueError:
   logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Unable to open user input yaml file')
-  sys.exit()
+  exit(1)
 
 
 

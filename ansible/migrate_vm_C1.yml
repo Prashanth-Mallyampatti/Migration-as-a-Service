@@ -1,4 +1,5 @@
 ---
+# ************** Main Tasks **************** #
 - hosts: main
   gather_facts: False
   vars:
@@ -25,6 +26,7 @@
       - "{{ Migrate }}"
       - VM
 
+# ***************** Worker Tasks *************** #
 - hosts: worker
   gather_facts: False
   vars:
@@ -47,6 +49,7 @@
     with_subelements:
       - "{{ Migrate }}"
       - VM
+
   - name: Migrate VM templates
     copy:
       src: '{{ template_dir }}/{{ item.1.name }}.xml'
@@ -103,8 +106,6 @@
       ip link show "{{ item.1.brif_m }}" ; if [ $? -eq 0 ] ; then ip link set "{{ item.1.brif_m }}" netns "{{ item.0.ns_name }}" ; fi
       ip netns exec "{{ item.0.ns_name }}" brctl show "{{ item.0.bridge_name }}" | grep -w '{{ item.1.brif_m }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" brctl addif "{{ item.0.bridge_name }}" "{{ item.1.brif_m }}" ; fi
       virsh domiflist "{{ item.1.name }}" | grep -w "{{ item.1.vmif_m }}" ; if [ $? -ne 0 ] ; then virsh attach-interface --domain "{{ item.1.name }}" direct "{{ item.1.vmif_m }}" --live --persistent --mac "{{ item.1.vm_mac }}" ; fi
-      
-    ignore_errors: yes
     with_subelements:
       - "{{ Migrate }}"
       - VM
@@ -113,6 +114,30 @@
     shell: |
       ip netns exec "{{ item.0.ns_name }}" ip link set dev "{{ item.1.brif_m }}" up
       ip link set dev "{{ item.1.vmif_m }}" up
+    with_subelements:
+      - "{{ Migrate }}"
+      - VM
+
+# ****************** Main tasks ************** #
+- hosts: main
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python2
+    disk_dir: /var/lib/libvirt/images
+    template_dir: /etc/libvirt/qemu
+    ansible_ssh_pipelining: no
+    sftp_batch_mode: yes
+
+  vars_files:
+    - config_files/migration/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C2.yml
+  tasks:
+  - pause:
+      minutes: 1
+
+  - name: Undefine Migrated VM at C2
+    shell: |
+      virsh undefine "{{ item.1.name }}"
     with_subelements:
       - "{{ Migrate }}"
       - VM

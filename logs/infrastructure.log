@@ -774,3 +774,33 @@ failed: [localhost] (item={u'default_route_ip': u'192.168.6.1', u'name': u't6', 
 PLAY RECAP **************************************************************************************************************************************************
 localhost                  : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
 
+INFO:root: 01:23:28.139104 Printing the yaml input file
+INFO:root: 01:23:28.139212 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 01:23:28.139303 Provided subnet in C1: 1.1.1.0/24 is valid
+INFO:root: 01:23:28.139354 Provided subnet in C1: 2.2.2.0/24 is valid
+INFO:root: 01:23:28.139399 Provided subnet in C2: 1.1.1.0/24 is valid
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [main] *************************************************************************************************************************************************
+
+TASK [Create Tenant Namespace] ******************************************************************************************************************************
+failed: [localhost] (item={u'default_route_ip': u'192.168.7.1', u'name': u't7', u'pns_ip': u'192.168.7.1/24', u'tenant_if': u't7if', u'tenant_ip': u'192.168.7.2/24', u'pns_if': u't7pns_if'}) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ip", "nlsjdifgjfdbgetns", "add", "t7"], "delta": "0:00:00.003046", "end": "2019-11-18 01:23:29.215747", "item": {"default_route_ip": "192.168.7.1", "name": "t7", "pns_if": "t7pns_if", "pns_ip": "192.168.7.1/24", "tenant_if": "t7if", "tenant_ip": "192.168.7.2/24"}, "msg": "non-zero return code", "rc": 1, "start": "2019-11-18 01:23:29.212701", "stderr": "Object \"nlsjdifgjfdbgetns\" is unknown, try \"ip help\".", "stderr_lines": ["Object \"nlsjdifgjfdbgetns\" is unknown, try \"ip help\"."], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP **************************************************************************************************************************************************
+localhost                  : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+INFO:root: 01:29:24.884487 Printing the yaml input file
+INFO:root: 01:29:24.884603 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 01:29:24.884693 Provided subnet in C1: 1.1.1.0/24 is valid
+INFO:root: 01:29:24.884743 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 01:29:24.884775Multiple subnet in the C1 are same
+INFO:root: 01:29:41.901960 Printing the yaml input file
+INFO:root: 01:29:41.902100 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 01:29:41.902199 Provided subnet in C1: 1.1.1.0/24 is valid
+INFO:root: 01:29:41.902245 Provided subnet in C1: 1.1.1.0/24 is valid
+ERROR:root: 01:29:41.902274Multiple subnet in the C1 are same
+INFO:root: 01:30:03.360679 Printing the yaml input file
+INFO:root: 01:30:03.360821 {'C1': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM1', 'disk': '10G', 'mem': 2, 'vcpu': 4}, {'name': 'VM2', 'disk': '10G', 'mem': 4, 'vcpu': 2}]}, {'subnet_addr': '2.2.2.0/24', 'VM': [{'name': 'VM3', 'disk': '10G', 'mem': 3, 'vcpu': 2}]}], 'C2': [{'subnet_addr': '1.1.1.0/24', 'VM': [{'name': 'VM4', 'disk': '10G', 'mem': 2, 'vcpu': 4}]}]}
+INFO:root: 01:30:03.360913 Provided subnet in C1: 1.1.1.0/24 is valid
+INFO:root: 01:30:03.360962 Provided subnet in C1: 2.2.2.0/24 is valid
+INFO:root: 01:30:03.361005 Provided subnet in C2: 1.1.1.0/24 is valid

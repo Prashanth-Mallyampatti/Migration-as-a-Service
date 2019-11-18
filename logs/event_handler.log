@@ -175,3 +175,5 @@ INFO:root: 01:21:18.804038 file 't5.yml' created in '/root/Migration-as-a-Servic
 INFO:root: 01:21:18.808493 Created t5/VM_templates directory for tenant t5.yml
 INFO:root: 01:22:03.461645 file 't6.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
 INFO:root: 01:22:03.466199 Created t6/VM_templates directory for tenant t6.yml
+INFO:root: 01:23:28.085513 file 't7.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 01:23:28.090571 Created t7/VM_templates directory for tenant t7.yml

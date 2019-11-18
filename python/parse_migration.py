@@ -71,7 +71,6 @@ class Create_YAML_FILE():
                   stream = os.popen(cmd)
                   out = stream.read()
                   vm_list["vm_mac"] = out.rstrip()
-              #vm_list["hello"] = "hi"
               vm.append(vm_list)
             migrate_list["VM"] = vm
 
@@ -109,7 +108,6 @@ class Create_YAML_FILE():
                   stream = os.popen(cmd)
                   out = stream.read()
                   vm_list["vm_mac"] = out.rstrip()
-              #vm_list["hello"] = "hi"
               vm.append(vm_list)
             migrate_list["VM"] = vm
 

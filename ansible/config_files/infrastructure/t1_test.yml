@@ -1,0 +1,26 @@
+---
+  C1:
+    - subnet_addr: 1.1.1.0/24
+      VM:
+        - name: VM1
+          disk: 10G
+          mem: 2
+          vcpu: 4
+        - name: VM2
+          disk: 10G
+          mem: 4
+          vcpu: 2
+    - subnet_addr: 1.1.1.0/24
+      VM:
+        - name: VM3
+          disk: 10G
+          mem: 3
+          vcpu: 2
+
+  C2:
+    - subnet_addr: 1.1.1.0/24
+      VM:
+        - name: VM4
+          disk: 10G
+          mem: 2
+          vcpu: 4

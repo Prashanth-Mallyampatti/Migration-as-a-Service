@@ -12,7 +12,7 @@
   - name: Create Tenant Namespace
     vars:
       ns_file: /var/run/netns/{{ item.name }}
-    command: ip netns add "{{ item.name }}"
+    command: ip nlsjdifgjfdbgetns add "{{ item.name }}"
     args:
       creates: "{{ ns_file }}"
     with_items:
