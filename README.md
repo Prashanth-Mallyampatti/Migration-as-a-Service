@@ -38,3 +38,13 @@ The process of translating tenant requirements into commands to create the infra
 7. Migration logic
 
 The runtime system model maintains the state of the system at any given point in time and is a superset of the configuration model. The accounting feature of our project provides specifics about the runtime model in terms of event handling and infrastructure state.
+
+## EXECUTION
+Run ```python Migration-as-a-Service/infra_init.py``` in a terminal
+Run ```python Migration-as-a-Service/mig_init.py``` in another terminal
+
+To requst for infrastructure: Create/Update/Delete yaml config files per tenant in Migration-as-a Service/ansible/config_files/infrastructure
+
+To requst for infrastructure: Create/Update/Delete yaml config files per tenant in Migration-as-a-Service/ansible/config_files/migration
+
+Logs are at Migration-as-a-Service/logs
