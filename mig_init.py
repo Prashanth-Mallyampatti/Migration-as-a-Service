@@ -42,7 +42,7 @@ for event in notifier_mig.event_gen():
              dir_exists=os.path.exists("/root/Migration-as-a-Service/" + str(dir_name[0]))
              if not dir_exists:
                 os.system("mkdir /root/Migration-as-a-Service/" + str(dir_name[0]))
-                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Created ' + str(dir_name[0]) + 'directory for tenant ' + str(tenant))
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Created ' + str(dir_name[0]) + ' directory for tenant ' + str(tenant))
                          
              # Validate tenant input
              exit_status = os.system("python3 " + str(MIG_PYTHON) + "validate_migration.py " + str(name[0]) + ".yml" + " " + str(tenant))
@@ -75,7 +75,8 @@ for event in notifier_mig.event_gen():
                   if exit_status!= 0:
                     continue_flag = False
                     logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to migrate for tenant ' + str(dir_name[0]))
-
+              
+             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'SUCCESSFULLY migrated for tenant ' + str(dir_name[0]))
 
              # Watch migration requests once the infrastructure is created
              # Event handling
