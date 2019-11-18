@@ -22,7 +22,8 @@ class Create_YAML_FILE():
     self.file_name = file_name
 
   def parse_Migration(self, content_req):
-    self.subnets = []
+    self.subnets_C1 = []
+    self.subnets_C2 = []
 
     with open(Yaml_file,'r') as stream:
       try:
@@ -36,7 +37,6 @@ class Create_YAML_FILE():
     for migrate in self.contents:
       source_cloud = migrate["source_cloud"]
       source_subnet = migrate["source_subnet"]
-      
       if source_cloud == "C1":
         with open(C1_infra_file,'r') as stream:
           try:
@@ -73,16 +73,18 @@ class Create_YAML_FILE():
                   vm_list["vm_mac"] = out.rstrip()
               vm.append(vm_list)
             migrate_list["VM"] = vm
-
+        self.subnets_C1.append(migrate_list)
+        file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + "C1.yml"
+      print(source_cloud) 
       if source_cloud == "C2":
         with open(C2_infra_file,'r') as stream:
           try:
             INFRA_CONTENT = yaml.safe_load(stream)
           except OSError:
             print ("Creation of the directory %s failed" % path)
-      
+    
         self.infra_contents = INFRA_CONTENT["Subnet"]
-      
+    
         migrate_list = {}
 
         for infra in self.infra_contents:
@@ -110,14 +112,19 @@ class Create_YAML_FILE():
                   vm_list["vm_mac"] = out.rstrip()
               vm.append(vm_list)
             migrate_list["VM"] = vm
-
-      self.subnets.append(migrate_list)
-    file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + source_cloud + ".yml"
-    self.dump_content(file_name)
+        
+        file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + "C2.yml"
+        self.subnets_C2.append(migrate_list)
+        print(self.subnets_C2)
     
-  def dump_content(self, file_name):
+      self.dump_content(file_name, source_cloud)
+    
+  def dump_content(self, file_name, source_cloud):
     self.tenant = {}
-    self.tenant[MIGRATION_KEY] = self.subnets
+    if source_cloud == "C1":
+      self.tenant[MIGRATION_KEY] = self.subnets_C1
+    if source_cloud == "C2":
+      self.tenant[MIGRATION_KEY] = self.subnets_C2
     with open(file_name, "w") as file:
       doc = yaml.dump(self.tenant, file, default_flow_style=False)
 

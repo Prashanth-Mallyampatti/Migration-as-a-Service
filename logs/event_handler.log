@@ -177,3 +177,92 @@ INFO:root: 01:22:03.461645 file 't6.yml' created in '/root/Migration-as-a-Servic
 INFO:root: 01:22:03.466199 Created t6/VM_templates directory for tenant t6.yml
 INFO:root: 01:23:28.085513 file 't7.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
 INFO:root: 01:23:28.090571 Created t7/VM_templates directory for tenant t7.yml
+INFO:root: 02:29:47.442607 file 't3_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 02:29:47.445786 Created t3_migdirectory for tenant t3_mig.yml
+ERROR:root: 02:29:47.576715 FAILED to migrate for tenant t3_mig
+INFO:root: 02:31:01.824603 file 't4_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 02:31:01.827845 Created t4_migdirectory for tenant t4_mig.yml
+ERROR:root: 02:31:01.959370 FAILED to migrate for tenant t4_mig
+INFO:root: 02:31:59.726942 file 't5_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 02:31:59.730194 Created t5_migdirectory for tenant t5_mig.yml
+ERROR:root: 02:31:59.853458 FAILED to migrate for tenant t5_mig
+INFO:root: 02:33:34.060869 file 't6_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 02:33:34.063466 Created t6_migdirectory for tenant t6_mig.yml
+ERROR:root: 02:33:34.213453 FAILED to migrate for tenant t6_mig
+INFO:root: 02:35:30.272250 file 't7_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 02:35:30.274442 Created t7_migdirectory for tenant t7_mig.yml
+INFO:root: 03:26:43.798824 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 03:26:43.803933 Created t2/VM_templates directory for tenant t2.yml
+ERROR:root: 03:26:45.236571 FAILED to create infrastructure for tenant t2
+INFO:root: 03:26:45.236909 SUCCESSFULLY completed creating the required infrastructure for tenant t2
+INFO:root: 03:26:51.874853 file '.t2.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 03:26:51.924044 FAILED to create infrastructure for tenant 
+INFO:root: 03:26:51.924338 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 03:26:51.924476 file '.t2.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 03:26:52.039483 FAILED to create infrastructure for tenant 
+INFO:root: 03:26:52.039800 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 03:26:52.040036 file '.t2.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 03:26:52.095405 FAILED to create infrastructure for tenant 
+INFO:root: 03:26:52.095755 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 03:28:05.386891 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 03:28:05.391301 Created t1/VM_templates directory for tenant t1.yml
+INFO:root: 03:28:05.450569 SUCCESSFULLY completed creating the required infrastructure for tenant t1
+INFO:root: 03:28:28.324127 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 03:37:40.895978 SUCCESSFULLY completed creating the required infrastructure for tenant t1
+INFO:root: 03:42:34.703671 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 03:42:34.706369 Created t1_migdirectory for tenant t1_mig.yml
+ERROR:root: 03:47:21.787652 FAILED to migrate for tenant t1_mig
+INFO:root: 03:50:44.092648 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+ERROR:root: 03:55:14.442745 FAILED to migrate for tenant t1_mig
+INFO:root: 03:57:39.352200 file 't2.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 04:05:27.164056 SUCCESSFULLY completed creating the required infrastructure for tenant t2
+INFO:root: 05:17:00.801826 file 't1.yml' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:17:00.806726 Created t1/VM_templates directory for tenant t1.yml
+INFO:root: 05:25:15.574456 SUCCESSFULLY completed creating the required infrastructure for tenant t1
+INFO:root: 05:25:15.576679 file 't1.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:25:15.577423 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:25:15.805555 FAILED to create infrastructure for tenant 
+INFO:root: 05:25:15.805974 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:25:15.806151 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:25:15.934215 FAILED to create infrastructure for tenant 
+INFO:root: 05:25:15.934675 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:25:15.935003 file '.t1.yml.swx' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:25:15.935116 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:25:15.935183 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:25:16.072546 FAILED to create infrastructure for tenant 
+INFO:root: 05:25:16.072963 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:25:16.073160 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:25:16.073332 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:26:28.961634 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:26:29.028806 FAILED to create infrastructure for tenant 
+INFO:root: 05:26:29.029178 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:26:29.029332 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:26:29.180582 FAILED to create infrastructure for tenant 
+INFO:root: 05:26:29.180965 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:26:29.181126 file '.t1.yml.swx' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:26:29.181281 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:26:29.181342 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:26:29.238152 FAILED to create infrastructure for tenant 
+INFO:root: 05:26:29.238489 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:26:29.238648 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:26:33.019939 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:27:50.707244 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:38:26.980931 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:38:27.034706 FAILED to create infrastructure for tenant 
+INFO:root: 05:38:27.035037 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:38:27.035210 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:38:27.157215 FAILED to create infrastructure for tenant 
+INFO:root: 05:38:27.157537 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:38:27.157713 file '.t1.yml.swx' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:38:27.157824 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:38:27.157938 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+ERROR:root: 05:38:27.208842 FAILED to create infrastructure for tenant 
+INFO:root: 05:38:27.209147 SUCCESSFULLY completed creating the required infrastructure for tenant 
+INFO:root: 05:38:27.209302 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:38:31.025010 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:39:56.829241 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/ansible/config_files/infrastructure'
+INFO:root: 05:43:26.693116 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 05:43:26.695837 Created t1_migdirectory for tenant t1_mig.yml
+INFO:root: 05:43:26.895954 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 05:49:05.124004 file 't1_mig.yml' created in '/root/Migration-as-a-Service/ansible/config_files/migration'
+INFO:root: 05:49:05.299084 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/ansible/config_files/migration'

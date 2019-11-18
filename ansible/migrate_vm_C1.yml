@@ -46,6 +46,10 @@
       src: '{{ disk_dir }}/{{ item.1.name }}.qcow2'
       dest: '{{ disk_dir }}/'
       force: no
+    register: result
+    until: result is not failed
+    retries: 3
+    delay: 2
     with_subelements:
       - "{{ Migrate }}"
       - VM

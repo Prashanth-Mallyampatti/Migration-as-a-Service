@@ -1,8 +1,0 @@
-Migrate:
-- VM:
-  - name: t1_VM1
-  - name: t1_VM2
-  ns_name: t1ns1
-- VM:
-  - name: t1_VM2
-  ns_name: t1ns2
