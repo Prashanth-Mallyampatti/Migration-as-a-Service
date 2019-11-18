@@ -1,0 +1,47 @@
+Namespace:
+- default_route_ip: 192.168.133.1
+  name: t5
+  pns_if: t5pns_if
+  pns_ip: 192.168.133.1/24
+  tenant_if: t5if
+  tenant_ip: 192.168.133.2/24
+Subnet:
+- bridge_name: t5br1
+  default_route_ip: 10.2.41.1
+  dns:
+  - brif: t5s1_dnsbrif
+    dhcp_end: 1.1.1.254
+    dhcp_start: 1.1.1.133
+    dnsif: t5s1_dnsif
+    dnsif_ip: 1.1.1.128/24
+    net_mask: 255.255.255.0
+  ns_name: t5ns1
+  route:
+  - if: p1
+    ip: 10.2.41.1/24
+    ns_if: t5if
+    ns_name: t5
+  subnet_ip: 1.1.1.0/24
+  tenant_ns:
+  - tenant_ns_if: t5ns1if
+    tenant_ns_ip: 10.2.41.1/24
+    tenant_ns_name: t5
+    tenant_sub_if: t5s1if
+    tenant_sub_ip: 10.2.41.2/24
+  vms:
+  - brif: t5br1if1
+    disk: 10G
+    mem: 2
+    name: t5_VM4
+    vcpu: 4
+    vmif: t5VM4if1
+  vxlan:
+  - dev: t5s1if
+    dsport: 4789
+    id: 42
+    local_ip: 10.2.41.2
+    remote_ip: 10.1.41.2
+    remote_route: 10.1.41.0/24
+    subnet_route: 10.2.41.0/24
+    tenant_route_ip: 192.168.133.2
+    v_name: vxlan_t5s1

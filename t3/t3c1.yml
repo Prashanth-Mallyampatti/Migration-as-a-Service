@@ -37,9 +37,9 @@ Subnet:
     vmif: t3VM1if1
   - brif: t3br1if2
     disk: 10G
-    mem: 2
+    mem: 4
     name: t3_VM2
-    vcpu: 4
+    vcpu: 2
     vmif: t3VM2if1
   vxlan:
   - dev: t3s1if

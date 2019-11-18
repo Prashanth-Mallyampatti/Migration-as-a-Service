@@ -9,6 +9,7 @@ import inotify.adapters
 import os
 import datetime
 import logging
+import sys
 
 # Migration directories
 MIG_ANSIBLE = "/root/Migration-as-a-Service/ansible/"
@@ -45,46 +46,56 @@ for event in notifier_infra.event_gen():
                 logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Created ' + str(dir_name[0]) + '/VM_templates directory for tenant ' + str(tenant))
                          
              # Validate tenant input
-             os.system("python3 " + str(MIG_PYTHON) + "validate_subnet.py " + str(tenant))
+             exit_status = os.system("python3 " + str(MIG_PYTHON) + "validate_subnet.py " + str(tenant))
+             print exit_status
+             if exit_status!= 0:
+                sys.exit
 
              # Create the required files for building infrastructure
-             os.system("python3 " + str(MIG_PYTHON) + "parse_tenant.py " + str(tenant))
+             exit_status = os.system("python3 " + str(MIG_PYTHON) + "parse_tenant.py " + str(tenant))
+             print exit_status
+             if exit_status!= 0:
+                sys.exit
 
-             # Create infrastructure on cloud 1
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Create infrastructure on cloud 2
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Add routes in cloud 1
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Add routes in cloud 2
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Create VM templates on cloud 1
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Create VM templates on cloud 2
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Create VMs in cloud 1
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-
-             # Create VMs in cloud 2
-             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2.yml -i " +  str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
-        
-             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Completed creating the required infrastructure')
+#             # Create infrastructure on cloud 1
+             exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+             print exit_status
+             if exit_status!= 0:
+                sys.exit
+             
+#
+#             # Create infrastructure on cloud 2
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#
+#             # Add routes in cloud 1
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#
+#             # Add routes in cloud 2
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#
+#             # Create VM templates on cloud 1
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#
+#             # Create VM templates on cloud 2
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2_templates.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#
+#             # Create VMs in cloud 1
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#
+#             # Create VMs in cloud 2
+#             os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_vm_C2.yml -i " +  str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
+#        
+#             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Completed creating the required infrastructure')
   
              # Watch migration requests once the infrastructure is created
              # Event handling
-             for event in notifier_mig.event_gen():
-                 if event is not None:
+#             for event in notifier_mig.event_gen():
+#                 if event is not None:
                      # If a new tenant is created
-                     if 'IN_CREATE' in event[1]:
-                          logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' created in '{1}'".format(event[3], event[2]))
+#                     if 'IN_CREATE' in event[1]:
+#                          logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' created in '{1}'".format(event[3], event[2]))
                           #print "file '{0}' created".format(event[3], event[2])
-                          tenant = '{0}'.format(event[3], event[2])
+#                          tenant = '{0}'.format(event[3], event[2])
        
         #if 'IN_MODIFY' in event[1]:
         #     logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' modified in '{1}'".format(event[3], event[2]))
