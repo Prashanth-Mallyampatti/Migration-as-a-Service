@@ -105,3 +105,12 @@ PLAY [worker] ******************************************************************
 TASK [pause] ************************************************************************************************************************************************
 Pausing for 60 seconds
 (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [99.99.99.2] => {"changed": false, "delta": 60, "echo": true, "rc": 0, "start": "2019-11-22 07:10:48.774109", "stderr": "", "stdout": "Paused for 1.0 minutes", "stop": "2019-11-22 07:11:48.774449", "user_input": ""}
+
+TASK [Undefine Migrated VM at C2] ***************************************************************************************************************************
+changed: [99.99.99.2] => (item=[{u'ns_name': u't1ns1', u'bridge_name': u't1br1'}, {u'vmif_m': u't1VM4if1_m', u'vm_mac': u'52:54:00:a7:c6:7e', u'name': u't1_VM4', u'vmif': u't1VM4if1', u'brif_m': u't1br1if1_m'}]) => {"ansible_loop_var": "item", "changed": true, "cmd": "virsh undefine \"t1_VM4\"\n", "delta": "0:00:00.027026", "end": "2019-11-22 07:11:49.862820", "item": [{"bridge_name": "t1br1", "ns_name": "t1ns1"}, {"brif_m": "t1br1if1_m", "name": "t1_VM4", "vm_mac": "52:54:00:a7:c6:7e", "vmif": "t1VM4if1", "vmif_m": "t1VM4if1_m"}], "rc": 0, "start": "2019-11-22 07:11:49.835794", "stderr": "", "stderr_lines": [], "stdout": "Domain t1_VM4 has been undefined", "stdout_lines": ["Domain t1_VM4 has been undefined"]}
+
+PLAY RECAP **************************************************************************************************************************************************
+99.99.99.2                 : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
