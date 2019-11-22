@@ -11,7 +11,7 @@ import datetime
 import logging
 
 # Log file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/infrastructure.log", level=logging.INFO)
 
 # Retrieve range of IPs for a given subnet
 def range_of_ips(ip):
@@ -49,7 +49,7 @@ def parse_DNS(C1_contents, C2):
 # ******************** #
 arg = sys.argv
 tenant_name = arg[1].split('.')[0]
-Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/infrastructure/" + str(arg[1])
+Yaml_file = "/root/Migration-as-a-Service/src/northbound/config_files/infrastructure/" + str(arg[1])
 SUBNET_KEY = "Subnet"
 TENANT_KEY = "Namespace"
 YAML_CONTENT = None
@@ -270,7 +270,7 @@ class Create_YAML_FILE():
     self.tenant = {}
     self.tenant[SUBNET_KEY] = self.subnets
     self.tenant[TENANT_KEY] = self.tenant_ns
-    file_path = "/root/Migration-as-a-Service/" + tenant_name + "/"
+    file_path = "/root/Migration-as-a-Service/etc/" + tenant_name + "/"
     with open(file_path + file_name + ".yml", "w") as file:
       doc = yaml.dump(self.tenant, file, default_flow_style=False)
 

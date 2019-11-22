@@ -11,12 +11,12 @@ import logging
 import os
 
 # Logging file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/infrastructure.log", level=logging.INFO)
 
 # Reads yaml config file provided as parameter
 arg = sys.argv
 #print(arg)
-Yaml_file = os.path.join('/root/Migration-as-a-Service/ansible/config_files/infrastructure', arg[1])
+Yaml_file = os.path.join('/root/Migration-as-a-Service/src/northbound/config_files/infrastructure', arg[1])
 
 # Check if subnet IP provided is valid in each case.
 try:

@@ -15,7 +15,7 @@ import datetime
 import logging
 
 # Log file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/infrastructure.log", level=logging.INFO)
 
 # worker node ssh details
 ip='99.99.99.2'
@@ -26,15 +26,15 @@ password=''
 # Takes <tenant>_mig.yml file as input
 arg = sys.argv
 tenant_name1 = arg[1].split('.')[0]
-Yaml_file = "/root/Migration-as-a-Service/ansible/config_files/migration/" + str(arg[1])
+Yaml_file = "/root/Migration-as-a-Service/src/northbound/config_files/migration/" + str(arg[1])
 YAML_CONTENT = None
 INFRA_CONTENT = None
 MIGRATION_KEY = "Migrate"
 
 # Create yaml files needed for ansible
 tenant_name = arg[1].split("_")[0]
-C1_infra_file = "/root/Migration-as-a-Service/" + tenant_name + "/" + tenant_name + "c1.yml"
-C2_infra_file = "/root/Migration-as-a-Service/" + tenant_name + "/" + tenant_name + "c2.yml"
+C1_infra_file = "/root/Migration-as-a-Service/etc/" + tenant_name + "/" + tenant_name + "c1.yml"
+C2_infra_file = "/root/Migration-as-a-Service/etc/" + tenant_name + "/" + tenant_name + "c2.yml"
 
 class Create_YAML_FILE():
   def __init__(self, file_name):
@@ -95,7 +95,7 @@ class Create_YAML_FILE():
               vm.append(vm_list)
             migrate_list["VM"] = vm
         self.subnets_C1.append(migrate_list)
-        file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + "C1.yml"
+        file_name = "/root/Migration-as-a-Service/etc/" + tenant_name1 + "/" + tenant_name1 + "C1.yml"
       #print(source_cloud) 
       logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'source cloud is ' + str(source_cloud))
       if source_cloud == "C2":
@@ -140,7 +140,7 @@ class Create_YAML_FILE():
               vm.append(vm_list)
             migrate_list["VM"] = vm
         
-        file_name = "/root/Migration-as-a-Service/" + tenant_name1 + "/" + tenant_name1 + "C2.yml"
+        file_name = "/root/Migration-as-a-Service/etc/" + tenant_name1 + "/" + tenant_name1 + "C2.yml"
         self.subnets_C2.append(migrate_list)
     
       self.dump_content(file_name, source_cloud)

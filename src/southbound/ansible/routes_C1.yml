@@ -1,12 +1,12 @@
 ---
-- hosts: worker
+- hosts: main
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
   vars_files:
-    - config_files/infrastructure/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c2.yml
+    - /root/Migration-as-a-Service/src/northbound/config_files/infrastructure/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}c1.yml
 
   tasks:
   - name: Add VXLAN routes in PNS
@@ -30,11 +30,11 @@
       ip netns exec pns ip addr show p1 | awk 'FNR==3{ print $2 }' | awk -F/ '{ print $1 }'
     register: PNS_IP
     changed_when: "PNS_IP.rc != 0"
-
+  
   - name: Add VXLAN routes to host
     shell: |
       ip route show "{{ item.1.subnet_route }}" via "{{ PNS_IP.stdout }}" | grep -w '^{{ item.1.subnet_route }}' ; if [ $? -ne 0 ] ; then ip route add "{{ item.1.subnet_route }}" via "{{ PNS_IP.stdout }}" ; fi
-      ip route show "{{ item.1.remote_route }}" via 99.99.99.1 | grep -w '^{{ item.1.remote_route }}'; if [ $? -ne 0 ] ; then ip route add "{{ item.1.remote_route }}" via 99.99.99.1 ; fi
+      ip route show "{{ item.1.remote_route }}" via 99.99.99.2 | grep -w '^{{ item.1.remote_route }}'; if [ $? -ne 0 ] ; then ip route add "{{ item.1.remote_route }}" via 99.99.99.2 ; fi
     when:
       - item.1.dev != []
       - item.1.subnet_route != []

@@ -1,5 +1,5 @@
 ############################################################################################################################
-# Event Handler  script that watches the main directory: "/root/Migration-as-a-Service/ansible/config_files/infrastructure"
+# Event Handler  script that watches the main directory: "/root/Migration-as-a-Service/src/northbound/config_files/infrastructure"
 # It watches for 3 main events: Create, Modify and Delete
 # Based on the event occured, respective ansible playbooks will be invoked
 # This script is only used for infrastructure requirements
@@ -11,19 +11,28 @@ import datetime
 import logging
 
 # Migration directories
-MIG_ANSIBLE = "/root/Migration-as-a-Service/ansible/"
-MIG_PYTHON = "/root/Migration-as-a-Service/python/"
-MIG_INFRA_LOG = "/root/Migration-as-a-Service/logs/infrastructure.log"
+MIG_ANSIBLE = "/root/Migration-as-a-Service/src/southbound/ansible/"
+MIG_INPUT_PYTHON = "/root/Migration-as-a-Service/src/northbound/validation_scripts/"
+MIG_LOGIC_PYTHON = "/root/Migration-as-a-Service/src/logiclayer/parser_scripts/"
+MIG_INFRA_LOG = "/root/Migration-as-a-Service/var/logs/infrastructure.log"
+
+dir_exists = os.path.exists(MIG_INFRA_LOG)
+if not dir_exists:
+  os.system("touch " + str(MIG_INFRA_LOG))
+
+dir_exists = os.path.exists("/root/Migration-as-a-Service/var/logs/event_handler.log")
+if not dir_exists:
+  os.system("touch /root/Migration-as-a-Service/var/logs/event_handler.log")
 
 # Create log file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/event_handler.log", level=logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/event_handler.log", level=logging.INFO)
 
 # Create event handlers for infrastructure and migration
 notifier_infra = inotify.adapters.Inotify()
 #notifier_mig = inotify.adapters.Inotify()
 
 # Initialize directory to watch for events
-notifier_infra.add_watch('/root/Migration-as-a-Service/ansible/config_files/infrastructure')
+notifier_infra.add_watch('/root/Migration-as-a-Service/src/northbound/config_files/infrastructure')
 #notifier_mig.add_watch('/root/Migration-as-a-Service/ansible/config_files/migration')
 
 # Error checking flag
@@ -37,14 +46,14 @@ for event in notifier_infra.event_gen():
              logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' created in '{1}'".format(event[3], event[2]))
              tenant = '{0}'.format(event[3], event[2])
              dir_name = tenant.split(".")
-             dir_exists=os.path.exists("/root/Migration-as-a-Service/" + str(dir_name[0]))
+             dir_exists=os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]))
              if not dir_exists:
-                os.system("mkdir /root/Migration-as-a-Service/" + str(dir_name[0]))
-                os.system("mkdir /root/Migration-as-a-Service/" + str(dir_name[0]) + "/VM_templates")
+                os.system("mkdir /root/Migration-as-a-Service/etc/" + str(dir_name[0]))
+                os.system("mkdir /root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/VM_templates")
                 logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Created ' + str(dir_name[0]) + '/VM_templates directory for tenant ' + str(tenant))
                          
              # Validate tenant input
-             exit_status = os.system("python3 " + str(MIG_PYTHON) + "validate_subnet.py " + str(tenant))
+             exit_status = os.system("python3 " + str(MIG_INPUT_PYTHON) + "validate_subnet.py " + str(tenant))
              #print exit_status
              if exit_status!= 0:
                 continue_flag = False
@@ -52,7 +61,7 @@ for event in notifier_infra.event_gen():
 
              # Create the required files for building infrastructure
              if continue_flag:
-                exit_status = os.system("python3 " + str(MIG_PYTHON) + "parse_tenant.py " + str(tenant))
+                exit_status = os.system("python3 " + str(MIG_LOGIC_PYTHON) + "parse_tenant.py " + str(tenant))
                 #print exit_status
                 if exit_status!= 0:
                    continue_flag = False
@@ -115,8 +124,11 @@ for event in notifier_infra.event_gen():
                 if exit_status != 0:
                   continue_flag = False
                   logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure for tenant ' + str(dir_name[0]))
-        
-             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'SUCCESSFULLY completed creating the required infrastructure for tenant ' + str(dir_name[0]))
+
+             if continue_flag:
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'SUCCESSFULLY completed creating the required infrastructure for tenant ' + str(dir_name[0]))
+             else:
+                logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure for tenant ' + str(dir_name[0]))
   
              # Watch migration requests once the infrastructure is created
              # Event handling
