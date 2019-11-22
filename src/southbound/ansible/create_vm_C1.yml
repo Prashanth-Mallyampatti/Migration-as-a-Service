@@ -1,0 +1,69 @@
+---
+# ************************* Master tasks *********************** #
+- hosts: main
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python2
+    disk_dir: /var/lib/libvirt/images
+  vars_files:
+    - /root/Migration-as-Service/src/northbound/config_files/infrastructure/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}c1.yml
+
+  tasks:
+  - name: Copy VM image
+    copy: 
+      src: /root/mainVM.qcow2 
+      dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
+      force: no
+    with_subelements:
+      - "{{ Subnet }}"
+      - vms
+
+  - name: Get list of running VMs
+    command: virsh list --name
+    register: vm_list
+    changed_when: "vm_list.rc != 0"
+    become: yes
+
+  - name: Define VM
+    virt:
+      name: "{{ item.1.name }}"
+      command: define
+      xml: "{{ lookup('template', '/root/Migration-as-a-Service/etc/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
+    when: item.1.name not in vm_list.stdout
+    with_subelements:
+      - "{{ Subnet }}"
+      - vms
+
+  - name: Create VM
+    virt:
+      name: "{{ item.1.name }}"
+      command: create
+    when: item.1.name not in vm_list.stdout
+    with_subelements: 
+      - "{{ Subnet }}"
+      - vms
+
+  - name: Start VM
+    virt:
+      name: "{{ item.1.name }}"
+      state: running
+    when: item.1.name not in vm_list.stdout
+    with_subelements: 
+      - "{{ Subnet }}"
+      - vms
+
+  - name: Attach VM interface
+    shell: |
+      virsh domiflist "{{ item.1.name }}" | grep -w '{{ item.1.vmif }}' ; if [ $? -ne 0 ] ; then virsh attach-interface "{{ item.1.name }}" direct "{{ item.1.vmif }}" --live --persistent ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - vms
+
+#  - name: Attach VM interent interface
+#    shell: |
+#      virsh domiflist '{{ tenant_name }}_{{ item.1.name }}' | grep -w 'default' ; if [ $? -ne 0 ] ; then virsh attach-interface --domain '{{ tenant_name }}_{{ item.1.name }}' --type network --source default --live --config ; fi
+#    when: "{{ item.1.internet_access }}" 
+#    with_subelements:
+#      - "{{ C1 }}"
+#      - VM

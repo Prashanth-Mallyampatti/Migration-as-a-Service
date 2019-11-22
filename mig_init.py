@@ -1,5 +1,5 @@
 ############################################################################################################################
-# Event Handler  script that watches the main directory: "/root/Migration-as-a-Service/ansible/config_files/migration"
+# Event Handler  script that watches the main directory: "/root/Migration-as-a-Service/src/northbound/config_files/migration"
 # It watches for 3 main events: Create, Modify and Delete
 # Based on the event occured, respective ansible playbooks will be invoked
 # This script is only used for infrastructure requirements
@@ -11,18 +11,19 @@ import datetime
 import logging
 
 # Migration directories
-MIG_ANSIBLE = "/root/Migration-as-a-Service/ansible/"
-MIG_PYTHON = "/root/Migration-as-a-Service/python/"
-MIG_LOG = "/root/Migration-as-a-Service/logs/migration.log"
+MIG_ANSIBLE = "/root/Migration-as-a-Service/src/southbound/ansible/"
+MIG_INPUT_PYTHON = "/root/Migration-as-a-Service/src/northbound/validation_scripts/"
+MIG_LOGIC_PYTHON = "/root/Migration-as-a-Service/src/logiclayer/parser_scripts/"
+MIG_LOG = "/root/Migration-as-a-Service/var/logs/migration.log"
 
 # Create log file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/event_handler.log", level=logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/event_handler.log", level=logging.INFO)
 
 # Create event handlers for migration
 notifier_mig = inotify.adapters.Inotify()
 
 # Initialize directory to watch for events
-notifier_mig.add_watch('/root/Migration-as-a-Service/ansible/config_files/migration')
+notifier_mig.add_watch('/root/Migration-as-a-Service/src/northbound/config_files/migration')
 
 # Error checking flag
 continue_flag = True
@@ -39,13 +40,13 @@ for event in notifier_mig.event_gen():
              name = dir_name[0].split("_")
              print name[0] 
              print name[0]+".yml"
-             dir_exists=os.path.exists("/root/Migration-as-a-Service/" + str(dir_name[0]))
+             dir_exists=os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]))
              if not dir_exists:
-                os.system("mkdir /root/Migration-as-a-Service/" + str(dir_name[0]))
+                os.system("mkdir /root/Migration-as-a-Service/etc/" + str(dir_name[0]))
                 logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Created ' + str(dir_name[0]) + ' directory for tenant ' + str(tenant))
                          
              # Validate tenant input
-             exit_status = os.system("python3 " + str(MIG_PYTHON) + "validate_migration.py " + str(name[0]) + ".yml" + " " + str(tenant))
+             exit_status = os.system("python3 " + str(MIG_INPUT_PYTHON) + "validate_migration.py " + str(name[0]) + ".yml" + " " + str(tenant))
              #print exit_status
              if exit_status!= 0:
                 continue_flag = False
@@ -53,7 +54,7 @@ for event in notifier_mig.event_gen():
 
              # Create the required files for building infrastructure
              if continue_flag:
-                exit_status = os.system("python3 " + str(MIG_PYTHON) + "parse_migration.py " + str(tenant))
+                exit_status = os.system("python3 " + str(MIG_LOGIC_PYTHON) + "parse_migration.py " + str(tenant))
                 #print exit_status
                 if exit_status!= 0:
                    continue_flag = False
@@ -61,7 +62,7 @@ for event in notifier_mig.event_gen():
               
              # Create infrastructure on cloud 1
              if continue_flag:
-                if os.path.exists("/root/Migration-as-a-Service/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
+                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
                   exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "migrate_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
                   print exit_status
                   if exit_status!= 0:
@@ -70,7 +71,7 @@ for event in notifier_mig.event_gen():
              
              # Create infrastructure on cloud 2
              if continue_flag:
-                if os.path.exists("/root/Migration-as-a-Service/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C2.yml"):
+                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C2.yml"):
                   exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "migrate_vm_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
                   if exit_status!= 0:
                     continue_flag = False
