@@ -1,33 +1,23 @@
 ---
-- hosts: worker
+# ************************* Master tasks *********************** #
+- hosts: main
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python2
     disk_dir: /var/lib/libvirt/images
   vars_files:
-    - config_files/infrastructure/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}c2.yml
+    - /root/Migration-as-a-Service/src/northbound/config_files/infrastructure/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}c1.yml
 
   tasks:
   - name: Copy VM image
-    copy:
-      src: /root/mainVM.qcow2
+    copy: 
+      src: /root/mainVM.qcow2 
       dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
       force: no
-      remote_src: yes
     with_subelements:
       - "{{ Subnet }}"
       - vms
-
-# ************* This task is being executed on Master host, as jinja lookups aren't happening locally on remote host ************ #
-#  - name: Create VM templates
-#    copy:
-#      src: /root/Migration-as-a-Service/ansible/templates/jinja/vm_main.xml.j2
-#      dest: /root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2
-#      remote_src: yes
-#    with_subelements:
-#      - "{{ Subnet }}"
-#      - vms
 
   - name: Get list of running VMs
     command: virsh list --name
@@ -39,7 +29,7 @@
     virt:
       name: "{{ item.1.name }}"
       command: define
-      xml: "{{ lookup('template', '/root/Migration-as-a-Service/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
+      xml: "{{ lookup('template', '/root/Migration-as-a-Service/etc/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
     when: item.1.name not in vm_list.stdout
     with_subelements:
       - "{{ Subnet }}"
@@ -50,7 +40,7 @@
       name: "{{ item.1.name }}"
       command: create
     when: item.1.name not in vm_list.stdout
-    with_subelements:
+    with_subelements: 
       - "{{ Subnet }}"
       - vms
 
@@ -59,7 +49,7 @@
       name: "{{ item.1.name }}"
       state: running
     when: item.1.name not in vm_list.stdout
-    with_subelements:
+    with_subelements: 
       - "{{ Subnet }}"
       - vms
 
@@ -73,7 +63,7 @@
 #  - name: Attach VM interent interface
 #    shell: |
 #      virsh domiflist '{{ tenant_name }}_{{ item.1.name }}' | grep -w 'default' ; if [ $? -ne 0 ] ; then virsh attach-interface --domain '{{ tenant_name }}_{{ item.1.name }}' --type network --source default --live --config ; fi
-#    when: "{{ item.1.internet_access }}"
+#    when: "{{ item.1.internet_access }}" 
 #    with_subelements:
-#      - "{{ C2 }}"
+#      - "{{ C1 }}"
 #      - VM

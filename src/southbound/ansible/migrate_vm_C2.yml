@@ -1,15 +1,17 @@
 ---
-# ************** Main Tasks **************** #
-- hosts: main
+# *************** Worker Tasks ************** #
+- hosts: worker
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    disk_dir: /var/lib/libvirt/images
+    template_dir: /etc/libvirt/qemu
     ansible_ssh_pipelining: no
     sftp_batch_mode: yes
 
   vars_files:
-    - config_files/migration/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
+    - /root/Migration-as-a-Service/src/northbound/config_files/migration/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}C2.yml
   
   tasks:
   - name: Detach Interface
@@ -25,14 +27,36 @@
     with_subelements:
       - "{{ Migrate }}"
       - VM
-  
+
   - name: Remove TEMP files
     file:
       path: /root/.ansible/tmp/
       state: absent
+    
+  - name: Migrate VM images
+    fetch:
+      src: '{{ disk_dir }}/{{ item.1.name }}.qcow2'
+      dest: '{{ disk_dir }}/'
+      force: no
+      flat: yes
+      validate_checksum: no
+    retries: 3
+    delay: 2
+    with_subelements:
+      - "{{ Migrate }}"
+      - VM 
 
-# ***************** Worker Tasks *************** #
-- hosts: worker
+  - name: Migrate VM templates
+    fetch:
+      src: '{{ template_dir }}/{{ item.1.name }}.xml'
+      dest: '{{ template_dir }}/'
+      flat: yes
+    with_subelements:
+      - "{{ Migrate }}"
+      - VM
+
+# ****************** Main Tasks ***************** #
+- hosts: main
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python2
@@ -42,36 +66,10 @@
     sftp_batch_mode: yes
 
   vars_files:
-    - config_files/migration/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
+    - /root/Migration-as-a-Service/src/northbound/config_files/migration/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}C2.yml
 
   tasks:
-  - name: Remove TEMP files
-    file:
-      path: /root/.ansible/tmp/
-      state: absent
-  
-  - name: Migrate VM images
-    copy:
-      src: '{{ disk_dir }}/{{ item.1.name }}.qcow2'
-      dest: '{{ disk_dir }}/'
-      force: no
-    register: result
-    until: result is not failed
-    retries: 3
-    delay: 2
-    with_subelements:
-      - "{{ Migrate }}"
-      - VM
-
-  - name: Migrate VM templates
-    copy:
-      src: '{{ template_dir }}/{{ item.1.name }}.xml'
-      dest: '{{ template_dir }}/'
-    with_subelements:
-      - "{{ Migrate }}"
-      - VM
-
   - name: Get list of running VMs
     command: virsh list --name
     register: vm_list
@@ -132,8 +130,9 @@
       - "{{ Migrate }}"
       - VM
 
-# ****************** Main tasks ************** #
-- hosts: main
+
+# *********************** Worker Tasks ********************* #
+- hosts: worker
   gather_facts: False
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -141,13 +140,14 @@
     sftp_batch_mode: yes
 
   vars_files:
-    - config_files/migration/{{ tenant_name }}.yml
-    - /root/Migration-as-a-Service/{{ tenant_name }}/{{ tenant_name }}C1.yml
+    - /root/Migration-as-a-Service/src/northbound/config_files/migration/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}C2.yml
+
   tasks:
   - pause:
       minutes: 1
 
-  - name: Undefine Migrated VM at C1
+  - name: Undefine Migrated VM at C2
     shell: |
       virsh undefine "{{ item.1.name }}"
     with_subelements:

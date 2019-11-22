@@ -15,12 +15,12 @@ import logging
 import datetime
 
 # Log file
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level=logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/infrastructure.log", level=logging.INFO)
 
 # Receive the yaml file of the tenant
 arg = sys.argv
 logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Invoking compare_script for ' + arg[1])
-Yaml_file = os.path.join('/root/Migration-as-a-Service/ansible/config_files/infrastructure', arg[1])
+Yaml_file = os.path.join('/root/Migration-as-a-Service/src/northbound/config_files/infrastructure', arg[1])
 print(Yaml_file)
 # Read the yaml config file
 with open(Yaml_file,'r') as stream:
@@ -104,9 +104,9 @@ with open(Yaml_file,'r') as stream:
     
         # Writing the list in to the file
         #path = '/home/ece792/LN_PROJECT/'
-        path = '/root/Migration-as-a-Service/'
+        path = '/root/Migration-as-a-Service/etc'
         #file_path = '/home/ece792/LN_PROJECT/Compare_Subnets_Across_Clouds.yaml'
-        file_path = '/root/Migration-as-a-Service/Compare_Subnets_Across_Clouds.yaml'
+        file_path = '/root/Migration-as-a-Service/etc/Compare_Subnets_Across_Clouds.yaml'
         try:
             if not os.path.exists(path):
                 os.makedirs(path)

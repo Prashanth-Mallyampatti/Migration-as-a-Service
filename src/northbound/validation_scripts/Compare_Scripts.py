@@ -12,11 +12,11 @@ import datetime
 
 
 # Logging File
-logging.basicConfig(filename="/root/Migration-as-a-Service/logs/infrastructure.log", level = logging.INFO)
+logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/infrastructure.log", level = logging.INFO)
 
 # yaml config file as parameter
 arg = sys.argv
-Yaml_file = os.path.join('/root/Migration-as-a-Service/ansible/config_files/infrastructure', arg[1])
+Yaml_file = os.path.join('/root/Migration-as-a-Service/src/northbound/config_files/infrastructure', arg[1])
 
 # Read the config file
 with open(Yaml_file,'r') as stream:
