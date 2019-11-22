@@ -16,3 +16,5 @@ INFO:root: 06:52:15.326881 SUCCESSFULLY completed creating the required infrastr
 INFO:root: 06:52:15.336612 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
 INFO:root: 06:54:26.788047 file 't1_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
 INFO:root: 06:54:26.790807 Created t1_mig directory for tenant t1_mig.yml
+INFO:root: 07:11:49.968621 SUCCESSFULLY migrated for tenant t1_mig
+INFO:root: 07:11:49.970235 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
