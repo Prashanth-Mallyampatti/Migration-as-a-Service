@@ -16,6 +16,14 @@ MIG_INPUT_PYTHON = "/root/Migration-as-a-Service/src/northbound/validation_scrip
 MIG_LOGIC_PYTHON = "/root/Migration-as-a-Service/src/logiclayer/parser_scripts/"
 MIG_INFRA_LOG = "/root/Migration-as-a-Service/var/logs/infrastructure.log"
 
+dir_exists = os.path.exists(MIG_INFRA_LOG)
+if not dir_exists:
+  os.system("touch " + str(MIG_INFRA_LOG))
+
+dir_exists = os.path.exists("/root/Migration-as-a-Service/var/logs/event_handler.log")
+if not dir_exists:
+  os.system("touch /root/Migration-as-a-Service/var/logs/event_handler.log")
+
 # Create log file
 logging.basicConfig(filename="/root/Migration-as-a-Service/var/logs/event_handler.log", level=logging.INFO)
 
@@ -75,11 +83,8 @@ for event in notifier_infra.event_gen():
                   continue_flag = False
                   logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure for tenant ' + str(dir_name[0]))
 
-             print ("before routes")
              # Add routes in cloud 1
              if continue_flag:
-                print ("inside routes")
-                print (continue_flag) 
                 exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_INFRA_LOG))
                 if exit_status!= 0:
                   continue_flag = False
@@ -119,8 +124,11 @@ for event in notifier_infra.event_gen():
                 if exit_status != 0:
                   continue_flag = False
                   logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure for tenant ' + str(dir_name[0]))
-        
-             logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'SUCCESSFULLY completed creating the required infrastructure for tenant ' + str(dir_name[0]))
+
+             if continue_flag:
+                logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'SUCCESSFULLY completed creating the required infrastructure for tenant ' + str(dir_name[0]))
+             else:
+                logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create infrastructure for tenant ' + str(dir_name[0]))
   
              # Watch migration requests once the infrastructure is created
              # Event handling

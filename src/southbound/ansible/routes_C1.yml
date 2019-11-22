@@ -5,7 +5,7 @@
     ansible_python_interpreter: /usr/bin/python3
 
   vars_files:
-    - /root/Migration-as-Service/src/northbound/config_files/infrastructure/{{ tenant_name }}.yml
+    - /root/Migration-as-a-Service/src/northbound/config_files/infrastructure/{{ tenant_name }}.yml
     - /root/Migration-as-a-Service/etc/{{ tenant_name }}/{{ tenant_name }}c1.yml
 
   tasks:

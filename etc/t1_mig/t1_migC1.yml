@@ -2,7 +2,7 @@ Migrate:
 - VM:
   - brif_m: t1br1if1_m
     name: t1_VM1
-    vm_mac: 52:54:00:32:95:fb
+    vm_mac: 52:54:00:68:4a:91
     vmif: t1VM1if1
     vmif_m: t1VM1if1_m
   bridge_name: t1br1
