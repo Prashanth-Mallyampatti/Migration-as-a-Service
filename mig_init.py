@@ -52,16 +52,6 @@ for event in notifier_mig.event_gen():
                 continue_flag = False
                 logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to migrate for tenant ' + str(dir_name[0]))
 
-             # Checing if destination subnet is present
-             if continue_flag:
-                exit_status = os.system("python3 " + str(MIG_LOGIC_PYTHON) + "migration_check.py " + str(tenant) + " " + str(name[0]) + ".yml")
-                #print exit_status
-                if exit_status!= 0:
-                   continue_flag = False
-                   logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to migrate for tenant ' + str(dir_name[0]))
-              
-             
-
              # Create the required files for building infrastructure
              if continue_flag:
                 exit_status = os.system("python3 " + str(MIG_LOGIC_PYTHON) + "parse_migration.py " + str(tenant))
@@ -73,7 +63,7 @@ for event in notifier_mig.event_gen():
              # Create infrastructure on cloud 1
              if continue_flag:
                 if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
-                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "copy_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
+                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "migrate_vm_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
                   print exit_status
                   if exit_status!= 0:
                     continue_flag = False
@@ -82,7 +72,7 @@ for event in notifier_mig.event_gen():
              # Create infrastructure on cloud 2
              if continue_flag:
                 if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C2.yml"):
-                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "copy_vm_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
+                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "migrate_vm_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
                   if exit_status!= 0:
                     continue_flag = False
                     logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to migrate for tenant ' + str(dir_name[0]))
