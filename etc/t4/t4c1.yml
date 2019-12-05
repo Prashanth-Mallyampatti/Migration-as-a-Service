@@ -77,7 +77,7 @@ Subnet:
   - brif: []
     disk: []
     mem: []
-    name: []
+    name: emptyVM
     vcpu: []
     vmif: []
   vxlan:

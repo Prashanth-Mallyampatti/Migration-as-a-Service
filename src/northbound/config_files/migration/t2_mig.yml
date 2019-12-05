@@ -1,0 +1,19 @@
+VM_Migration:
+  - VM:
+      - name: "VM2"
+    source_cloud: "C1"
+    source_subnet: "1.1.1.0/24"
+    destination_cloud: "C2"
+  - VM:
+      - name: "VM4"
+    source_cloud: "C2"
+    source_subnet: "1.1.1.0/24"
+    destination_cloud: "C1"
+Subnet_Migration:
+  - subnet:
+      - subnet_addr: "2.2.2.0/24"
+        source_cloud: "C2"
+        destination_cloud: "C1"
+MISC:
+  - LOG_ENABLE: true
+  - GUI: true

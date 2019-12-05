@@ -29,7 +29,7 @@
 
   - name: Create Tenant VETH pairs
     shell: |
-      ip link show "{{ item.tenant_if }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.tenant_if }}" type veth peer name "{{ item.pns_if }}" ; fi
+      ip netns exec "{{ item.name }}" ip link show "{{ item.tenant_if }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.tenant_if }}" type veth peer name "{{ item.pns_if }}" ; fi
     with_items:
       - "{{ Namespace }}"
 
@@ -51,7 +51,7 @@
 
   - name: Create Namespace VETH Pairs
     shell: |
-      ip link show "{{ item.1.tenant_ns_if }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.tenant_ns_if }}" type veth peer name "{{ item.1.tenant_sub_if }}" ; fi
+      ip netns exec "{{ item.1.tenant_ns_name }}" ip link show "{{ item.1.tenant_ns_if }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.tenant_ns_if }}" type veth peer name "{{ item.1.tenant_sub_if }}" ; fi
     with_subelements:
       - "{{ Subnet }}"
       - tenant_ns
@@ -132,7 +132,7 @@
 
   - name: Create VETH Pairs
     shell: |
-      ip link show "{{ item.1.brif }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.vmif }}" type veth peer name "{{ item.1.brif }}" ; fi
+      ip netns exec "{{ item.0.ns_name }}" ip link show "{{ item.1.brif }}" ; if [ $? -ne 0 ] ; then ip link add "{{ item.1.vmif }}" type veth peer name "{{ item.1.brif }}" ; fi
       ip link set dev "{{ item.1.brif }}" up
       ip link set dev "{{ item.1.vmif }}" up
     when:
