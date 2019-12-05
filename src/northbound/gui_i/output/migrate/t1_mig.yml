@@ -1,0 +1,6 @@
+VM_Migration:
+  - VM:
+      - name: "wfe"
+    source_cloud: "wef"
+    source_subnet: "wef"
+    destination_cloud: "wef"

@@ -1,0 +1,50 @@
+div{
+    padding: 10px;
+  }
+  span, input{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .hide{
+    display:none;
+  }
+  .vmMigrationDiv{
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 2px;
+     margin-top: 10px;
+  }
+  .migrationDiv{
+    margin-left: 30px;
+    border-style: solid;
+    border-width: 1.5px;
+    margin-top: 5px;
+  }
+  .vmDiv{
+    margin-left: 60px;
+    border-style: solid;
+    border-width: 1px;
+  }
+  .addVM{
+    margin-left: 60px;
+    margin-bottom: 5px;
+  }
+  .addMigration{
+    margin-left: 30px;
+    margin-bottom: 5px;
+  }
+  .addVMMigration{
+    margin-left: 10px;
+  }
+  .submit{
+    background: #00aaff;
+    margin: 10px;
+    float: right;
+    width: 25%;
+  }
+  button{
+    display:block;
+    padding: 3px;
+    width: 30%;
+    
+  }
