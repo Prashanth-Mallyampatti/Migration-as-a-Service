@@ -139,7 +139,7 @@
       - item.1.brif != []
       - item.1.disk != []
       - item.1.mem != []
-      - item.1.name != []
+      - item.1.name != "JOKER"
       - item.1.vcpu != []
       - item.1.vmif != []
     with_subelements:
@@ -154,7 +154,7 @@
       - item.1.brif != []
       - item.1.disk != []
       - item.1.mem != []
-      - item.1.name != []
+      - item.1.name != "JOKER"
       - item.1.vcpu != []
       - item.1.vmif != []
     with_subelements:
@@ -169,7 +169,7 @@
       - item.1.brif != []
       - item.1.disk != []
       - item.1.mem != []
-      - item.1.name != []
+      - item.1.name != "JOKER"
       - item.1.vcpu != []
       - item.1.vmif != []
     with_subelements:

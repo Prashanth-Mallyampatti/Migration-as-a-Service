@@ -1,0 +1,17 @@
+Migrate:
+- VM:
+  - brif_m: t5br1if1_m
+    name: t5_VM4
+    vm_mac: 52:54:00:7f:d0:83
+    vmif: t5VM4if1
+    vmif_m: t5VM4if1_m
+  bridge_name: t5br1
+  ns_name: t5ns1
+- VM:
+  - brif_m: t5br2if1_m
+    name: t5_VM3
+    vm_mac: 52:54:00:2f:a9:53
+    vmif: t5VM3if1
+    vmif_m: t5VM3if1_m
+  bridge_name: t5br2
+  ns_name: t5ns2

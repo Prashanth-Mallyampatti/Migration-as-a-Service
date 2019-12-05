@@ -252,7 +252,7 @@ class Create_YAML_FILE():
           vm_lists.append(vm_list)
         else:
           vm_list = {}
-          vm_list["name"] = []
+          vm_list["name"] = "JOKER"
           vm_list["disk"] = []
           vm_list["mem"] = []
           vm_list["vcpu"] = []
