@@ -1,0 +1,53 @@
+Namespace:
+- default_route_ip: 192.168.7.1
+  name: t17
+  pns_if: t17pns_if
+  pns_ip: 192.168.7.1/24
+  tenant_if: t17if
+  tenant_ip: 192.168.7.2/24
+Subnet:
+- bridge_name: t17br1
+  default_route_ip: 10.1.61.1
+  dns:
+  - brif: t17s1_dnsbrif
+    dhcp_end: 1.1.1.254
+    dhcp_start: 1.1.1.5
+    dnsif: t17s1_dnsif
+    dnsif_ip: 1.1.1.1/24
+    net_mask: 255.255.255.0
+  ns_name: t17ns1
+  route:
+  - if: p1
+    ip: 10.1.61.1/24
+    ns_if: t17if
+    ns_name: t17
+  subnet_ip: 1.1.1.0/24
+  tenant_ns:
+  - tenant_ns_if: t17ns1if
+    tenant_ns_ip: 10.1.61.1/24
+    tenant_ns_name: t17
+    tenant_sub_if: t17s1if
+    tenant_sub_ip: 10.1.61.2/24
+  vms:
+  - brif: t17br1if1
+    disk: 10G
+    mem: 2
+    name: t17_VM1
+    vcpu: 4
+    vmif: t17VM1if1
+  - brif: t17br1if2
+    disk: 10G
+    mem: 4
+    name: t17_VM2
+    vcpu: 2
+    vmif: t17VM2if1
+  vxlan:
+  - dev: t17s1if
+    dsport: 4789
+    id: 42
+    local_ip: 10.1.61.2
+    remote_ip: 10.2.61.2
+    remote_route: 10.2.61.0/24
+    subnet_route: 10.1.61.0/24
+    tenant_route_ip: 192.168.7.2
+    v_name: vxlan_t17s1

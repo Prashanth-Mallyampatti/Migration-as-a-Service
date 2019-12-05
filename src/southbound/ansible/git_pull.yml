@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: False
+  
+  tasks:
+  - name: pull from git
+    git:
+      repo: https://github.com/RamyaViju/Migration-as-a-Service.git
+      dest: /root
+      update: yes
+      clone: no
+      version: master
