@@ -1,12 +1,6 @@
----
-  VM_Migration:
-    - source_cloud: C1
-      source_subnet: 1.1.1.0/24
-      destination_cloud: C2
-      VM:
-        - name: VM1
-    - source_cloud: C2
-      source_subnet: 1.1.1.0/24
-      destination_cloud: C1
-      VM:
-        - name: VM4
+VM_Migration:
+  - VM:
+      - name: "wfe"
+    source_cloud: "wef"
+    source_subnet: "wef"
+    destination_cloud: "wef"
