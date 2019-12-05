@@ -1,8 +1,0 @@
-C1:
-  - subnet_addr: "1"
-    VM:
-      - name: "1"
-        disk: "1"
-        mem: "1"
-        vcpu: "1"
-        internet_access: false

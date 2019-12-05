@@ -1,325 +1,48 @@
-<<<<<<< HEAD
-INFO:root: 18:16:55.267279 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 18:16:55.272182 Created t3/VM_templates directory for tenant t3.yml
-INFO:root: 18:25:29.145200 SUCCESSFULLY completed creating the required infrastructure for tenant t3
-INFO:root: 18:25:29.181280 file 't3.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 18:33:56.944307 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 18:33:56.948105 Created t3_mig directory for tenant t3_mig.yml
-INFO:root: 18:49:56.639778 SUCCESSFULLY migrated for tenant t3_mig
-INFO:root: 18:49:56.643738 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 03:03:10.717516 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:03:10.761733 Created t1/VM_templates directory for tenant t1.yml
-ERROR:root: 03:03:36.242775 FAILED to create infrastructure for tenant t1
-ERROR:root: 03:03:36.243225 FAILED to create infrastructure for tenant t1
-INFO:root: 03:03:36.243513 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:09:23.202637 file 't2.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:09:23.264892 FAILED to create infrastructure for tenant t2
-INFO:root: 03:09:23.265375 file 't2.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:10:42.075041 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:19:27.696005 SUCCESSFULLY completed creating the required infrastructure for tenant t1
-INFO:root: 03:19:27.698013 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 01:51:02.975894 file 't2.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 01:59:31.807568 SUCCESSFULLY completed creating the required infrastructure for tenant t2
-INFO:root: 01:59:31.810006 file 't2.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:20.910349 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:50:21.002322 FAILED to create infrastructure for tenant 
-ERROR:root: 03:50:21.002775 FAILED to create infrastructure for tenant 
-INFO:root: 03:50:21.002971 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:50:21.203267 FAILED to create infrastructure for tenant 
-ERROR:root: 03:50:21.203667 FAILED to create infrastructure for tenant 
-INFO:root: 03:50:21.203871 file '.t1.yml.swx' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:21.204026 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:21.204087 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:50:21.257884 FAILED to create infrastructure for tenant 
-ERROR:root: 03:50:21.258244 FAILED to create infrastructure for tenant 
-INFO:root: 03:50:21.258431 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:26.639070 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:48.348127 file '4913' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:48.353630 Created 4913/VM_templates directory for tenant 4913
-ERROR:root: 03:50:48.481741 FAILED to create infrastructure for tenant 4913
-ERROR:root: 03:50:48.482184 FAILED to create infrastructure for tenant 4913
-INFO:root: 03:50:48.482492 file '4913' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:48.482654 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:48.482716 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:50:48.652464 FAILED to create infrastructure for tenant t1
-ERROR:root: 03:50:48.652915 FAILED to create infrastructure for tenant t1
-INFO:root: 03:50:48.653099 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:48.653247 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:48.653315 file 't1.yml~' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:50:52.357062 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:45.554366 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:53.061008 file '4913' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:51:53.220221 FAILED to create infrastructure for tenant 4913
-ERROR:root: 03:51:53.220833 FAILED to create infrastructure for tenant 4913
-INFO:root: 03:51:53.221056 file '4913' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:53.221188 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:53.221350 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:51:53.374304 FAILED to create infrastructure for tenant t1
-ERROR:root: 03:51:53.374763 FAILED to create infrastructure for tenant t1
-INFO:root: 03:51:53.374963 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:53.375099 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:53.375156 file 't1.yml~' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:51:57.081480 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:52:36.454732 file '4913' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:52:36.587169 FAILED to create infrastructure for tenant 4913
-ERROR:root: 03:52:36.587613 FAILED to create infrastructure for tenant 4913
-INFO:root: 03:52:36.587832 file '4913' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:52:36.587955 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 03:52:36.729792 FAILED to create infrastructure for tenant t1
-ERROR:root: 03:52:36.730228 FAILED to create infrastructure for tenant t1
-INFO:root: 03:52:36.730428 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:52:36.731032 file 't1.yml~' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 03:52:36.731358 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 04:06:00.568409 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 04:06:00.631839 FAILED to create infrastructure for tenant 
-ERROR:root: 04:06:00.632259 FAILED to create infrastructure for tenant 
-INFO:root: 04:06:00.632504 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 04:06:00.793601 FAILED to create infrastructure for tenant 
-ERROR:root: 04:06:00.793954 FAILED to create infrastructure for tenant 
-INFO:root: 04:06:00.794117 file '.t1.yml.swx' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 04:06:00.794349 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 04:06:00.794433 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 04:06:00.854144 FAILED to create infrastructure for tenant 
-ERROR:root: 04:06:00.854516 FAILED to create infrastructure for tenant 
-INFO:root: 04:06:00.854702 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 04:06:04.550291 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:40:13.708536 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:40:13.762363 FAILED to create infrastructure for tenant 
-ERROR:root: 06:40:13.762722 FAILED to create infrastructure for tenant 
-INFO:root: 06:40:13.762952 file '.t1.yml.swx' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:40:13.916113 FAILED to create infrastructure for tenant 
-ERROR:root: 06:40:13.916544 FAILED to create infrastructure for tenant 
-INFO:root: 06:40:13.916725 file '.t1.yml.swx' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:40:13.916839 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:40:13.916926 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:40:13.967837 FAILED to create infrastructure for tenant 
-ERROR:root: 06:40:13.968173 FAILED to create infrastructure for tenant 
-INFO:root: 06:40:13.968357 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:40:14.020176 FAILED to create infrastructure for tenant 
-ERROR:root: 06:40:14.020550 FAILED to update infrastructure for tenant 
-INFO:root: 06:40:25.087438 file '.t1.yml.swp' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:40:25.144808 FAILED to create infrastructure for tenant 
-ERROR:root: 06:40:25.145197 FAILED to update infrastructure for tenant 
-INFO:root: 06:40:28.569705 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:55:49.342659 file '.t1.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:55:55.719615 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:57:19.349750 file 't4.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:57:19.355753 Created t4/VM_templates directory for tenant t4.yml
-INFO:root: 07:01:20.827285 file 't5.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:01:20.832813 Created t5/VM_templates directory for tenant t5.yml
-INFO:root: 07:01:43.544926 file 't6.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:01:43.553681 Created t6/VM_templates directory for tenant t6.yml
-INFO:root: 07:05:48.307640 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:06:48.373864 file 't4.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:06:48.529831 FAILED to create infrastructure for tenant t4
-ERROR:root: 07:06:48.530313 FAILED to create infrastructure for tenant t4
-INFO:root: 07:06:48.530509 file 't4.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:06:48.664569 FAILED to create infrastructure for tenant t4
-ERROR:root: 07:06:48.665238 FAILED to update infrastructure for tenant t4
-INFO:root: 07:08:30.061955 file 't5.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:08:30.223684 FAILED to create infrastructure for tenant t5
-ERROR:root: 07:08:30.224080 FAILED to create infrastructure for tenant t5
-INFO:root: 07:08:30.224379 file 't5.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:08:30.361641 FAILED to create infrastructure for tenant t5
-ERROR:root: 07:08:30.362019 FAILED to update infrastructure for tenant t5
-INFO:root: 07:10:15.029187 file 't6.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:10:15.174253 FAILED to create infrastructure for tenant t6
-ERROR:root: 07:10:15.174690 FAILED to update infrastructure for tenant t6
-INFO:root: 07:10:15.174951 file 't6.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:10:15.317948 FAILED to create infrastructure for tenant t6
-ERROR:root: 07:10:15.319000 FAILED to update infrastructure for tenant t6
-INFO:root: 07:11:40.134541 file 't7.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:11:40.144079 Created t7/VM_templates directory for tenant t7.yml
-ERROR:root: 07:11:40.307815 FAILED to create infrastructure for tenant t7
-ERROR:root: 07:11:40.308260 FAILED to create infrastructure for tenant t7
-INFO:root: 07:11:40.308594 file 't7.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:11:40.445814 FAILED to create infrastructure for tenant t7
-ERROR:root: 07:11:40.446257 FAILED to update infrastructure for tenant t7
-INFO:root: 07:14:58.389425 file 't8.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:14:58.398521 Created t8/VM_templates directory for tenant t8.yml
-ERROR:root: 07:15:06.095760 FAILED to create infrastructure for tenant t8
-ERROR:root: 07:15:06.096342 FAILED to create infrastructure for tenant t8
-INFO:root: 07:15:06.096695 file 't8.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:15:06.155546 FAILED to update infrastructure for tenant t8
-INFO:root: 07:20:26.223059 file 't9.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:20:26.230922 Created t9/VM_templates directory for tenant t9.yml
-ERROR:root: 07:20:48.179833 FAILED to create infrastructure for tenant t9
-INFO:root: 07:21:50.714977 file '.t9.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:21:57.077141 file 't10.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:21:57.084832 Created t10/VM_templates directory for tenant t10.yml
-ERROR:root: 07:22:01.477042 FAILED to create infrastructure for tenant t10
-INFO:root: 07:23:06.325240 file 't11.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:23:06.333831 Created t11/VM_templates directory for tenant t11.yml
-ERROR:root: 07:23:28.613682 FAILED to create infrastructure for tenant t11
-INFO:root: 07:25:49.858716 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:26:11.392405 FAILED to create infrastructure for tenant t3
-INFO:root: 07:27:53.403406 file 't4.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:30:27.992704 file 't5.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:32:29.618513 file '.t5.yml.swp' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:32:40.102511 file 't6.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:33:06.208086 file 't7.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:33:47.828618 file 't8.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:34:09.112665 file 't9.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:34:43.331513 file 't10.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:40:44.551037 file 't11.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:40:54.103015 FAILED to create infrastructure for tenant t11
-INFO:root: 07:41:47.926537 file 't12.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:41:47.936757 Created t12/VM_templates directory for tenant t12.yml
-ERROR:root: 07:41:56.463994 FAILED to create infrastructure for tenant t12
-INFO:root: 07:42:22.214574 file 't13.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:42:22.228126 Created t13/VM_templates directory for tenant t13.yml
-ERROR:root: 07:42:25.263119 FAILED to create infrastructure for tenant t13
-INFO:root: 07:42:51.808726 file 't14.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:42:51.816201 Created t14/VM_templates directory for tenant t14.yml
-INFO:root: 07:43:33.221353 file 't15.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:43:33.228929 Created t15/VM_templates directory for tenant t15.yml
-ERROR:root: 07:43:39.561038 FAILED to create infrastructure for tenant t15
-INFO:root: 07:45:10.019181 file 't16.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:45:10.027798 Created t16/VM_templates directory for tenant t16.yml
-ERROR:root: 07:45:14.640943 FAILED to create infrastructure for tenant t16
-INFO:root: 07:54:47.564309 file 't17.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:54:47.573991 Created t17/VM_templates directory for tenant t17.yml
-ERROR:root: 07:55:10.023465 FAILED to create infrastructure for tenant t17
-ERROR:root: 07:55:10.023971 FAILED to create infrastructure for tenant t17
-INFO:root: 07:55:10.024205 file 't17.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 07:55:10.085168 FAILED to update infrastructure for tenant t17
-INFO:root: 07:56:34.998282 file 't3.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998593 file 't4.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998670 file 't5.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998759 file 't6.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998814 file 't7.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998863 file 't8.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998910 file 't9.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.998956 file 't10.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999002 file 't11.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999047 file 't12.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999091 file 't13.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999137 file 't14.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999198 file 't15.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999264 file 't16.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:34.999318 file 't17.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:56:45.968951 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:57:53.437420 file '.t3.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 07:59:22.748379 file 't4.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:00:14.567072 file 't5.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:00:36.093140 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:03:07.925896 file 't4.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:03:29.878220 file 't5.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:04:54.436287 file 't6.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:05:16.993209 FAILED to create infrastructure for tenant t6
-ERROR:root: 08:05:16.993925 FAILED to create infrastructure for tenant t6
-INFO:root: 08:05:16.994170 file 't6.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:06:08.333922 file 't7.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:06:25.456983 file 't8.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:06:27.910680 FAILED to create infrastructure for tenant t7
-ERROR:root: 08:06:27.911344 FAILED to create infrastructure for tenant t7
-INFO:root: 08:06:27.911585 file 't7.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:06:27.912165 file 't8.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:06:27.977730 FAILED to create infrastructure for tenant t8
-INFO:root: 08:06:27.978247 file 't8.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:06:39.518804 file 't9.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:06:44.029931 FAILED to create infrastructure for tenant t9
-ERROR:root: 08:06:44.030389 FAILED to create infrastructure for tenant t9
-INFO:root: 08:06:44.030587 file 't9.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:07:22.063296 file 't10.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:07:26.489236 FAILED to create infrastructure for tenant t10
-ERROR:root: 08:07:26.489697 FAILED to create infrastructure for tenant t10
-INFO:root: 08:07:26.489892 file 't10.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:07:26.490368 file 't11.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:07:26.562536 FAILED to create infrastructure for tenant t11
-INFO:root: 08:07:26.563081 file 't11.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:07:35.729310 file 't12.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:07:35.794158 FAILED to create infrastructure for tenant t12
-INFO:root: 08:07:35.794861 file 't12.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:07:40.173230 file 't13.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:07:40.238490 FAILED to create infrastructure for tenant t13
-INFO:root: 08:07:40.239030 file 't13.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 08:08:14.668656 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 08:08:16.627843 FAILED to create infrastructure for tenant t3
-ERROR:root: 08:08:16.628363 FAILED to create infrastructure for tenant t3
-INFO:root: 08:08:16.628603 file 't3.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-=======
-INFO:root: 06:36:51.315152 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:36:51.319865 Created t1/VM_templates directory for tenant t1.yml
-ERROR:root: 06:37:17.527455 FAILED to create infrastructure for tenant t1
-ERROR:root: 06:37:17.527935 FAILED to create infrastructure for tenant t1
-INFO:root: 06:37:17.528251 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:40:33.196415 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:40:56.841137 FAILED to create infrastructure for tenant t1
-ERROR:root: 06:40:56.841518 FAILED to create infrastructure for tenant t1
-INFO:root: 06:40:56.841740 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:41:57.035840 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 06:42:27.531493 FAILED to create infrastructure for tenant t1
-ERROR:root: 06:42:27.531887 FAILED to create infrastructure for tenant t1
-INFO:root: 06:42:27.532104 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:43:52.761386 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:52:15.326881 SUCCESSFULLY completed creating the required infrastructure for tenant t1
-INFO:root: 06:52:15.336612 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 06:54:26.788047 file 't1_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 06:54:26.790807 Created t1_mig directory for tenant t1_mig.yml
-INFO:root: 07:11:49.968621 SUCCESSFULLY migrated for tenant t1_mig
-INFO:root: 07:11:49.970235 file 't1_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
->>>>>>> a666be77f24446cb6b8080d865af191ba109176a
-INFO:root: 08:40:29.742137 file 't2_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:40:29.745168 Created t2_mig directory for tenant t2_mig.yml
-INFO:root: 08:40:49.935825 file 't2_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:40:52.290645 file 't2_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:42:00.679913 file 't2_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:43:26.847259 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-ERROR:root: 08:43:27.021150 FAILED to migrate for tenant t3_mig
-INFO:root: 08:43:27.021602 SUCCESSFULLY migrated for tenant t3_mig
-INFO:root: 08:43:27.021810 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:43:43.359844 file 't2_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:43:46.136638 file 't2_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:43:46.201338 SUCCESSFULLY migrated for tenant t2_mig
-INFO:root: 08:43:46.201879 file 't2_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:45:09.157164 file 't2_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:45:10.825752 file 't2_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:56:37.834960 SUCCESSFULLY migrated for tenant t2_mig
-INFO:root: 08:56:37.837516 file 't2_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:56:37.838371 file 't2_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:56:37.838564 file 't2_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-ERROR:root: 08:56:40.205376 FAILED to migrate for tenant t2_mig
-INFO:root: 08:56:40.205880 SUCCESSFULLY migrated for tenant t2_mig
-INFO:root: 08:56:40.206095 file 't2_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 08:56:40.206459 file '.t1_mig.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 10:19:12.960073 file 't8.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:23:17.607805 file 't10.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:25:01.593441 file 't15.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 10:26:52.061625 FAILED to create infrastructure for tenant t15
-ERROR:root: 10:26:52.063219 FAILED to create infrastructure for tenant t15
-INFO:root: 10:26:52.063596 file 't15.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:26:52.064779 file '.t15.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:27:53.007809 file 't14.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:36:44.004715 SUCCESSFULLY completed creating the required infrastructure for tenant t14
-INFO:root: 10:36:44.006951 file 't14.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:36:44.007880 file '.t14.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 10:39:49.194758 file 't14_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 10:39:49.200560 Created t14_mig directory for tenant t14_mig.yml
-INFO:root: 10:57:18.154191 SUCCESSFULLY migrated for tenant t14_mig
-INFO:root: 10:57:18.157999 file 't14_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 11:04:28.848306 file '.t14_mig.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 11:05:17.432942 file 't15_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 11:05:17.444780 Created t15_mig directory for tenant t15_mig.yml
-ERROR:root: 11:05:20.682333 FAILED to create migration infrastructure for tenant t15_mig
-INFO:root: 11:05:20.682784 SUCCESSFULLY migrated for tenant t15_mig
-INFO:root: 11:05:20.682987 file 't15_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 11:05:51.968362 file 't16.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:06:03.548865 file 't16.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-ERROR:root: 11:10:59.423267 FAILED to create infrastructure for tenant t16
-ERROR:root: 11:10:59.424241 FAILED to create infrastructure for tenant t16
-INFO:root: 11:10:59.424613 file 't16.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:15:52.792062 file '.t16.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:16:44.680006 file 't17.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:25:54.834866 SUCCESSFULLY completed creating the required infrastructure for tenant t17
-INFO:root: 11:25:54.836889 file 't17.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:29:24.889505 file 't17_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 11:29:24.895659 Created t17_mig directory for tenant t17_mig.yml
-INFO:root: 11:35:24.076400 SUCCESSFULLY migrated for tenant t17_mig
-INFO:root: 11:35:24.079317 file 't17_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
-INFO:root: 11:41:27.466214 file '.t17.yml.swx' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:41:53.169610 file 't18.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
-INFO:root: 11:41:53.176719 Created t18/VM_templates directory for tenant t18.yml
-ERROR:root: 11:46:15.386688 FAILED to create infrastructure for tenant t18
-ERROR:root: 11:46:15.388359 FAILED to create infrastructure for tenant t18
-INFO:root: 11:46:15.388821 file 't18.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 16:52:28.915253 file 't1.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 16:52:28.920827 Created t1/VM_templates directory for tenant t1.yml
+INFO:root: 17:00:08.383238 SUCCESSFULLY completed creating the required infrastructure for tenant t1
+INFO:root: 17:00:08.385694 file 't1.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 17:14:48.711165 file '.t1.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 17:15:37.305458 file 't2.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 17:15:37.313873 Created t2/VM_templates directory for tenant t2.yml
+INFO:root: 17:23:56.265972 SUCCESSFULLY completed creating the required infrastructure for tenant t2
+INFO:root: 17:23:56.268812 file 't2.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 17:41:30.352184 file 't3.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 17:41:30.359817 Created t3/VM_templates directory for tenant t3.yml
+INFO:root: 17:50:02.006935 SUCCESSFULLY completed creating the required infrastructure for tenant t3
+INFO:root: 17:50:02.009306 file 't3.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 17:55:59.162348 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 17:55:59.167592 Created t3_mig directory for tenant t3_mig.yml
+ERROR:root: 17:56:01.758150 FAILED to migrate for tenant t3_mig
+INFO:root: 17:56:01.758574 SUCCESSFULLY migrated for tenant t3_mig
+INFO:root: 17:56:01.758736 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 17:59:28.381939 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+ERROR:root: 17:59:31.510682 FAILED to create migration infrastructure for tenant t3_mig
+INFO:root: 17:59:31.511141 SUCCESSFULLY migrated for tenant t3_mig
+INFO:root: 17:59:31.511324 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:02:28.886543 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+ERROR:root: 18:02:31.794372 FAILED to create migration infrastructure for tenant t3_mig
+INFO:root: 18:02:31.794903 SUCCESSFULLY migrated for tenant t3_mig
+INFO:root: 18:02:31.795154 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:05:18.015980 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:05:25.251138 file 't3_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+ERROR:root: 18:17:15.970091 FAILED to migrate for tenant t3_mig
+INFO:root: 18:17:15.972179 SUCCESSFULLY migrated for tenant t3_mig
+INFO:root: 18:17:15.972730 file 't3_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:18:35.436764 file 't4.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 18:18:35.449293 Created t4/VM_templates directory for tenant t4.yml
+INFO:root: 18:26:18.425043 SUCCESSFULLY completed creating the required infrastructure for tenant t4
+INFO:root: 18:26:18.427766 file 't4.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 18:31:58.912750 file 't4_mig.yml3' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:31:58.918547 Created t4_mig directory for tenant t4_mig.yml3
+ERROR:root: 18:31:59.156755 FAILED to migrate for tenant t4_mig
+INFO:root: 18:31:59.157266 SUCCESSFULLY migrated for tenant t4_mig
+INFO:root: 18:31:59.157506 file 't4_mig.yml3' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:33:33.610320 file 't4_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:33:42.414294 file 't4_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:33:50.785342 file 't4_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:33:54.245668 file 't4_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:34:25.733703 file 't4_mig.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:57:20.533552 SUCCESSFULLY migrated for tenant t4_mig
+INFO:root: 18:57:20.535737 file 't4_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 18:57:20.537015 file '.t4_mig.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/migration'

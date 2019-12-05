@@ -86,7 +86,7 @@ for event in notifier_mig.event_gen():
               
              # Create the required files for building infrastructure
              if continue_flag:
-                exit_status = os.system("python3 " + str(MIG_LOGIC_PYTHON) + "parse_tenant.py " + str(tenant))
+                exit_status = os.system("python3 " + str(MIG_LOGIC_PYTHON) + "parse_tenant.py " + str(name[0]) + ".yml")
                 #print exit_status
                 if exit_status!= 0:
                    continue_flag = False
@@ -95,37 +95,37 @@ for event in notifier_mig.event_gen():
 
              # Create migration infrastructure on cloud 1
              if continue_flag:
-                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
-                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
+                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(name[0]) + "/" + str(name[0]) + "c1.yml"):
+                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(name[0]) + "' -v >> " + str(MIG_LOG))
                   if exit_status!= 0:
                     continue_flag = False
                     if log_enable:
-                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure for tenant ' + str(dir_name[0]))
+                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure for tenant ' + str(name[0]))
 
              # Create migration infrastructure on cloud 2
              if continue_flag:
-                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
-                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
+                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(name[0]) + "/" + str(name[0]) + "c1.yml"):
+                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "create_infra_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(name[0]) + "' -v >> " + str(MIG_LOG))
                   if exit_status!= 0:
                     continue_flag = False
                     if log_enable:
-                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure for tenant ' + str(dir_name[0]))
+                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure for tenant ' + str(name[0]))
              # Create migration infrastructure routes on cloud 1
              if continue_flag:
-                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
-                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
+                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(name[0]) + "/" + str(name[0]) + "c1.yml"):
+                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C1.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(name[0]) + "' -v >> " + str(MIG_LOG))
                   if exit_status!= 0:
                     continue_flag = False
                     if log_enable:
-                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure routes for tenant ' + str(dir_name[0]))
+                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure routes for tenant ' + str(name[0]))
              # Create migration infrastructure routes on cloud 2
              if continue_flag:
-                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):
-                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(dir_name[0]) + "' -v >> " + str(MIG_LOG))
+                if os.path.exists("/root/Migration-as-a-Service/etc/" + str(name[0]) + "/" + str(name[0]) + "c1.yml"):
+                  exit_status = os.system("ansible-playbook " + str(MIG_ANSIBLE) + "routes_C2.yml -i " + str(MIG_ANSIBLE) + "inventory --extra-vars 'tenant_name=" + str(name[0]) + "' -v >> " + str(MIG_LOG))
                   if exit_status!= 0:
                     continue_flag = False
                     if log_enable:
-                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure routes for tenant ' + str(dir_name[0]))
+                       logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'FAILED to create migration infrastructure routes for tenant ' + str(name[0]))
              # Create infrastructure on cloud 1
              if continue_flag:
                 if os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/" + str(dir_name[0]) + "C1.yml"):

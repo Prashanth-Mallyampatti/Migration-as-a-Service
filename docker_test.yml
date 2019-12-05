@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  gather_facts: False
+  become: yes
+  
+  tasks:
+  - name: Build Docker Image
+    docker_image:
+      name: centos7
+      build:
+        path: ./
+      state: present
+      source: build
+  
+  - name: Spawning test container
+    docker_container:
+      name: test
+      image: centos7:latest
+      hostname: test
+      privileged: yes
+      interactive: yes
+      tty: yes

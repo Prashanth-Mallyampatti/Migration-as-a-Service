@@ -1,9 +1,0 @@
-Migrate:
-- VM:
-  - brif_m: t15br1if2_m
-    name: t15_VM2
-    vm_mac: ''
-    vmif: t15VM2if1
-    vmif_m: t15VM2if1_m
-  bridge_name: t15br1
-  ns_name: t15ns1

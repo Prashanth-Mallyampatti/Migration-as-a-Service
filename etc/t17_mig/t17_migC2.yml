@@ -1,9 +1,0 @@
-Migrate:
-- VM:
-  - brif_m: t17br2if1_m
-    name: t17_VM3
-    vm_mac: 52:54:00:11:ef:b3
-    vmif: t17VM3if1
-    vmif_m: t17VM3if1_m
-  bridge_name: t17br2
-  ns_name: t17ns2
