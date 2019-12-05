@@ -100,44 +100,32 @@ class Create_YAML_FILE():
       self.subnets.append(subnet_val)
 
       mask_num = subnet_addr.split("/")
-     # dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
-     # dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
+      dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
+      dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
       
       if content_req == "C1":
         full_range = parse_DNS(subnet_addr_and_vm, "C2")
         if full_range is False:
-          dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
-          dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
           dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
           dns_list["dhcp_start"] = ip_range[5]
-          dns_list["dhcp_end"] =  ip_range[len(ip_range) - 2]
-          dns_list["net_mask"] = mask
+          dns_list["dhcp_end"] = ip_range[len(ip_range)//2 - 2]
         else:
-          dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
-          dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
           dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
           dns_list["dhcp_start"] = ip_range[5]
           dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
-          dns_list["net_mask"] = mask
 
       elif content_req == "C2":
         full_range = parse_DNS(subnet_addr_and_vm, "C1")
         if full_range is False:
-          dns_list["brif"] = [] #tenant_name + "s" + str(br_counter) + "_dnsbrif"
-          dns_list["dnsif"] = [] #tenant_name + "s" + str(br_counter) + "_dnsif"
-          dns_list["dnsif_ip"] = [] #ip_range[len(ip_range)//2] + "/" + mask_num[1]
-          dns_list["dhcp_start"] = [] #ip_range[len(ip_range)//2 + 5]
-          dns_list["dhcp_end"] = [] #ip_range[len(ip_range) - 2]
-          dns_list["net_mask"] = [] #mask
+          dns_list["dnsif_ip"] = ip_range[len(ip_range)//2] + "/" + mask_num[1]
+          dns_list["dhcp_start"] = ip_range[len(ip_range)//2 + 5]
+          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
         else:
-          dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
-          dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
           dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
           dns_list["dhcp_start"] = ip_range[5]
           dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
-          dns_list["net_mask"] = mask
 
-      #dns_list["net_mask"] = mask
+      dns_list["net_mask"] = mask
       dns.append([dns_list])
 
       IP_COUNTER += 1

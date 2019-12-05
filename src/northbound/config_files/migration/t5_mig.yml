@@ -1,0 +1,6 @@
+VM_Migration:
+  - VM:
+      - name: "2"
+    source_cloud: "2"
+    source_subnet: "2"
+    destination_cloud: "2"
