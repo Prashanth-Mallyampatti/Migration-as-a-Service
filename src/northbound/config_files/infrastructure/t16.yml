@@ -1,0 +1,32 @@
+---
+C1:
+- VM:
+  - disk: 10G
+    internet_access: true
+    mem: 2
+    name: VM1
+    vcpu: 4
+  - disk: 10G
+    internet_access: false
+    mem: 4
+    name: VM2
+    vcpu: 2
+  subnet_addr: 1.1.1.0/24
+C2:
+- VM:
+  - disk: 10G
+    internet_access: true
+    mem: 2
+    name: VM4
+    vcpu: 4
+  subnet_addr: 1.1.1.0/24
+- VM:
+  - disk: 10G
+    internet_access: true
+    mem: 3
+    name: VM3
+    vcpu: 2
+  subnet_addr: 2.2.2.0/24
+MISC:
+- LOG_ENABLE: true
+- GUI: true

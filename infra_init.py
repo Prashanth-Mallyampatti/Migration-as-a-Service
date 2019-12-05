@@ -52,7 +52,7 @@ for event in notifier_infra.event_gen():
                 os.system("mkdir /root/Migration-as-a-Service/etc/" + str(dir_name[0]))
                 os.system("mkdir /root/Migration-as-a-Service/etc/" + str(dir_name[0]) + "/VM_templates")
                 logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + 'Created ' + str(dir_name[0]) + '/VM_templates directory for tenant ' + str(tenant))
-             print (str(tenant))
+             #print (str(tenant))
              # Check if logging feature is enabled or not
              yaml_file = "/root/Migration-as-a-Service/src/northbound/config_files/infrastructure/" + str(tenant)
 
@@ -64,7 +64,8 @@ for event in notifier_infra.event_gen():
 
              misc_content = yaml_content["MISC"] 
              log_enable = misc_content[0]["LOG_ENABLE"]
-             print (log_enable)
+             #print (log_enable)
+
              # Validate tenant input
              exit_status = os.system("python3 " + str(MIG_INPUT_PYTHON) + "validate_subnet.py " + str(tenant))
              #print exit_status

@@ -33,18 +33,18 @@ def range_of_ips(ip):
     return None
 
 # Determine the subnet for which DNS must be run
-def parse_DNS(C1_contents, C2):
-  with open(Yaml_file,'r') as stream:
-    try:
-      YAML_CONTENT = yaml.safe_load(stream)
-    except OSError:
-      #print ("Creation of the directory %s failed" % path)
-      logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Creation of the directory ' + str(path) + ' failed')
-
-  C2_contents = YAML_CONTENT[C2]
-  for i in C2_contents:
-    if C1_contents["subnet_addr"] == i["subnet_addr"]:
-       return False
+#def parse_DNS(C1_contents, C2):
+#  with open(Yaml_file,'r') as stream:
+#    try:
+#      YAML_CONTENT = yaml.safe_load(stream)
+#    except OSError:
+#      #print ("Creation of the directory %s failed" % path)
+#      logging.error(' ' + str(datetime.datetime.now().time()) + ' ' + 'Creation of the directory ' + str(path) + ' failed')
+#
+#  C2_contents = YAML_CONTENT[C2]
+#  for i in C2_contents:
+#    if C1_contents["subnet_addr"] == i["subnet_addr"]:
+#       return False
  
 # ******************** #
 arg = sys.argv
@@ -100,32 +100,44 @@ class Create_YAML_FILE():
       self.subnets.append(subnet_val)
 
       mask_num = subnet_addr.split("/")
-      dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
-      dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
+#      dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
+#      dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
       
-      if content_req == "C1":
-        full_range = parse_DNS(subnet_addr_and_vm, "C2")
-        if full_range is False:
-          dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
-          dns_list["dhcp_start"] = ip_range[5]
-          dns_list["dhcp_end"] = ip_range[len(ip_range)//2 - 2]
-        else:
-          dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
-          dns_list["dhcp_start"] = ip_range[5]
-          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+#      if content_req == "C1":
+#        full_range = parse_DNS(subnet_addr_and_vm, "C2")
+#        if full_range is False:
+      if subnet_addr_and_vm["VM"][0]["name"] != []:
+        dns_list["brif"] = tenant_name + "s" + str(br_counter) + "_dnsbrif"
+        dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
+        dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
+        dns_list["dhcp_start"] = ip_range[5]
+        dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+        dns_list["net_mask"] = mask
+      else:
+        dns_list["brif"] = [] # tenant_name + "s" + str(br_counter) + "_dnsbrif"
+        dns_list["dnsif"] = [] #tenant_name + "s" + str(br_counter) + "_dnsif"
+        dns_list["dnsif_ip"] = [] #ip_range[1] + "/" + mask_num[1]
+        dns_list["dhcp_start"] = [] #ip_range[5]
+        dns_list["dhcp_end"] = [] #ip_range[len(ip_range) - 2]
+        dns_list["net_mask"] = [] #mask
 
-      elif content_req == "C2":
-        full_range = parse_DNS(subnet_addr_and_vm, "C1")
-        if full_range is False:
-          dns_list["dnsif_ip"] = ip_range[len(ip_range)//2] + "/" + mask_num[1]
-          dns_list["dhcp_start"] = ip_range[len(ip_range)//2 + 5]
-          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
-        else:
-          dns_list["dnsif_ip"] = ip_range[1] + "/" + mask_num[1]
-          dns_list["dhcp_start"] = ip_range[5]
-          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
-
-      dns_list["net_mask"] = mask
+#      elif content_req == "C2":
+#        full_range = parse_DNS(subnet_addr_and_vm, "C1")
+##        if full_range is False:
+#        if subnet_addr_and_vm["VM"][0]["name"] != []:
+#          dns_list["brif"] =  tenant_name + "s" + str(br_counter) + "_dnsbrif"
+#          dns_list["dnsif"] = tenant_name + "s" + str(br_counter) + "_dnsif"
+#          dns_list["dnsif_ip"] = ip_range[len(ip_range)//2] + "/" + mask_num[1]
+#          dns_list["dhcp_start"] = ip_range[len(ip_range)//2 + 5]
+#          dns_list["dhcp_end"] = ip_range[len(ip_range) - 2]
+#          dns_list["net_mask"] = mask
+#        else:
+#          dns_list["dnsif_ip"] = [] #ip_range[1] + "/" + mask_num[1]
+#          dns_list["brif"] = [] #tenant_name + "s" + str(br_counter) + "_dnsbrif"
+#          dns_list["dnsif"] = [] #tenant_name + "s" + str(br_counter) + "_dnsif"
+#          dns_list["dhcp_start"] = [] # ip_range[5]
+#          dns_list["dhcp_end"] = [] #ip_range[len(ip_range) - 2]
+#          dns_list["net_mask"] = [] #mask
       dns.append([dns_list])
 
       IP_COUNTER += 1
@@ -139,7 +151,6 @@ class Create_YAML_FILE():
         tenant_ns_subnet = "10.2." + str(ip) + ".0"
         tenant_ns_ip = "10.2." + str(ip) + ".1"
         tenant_sub_ip = "10.2." + str(ip) + ".2"
-        
 
       tenant_ns_list["tenant_ns_name"] = tenant_name
       tenant_ns_list["tenant_ns_if"] = tenant_name + "ns" + str(br_counter) + "if"
@@ -226,18 +237,28 @@ class Create_YAML_FILE():
       vms = subnet_addr_and_vm["VM"]
       vm_lists = []
       for vm_count, vm in enumerate(vms, 1):
-        vm_name = vm["name"]
-        disk_size = vm["disk"]
-        mem_size = vm["mem"]
-        vcpus = vm["vcpu"]
-        vm_list = {}
-        vm_list["name"] = tenant_name + "_" + vm_name
-        vm_list["disk"] = disk_size
-        vm_list["mem"] = mem_size
-        vm_list["vcpu"] = vcpus
-        vm_list["vmif"] = tenant_name + vm_name + "if1"
-        vm_list["brif"] = tenant_name + "br" + str(br_count) + "if" + str(vm_count)
-        vm_lists.append(vm_list)
+        if vm["name"] != []:
+          vm_name = vm["name"]
+          disk_size = vm["disk"]
+          mem_size = vm["mem"]
+          vcpus = vm["vcpu"]
+          vm_list = {}
+          vm_list["name"] = tenant_name + "_" + vm_name
+          vm_list["disk"] = disk_size
+          vm_list["mem"] = mem_size
+          vm_list["vcpu"] = vcpus
+          vm_list["vmif"] = tenant_name + vm_name + "if1"
+          vm_list["brif"] = tenant_name + "br" + str(br_count) + "if" + str(vm_count)
+          vm_lists.append(vm_list)
+        else:
+          vm_list = {}
+          vm_list["name"] = []
+          vm_list["disk"] = []
+          vm_list["mem"] = []
+          vm_list["vcpu"] = []
+          vm_list["vmif"] = []
+          vm_list["brif"] = []
+          vm_lists.append(vm_list)
       all_vm_lists.append(vm_lists)
 
     for subnet_no, subnet in enumerate(self.subnets):

@@ -9,12 +9,12 @@ Subnet:
 - bridge_name: t17br1
   default_route_ip: 10.2.61.1
   dns:
-  - brif: []
-    dhcp_end: []
-    dhcp_start: []
-    dnsif: []
-    dnsif_ip: []
-    net_mask: []
+  - brif: t17s1_dnsbrif
+    dhcp_end: 1.1.1.254
+    dhcp_start: 1.1.1.5
+    dnsif: t17s1_dnsif
+    dnsif_ip: 1.1.1.1/24
+    net_mask: 255.255.255.0
   ns_name: t17ns1
   route:
   - if: p1

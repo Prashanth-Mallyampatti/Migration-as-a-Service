@@ -1,0 +1,17 @@
+Migrate:
+- VM:
+  - brif_m: t15br1if1_m
+    name: t15_VM4
+    vm_mac: ''
+    vmif: t15VM4if1
+    vmif_m: t15VM4if1_m
+  bridge_name: t15br1
+  ns_name: t15ns1
+- VM:
+  - brif_m: t15br2if1_m
+    name: t15_VM3
+    vm_mac: ''
+    vmif: t15VM3if1
+    vmif_m: t15VM3if1_m
+  bridge_name: t15br2
+  ns_name: t15ns2

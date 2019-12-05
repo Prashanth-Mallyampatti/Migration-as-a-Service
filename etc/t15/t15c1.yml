@@ -51,3 +51,42 @@ Subnet:
     subnet_route: 10.1.41.0/24
     tenant_route_ip: 192.168.5.2
     v_name: vxlan_t15s1
+- bridge_name: t15br2
+  default_route_ip: 10.1.42.1
+  dns:
+  - brif: []
+    dhcp_end: []
+    dhcp_start: []
+    dnsif: []
+    dnsif_ip: []
+    net_mask: []
+  ns_name: t15ns2
+  route:
+  - if: p1
+    ip: 10.1.42.1/24
+    ns_if: t15if
+    ns_name: t15
+  subnet_ip: 2.2.2.0/24
+  tenant_ns:
+  - tenant_ns_if: t15ns2if
+    tenant_ns_ip: 10.1.42.1/24
+    tenant_ns_name: t15
+    tenant_sub_if: t15s2if
+    tenant_sub_ip: 10.1.42.2/24
+  vms:
+  - brif: []
+    disk: []
+    mem: []
+    name: []
+    vcpu: []
+    vmif: []
+  vxlan:
+  - dev: t15s2if
+    dsport: 4789
+    id: 42
+    local_ip: 10.1.42.2
+    remote_ip: 10.2.42.2
+    remote_route: 10.2.42.0/24
+    subnet_route: 10.1.42.0/24
+    tenant_route_ip: 192.168.5.2
+    v_name: vxlan_t15s2

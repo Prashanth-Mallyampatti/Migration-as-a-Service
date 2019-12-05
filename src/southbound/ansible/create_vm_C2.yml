@@ -15,6 +15,13 @@
       dest: /var/lib/libvirt/images/{{ item.1.name }}.qcow2
       force: no
       remote_src: yes
+    when:
+      - item.1.brif != []
+      - item.1.disk != []
+      - item.1.mem != []
+      - item.1.name != []
+      - item.1.vcpu != []
+      - item.1.vmif != []
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -40,7 +47,14 @@
       name: "{{ item.1.name }}"
       command: define
       xml: "{{ lookup('template', '/root/Migration-as-a-Service/etc/{{ tenant_name }}/VM_templates/{{ item.1.name }}.xml.j2') }}"
-    when: item.1.name not in vm_list.stdout
+    when:
+      - item.1.name not in vm_list.stdout
+      - item.1.brif != []
+      - item.1.disk != []
+      - item.1.mem != []
+      - item.1.name != []
+      - item.1.vcpu != []
+      - item.1.vmif != []
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -49,7 +63,14 @@
     virt:
       name: "{{ item.1.name }}"
       command: create
-    when: item.1.name not in vm_list.stdout
+    when:
+      - item.1.name not in vm_list.stdout
+      - item.1.brif != []
+      - item.1.disk != []
+      - item.1.mem != []
+      - item.1.name != []
+      - item.1.vcpu != []
+      - item.1.vmif != []
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -58,7 +79,14 @@
     virt:
       name: "{{ item.1.name }}"
       state: running
-    when: item.1.name not in vm_list.stdout
+    when:
+      - item.1.name not in vm_list.stdout
+      - item.1.brif != []
+      - item.1.disk != []
+      - item.1.mem != []
+      - item.1.name != []
+      - item.1.vcpu != []
+      - item.1.vmif != []
     with_subelements:
       - "{{ Subnet }}"
       - vms
@@ -66,6 +94,13 @@
   - name: Attach VM interface
     shell: |
       virsh domiflist "{{ item.1.name }}" | grep -w '{{ item.1.vmif }}' ; if [ $? -ne 0 ] ; then virsh attach-interface "{{ item.1.name }}" direct "{{ item.1.vmif }}" --live --persistent ; fi
+    when:
+      - item.1.brif != []
+      - item.1.disk != []
+      - item.1.mem != []
+      - item.1.name != []
+      - item.1.vcpu != []
+      - item.1.vmif != []
     with_subelements:
       - "{{ Subnet }}"
       - vms
