@@ -46,6 +46,7 @@ for event in notifier_infra.event_gen():
              logging.info(' ' + str(datetime.datetime.now().time()) + ' ' + "file '{0}' created in '{1}'".format(event[3], event[2]))
              tenant = '{0}'.format(event[3], event[2])
              dir_name = tenant.split(".")
+             print (dir_name[0])
              dir_exists=os.path.exists("/root/Migration-as-a-Service/etc/" + str(dir_name[0]))
              if not dir_exists:
                 os.system("mkdir /root/Migration-as-a-Service/etc/" + str(dir_name[0]))
