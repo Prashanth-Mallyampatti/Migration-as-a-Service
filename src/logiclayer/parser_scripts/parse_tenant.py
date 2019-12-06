@@ -157,6 +157,8 @@ class Create_YAML_FILE():
       tenant_ns_list["tenant_sub_if"] = tenant_name + "s" + str(br_counter) + "if"
       tenant_ns_list["tenant_ns_ip"] = tenant_ns_ip + "/" + mask_num[1]
       tenant_ns_list["tenant_sub_ip"] = tenant_sub_ip + "/" + mask_num[1]
+      tenant_ns_list["tenant_sub_net"] = tenant_sub_ip
+      tenant_ns_list["tenant_ns_net"] = tenant_ns_ip
 
       tenant_ns.append([tenant_ns_list])
      

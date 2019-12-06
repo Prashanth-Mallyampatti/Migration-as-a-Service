@@ -1,0 +1,86 @@
+Namespace:
+- default_route_ip: 192.168.128.1
+  name: t10
+  pns_if: t10pns_if
+  pns_ip: 192.168.128.1/24
+  tenant_if: t10if
+  tenant_ip: 192.168.128.2/24
+Subnet:
+- bridge_name: t10br1
+  default_route_ip: 10.2.-9.1
+  dns:
+  - brif: t10s1_dnsbrif
+    dhcp_end: 1.1.1.254
+    dhcp_start: 1.1.1.5
+    dnsif: t10s1_dnsif
+    dnsif_ip: 1.1.1.1/24
+    net_mask: 255.255.255.0
+  ns_name: t10ns1
+  route:
+  - if: p1
+    ip: 10.2.-9.1/24
+    ns_if: t10if
+    ns_name: t10
+  subnet_ip: 1.1.1.0/24
+  tenant_ns:
+  - tenant_ns_if: t10ns1if
+    tenant_ns_ip: 10.2.-9.1/24
+    tenant_ns_name: t10
+    tenant_sub_if: t10s1if
+    tenant_sub_ip: 10.2.-9.2/24
+  vms:
+  - brif: t10br1if1
+    disk: 10G
+    mem: 2
+    name: t10_VM4
+    vcpu: 4
+    vmif: t10VM4if1
+  vxlan:
+  - dev: t10s1if
+    dsport: 4789
+    id: 42
+    local_ip: 10.2.-9.2
+    remote_ip: 10.1.-9.2
+    remote_route: 10.1.-9.0/24
+    subnet_route: 10.2.-9.0/24
+    tenant_route_ip: 192.168.128.2
+    v_name: vxlan_t10s1
+- bridge_name: t10br2
+  default_route_ip: 10.2.-8.1
+  dns:
+  - brif: t10s2_dnsbrif
+    dhcp_end: 2.2.2.254
+    dhcp_start: 2.2.2.5
+    dnsif: t10s2_dnsif
+    dnsif_ip: 2.2.2.1/24
+    net_mask: 255.255.255.0
+  ns_name: t10ns2
+  route:
+  - if: p1
+    ip: 10.2.-8.1/24
+    ns_if: t10if
+    ns_name: t10
+  subnet_ip: 2.2.2.0/24
+  tenant_ns:
+  - tenant_ns_if: t10ns2if
+    tenant_ns_ip: 10.2.-8.1/24
+    tenant_ns_name: t10
+    tenant_sub_if: t10s2if
+    tenant_sub_ip: 10.2.-8.2/24
+  vms:
+  - brif: t10br2if1
+    disk: 10G
+    mem: 3
+    name: t10_VM3
+    vcpu: 2
+    vmif: t10VM3if1
+  vxlan:
+  - dev: []
+    dsport: []
+    id: []
+    local_ip: []
+    remote_ip: []
+    remote_route: []
+    subnet_route: []
+    tenant_route_ip: []
+    v_name: []

@@ -1,0 +1,13 @@
+MISC:
+- LOG_ENABLE: true
+- GUI: true
+Subnet_Migration:
+- destination_cloud: C1
+  source_cloud: C2
+  subnet_addr: 3.3.3.0/24
+VM_Migration:
+- VM:
+  - name: VM4
+  destination_cloud: C1
+  source_cloud: C2
+  source_subnet: 3.3.3.0/24

@@ -67,10 +67,13 @@ with open(mig_file,'r') as stream:
             Cloud_Number.append(i)
 
         Source_Cloud = []
-        for x in range(0,Cloud_Number[0],1):
-            #print x
-            sc = str(yaml_mig_content['VM_Migration'][x]['source_cloud'])
-            subnet = str(yaml_mig_content['VM_Migration'][x]['source_subnet'])
+        for x in yaml_mig_content['VM_Migration']:
+            print(x)
+            sc = str(x['source_cloud'])
+            subnet = str(x['source_subnet'])
+            print(sc)
+            print(subnet)
+            #exit()
             if sc == 'C1':
                 print("Checking whether subnet is present in C2")
                 if subnet in C2S:

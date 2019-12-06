@@ -61,3 +61,18 @@ INFO:root: 21:15:21.192376 SUCCESSFULLY migrated for tenant t5_mig
 INFO:root: 21:15:21.195493 file 't5_mig.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
 INFO:root: 21:17:13.614294 file 't2_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
 INFO:root: 21:17:13.614539 file 't4_mig.yml' deleted in '/root/Migration-as-a-Service/src/northbound/config_files/migration'
+INFO:root: 23:38:48.693941 file 't9.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 23:38:48.702875 Created t9/VM_templates directory for tenant t9.yml
+INFO:root: 23:48:30.303786 SUCCESSFULLY completed creating the required infrastructure for tenant t9
+INFO:root: 23:48:30.306535 file 't9.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 04:07:50.094143 file '.t9.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 04:08:15.718073 file 't10.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 04:08:15.725897 Created t10/VM_templates directory for tenant t10.yml
+ERROR:root: 04:08:20.073288 FAILED to create infrastructure for tenant t10
+ERROR:root: 04:08:20.073714 FAILED to create infrastructure for tenant t10
+INFO:root: 04:08:20.073958 file 't10.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 04:09:42.474838 file '.t10.yml.swp' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 04:13:21.599055 file 't14.yml' created in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'
+INFO:root: 04:13:21.607746 Created t14/VM_templates directory for tenant t14.yml
+INFO:root: 04:21:13.621339 SUCCESSFULLY completed creating the required infrastructure for tenant t14
+INFO:root: 04:21:13.624263 file 't14.yml' modified in '/root/Migration-as-a-Service/src/northbound/config_files/infrastructure'

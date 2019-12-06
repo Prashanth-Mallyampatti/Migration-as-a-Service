@@ -12,6 +12,12 @@ C1:
     name: VM2
     vcpu: 2
   subnet_addr: 1.1.1.0/24
+- VM:
+  - disk: []
+    mem: []
+    name: []
+    vcpu: []
+  subnet_addr: 3.3.3.0/24
 C2:
 - VM:
   - disk: 10G
@@ -19,7 +25,7 @@ C2:
     mem: 2
     name: VM4
     vcpu: 4
-  subnet_addr: 1.1.1.0/24
+  subnet_addr: 3.3.3.0/24
 - VM:
   - disk: 10G
     internet_access: true

@@ -1,0 +1,86 @@
+Namespace:
+- default_route_ip: 192.168.137.1
+  name: t9
+  pns_if: t9pns_if
+  pns_ip: 192.168.137.1/24
+  tenant_if: t9if
+  tenant_ip: 192.168.137.2/24
+Subnet:
+- bridge_name: t9br1
+  default_route_ip: 10.2.81.1
+  dns:
+  - brif: t9s1_dnsbrif
+    dhcp_end: 1.1.1.254
+    dhcp_start: 1.1.1.5
+    dnsif: t9s1_dnsif
+    dnsif_ip: 1.1.1.1/24
+    net_mask: 255.255.255.0
+  ns_name: t9ns1
+  route:
+  - if: p1
+    ip: 10.2.81.1/24
+    ns_if: t9if
+    ns_name: t9
+  subnet_ip: 1.1.1.0/24
+  tenant_ns:
+  - tenant_ns_if: t9ns1if
+    tenant_ns_ip: 10.2.81.1/24
+    tenant_ns_name: t9
+    tenant_sub_if: t9s1if
+    tenant_sub_ip: 10.2.81.2/24
+  vms:
+  - brif: t9br1if1
+    disk: 10G
+    mem: 2
+    name: t9_VM4
+    vcpu: 4
+    vmif: t9VM4if1
+  vxlan:
+  - dev: t9s1if
+    dsport: 4789
+    id: 42
+    local_ip: 10.2.81.2
+    remote_ip: 10.1.81.2
+    remote_route: 10.1.81.0/24
+    subnet_route: 10.2.81.0/24
+    tenant_route_ip: 192.168.137.2
+    v_name: vxlan_t9s1
+- bridge_name: t9br2
+  default_route_ip: 10.2.82.1
+  dns:
+  - brif: t9s2_dnsbrif
+    dhcp_end: 2.2.2.254
+    dhcp_start: 2.2.2.5
+    dnsif: t9s2_dnsif
+    dnsif_ip: 2.2.2.1/24
+    net_mask: 255.255.255.0
+  ns_name: t9ns2
+  route:
+  - if: p1
+    ip: 10.2.82.1/24
+    ns_if: t9if
+    ns_name: t9
+  subnet_ip: 2.2.2.0/24
+  tenant_ns:
+  - tenant_ns_if: t9ns2if
+    tenant_ns_ip: 10.2.82.1/24
+    tenant_ns_name: t9
+    tenant_sub_if: t9s2if
+    tenant_sub_ip: 10.2.82.2/24
+  vms:
+  - brif: t9br2if1
+    disk: 10G
+    mem: 3
+    name: t9_VM3
+    vcpu: 2
+    vmif: t9VM3if1
+  vxlan:
+  - dev: []
+    dsport: []
+    id: []
+    local_ip: []
+    remote_ip: []
+    remote_route: []
+    subnet_route: []
+    tenant_route_ip: []
+    v_name: []

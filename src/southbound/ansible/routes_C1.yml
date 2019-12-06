@@ -47,3 +47,11 @@
     with_subelements:
       - "{{ Subnet }}"
       - vxlan
+
+  - name: Add Routes for intra tenant communication
+    shell: |
+      ip netns exec "{{ item.1.tenant_ns_name }}" ip route show "{{ item.0.subnet_ip }}" via "{{ item.1.tenant_sub_net }}" | grep -w '^{{ item.0.subnet_ip }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.1.tenant_ns_name }}" ip route add "{{ item.0.subnet_ip }}" via "{{ item.1.tenant_sub_net }}" ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - tenant_ns
+    

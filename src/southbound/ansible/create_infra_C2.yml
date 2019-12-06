@@ -232,3 +232,10 @@
     with_subelements:
       - "{{ Subnet }}"
       - vxlan
+
+  - name: Tenant Isolation
+    shell: |
+      ip netns exec "{{ item.0.ns_name }}" iptables -t nat -L POSTROUTING -nv | grep -w 'MASQUERADE' | grep -w '{{ item.1.tenant_sub_if }}' ; if [ $? -ne 0 ] ; then ip netns exec "{{ item.0.ns_name }}" iptables -t nat -I POSTROUTING -o "{{ item.1.tenant_sub_if }}" -j MASQUERADE ; fi
+    with_subelements:
+      - "{{ Subnet }}"
+      - tenant_ns
