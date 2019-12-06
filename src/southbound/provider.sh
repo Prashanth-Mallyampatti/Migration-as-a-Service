@@ -5,9 +5,9 @@
 
 #!/bin/bash
 
-#virsh net-undefine testBR
-#virsh net-destroy testBR
-#ip netns del pns
+virsh net-undefine testBR
+virsh net-destroy testBR
+ip netns del pns
 
 # Create mainBR network and bridge
 sudo cp /root/networks/testBR.xml /etc/libvirt/qemu/networks/
@@ -39,3 +39,5 @@ rule_num_2=`sudo iptables -t filter -L FORWARD -nv --line-numbers | grep testBR 
 
 sudo iptables -t filter -D FORWARD $rule_num_1
 sudo iptables -t filter -D FORWARD $rule_num_1
+
+sudo iptables -P FORWARD ACCEPT
